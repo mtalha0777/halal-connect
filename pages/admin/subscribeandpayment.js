@@ -1,14 +1,14 @@
 'use client';
 import dynamic from 'next/dynamic';
-import Sidebar from "../components/layout/SideBar";
-import Topbar from "../components/layout/TopBar";
-import SubscribeCard from "../components/subscribe/SubscribeCard";
-const Overview = dynamic(() => import('../components/overview/OverView'), {
+import Sidebar from "../../components/layout/SideBar";
+import Topbar from "../../components/layout/TopBar";
+import SubscribeCard from "../../components/subscribe/SubscribeCard";
+const Overview = dynamic(() => import('../../components/overview/OverView'), {
   ssr: false,
 });
-import SubscriptionPlans from "../components/subscribe/SubscriptionPlans";
-import FeatureSubscriptionPlans from "../components/subscribe/FeatureSubscriptionPlans";
-import SubscriptionUserList from "../components/subscribe/SubscriptionUserList";
+import SubscriptionPlans from "../../components/subscribe/SubscriptionPlans";
+import FeatureSubscriptionPlans from "../../components/subscribe/FeatureSubscriptionPlans";
+import SubscriptionUserList from "../../components/subscribe/SubscriptionUserList";
 
 import { MoreVertical, Edit, Trash2, Crown, CreditCard, ShoppingCart, History } from "lucide-react";
 export default function SubscribeAndPaymentPage() {

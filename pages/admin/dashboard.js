@@ -2,23 +2,24 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Sidebar from '../components/layout/SideBar';
-import Topbar from '../components/layout/TopBar'; 
-import Chart from '../components/charts/Chart';
-import AllUsers from '../components/users/AllUsers';
+import Sidebar from '../../components/layout/SideBar';
+import Topbar from '../../components/layout/TopBar'; 
+import Chart from '../../components/charts/Chart';
+import AllUsers from '../../components/users/AllUsers';
 const Dashboard = () => {
   return (
 
     <div className="flex min-h-screen font-sans">
        <Sidebar />
-    <main className="flex-1 bg-white p-6">
+    <main className="flex-1 bg-white p-6 pt-28 ">
+    {/* <main className=" pt-28 px-6 bg-white min-h-screen"> */}
         {/* Topbar */}
         <Topbar />
          {/* Stat Cards */}
       <div className="grid grid-cols-4 gap-4 mb-6">
          {(() => {
     const cards = [
-      {
+      { 
         title: 'Total User',
         count: '3,50,789',
         bg: '#06D4C680',

@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import BackgroundWrapper from "@/components/BackgroundWrapper";
+import BackgroundWrapper from "@/112components/BackgroundWrapper";
 
 function MyApp({ Component, pageProps, router }) {
   const showBackgroundPages = [

@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Sidebar from '../layout/SideBar';
-import Topbar from '../layout/TopBar';
 import Image from 'next/image';
-
+import Sidebar from '../../components/layout/SideBar';
+import Topbar from '../../components/layout/TopBar';
+import Link from 'next/link';
 const ReportedUser = () => {
   // State for filter dropdown
   const [isFilterOpen, setIsFilterOpen] = React.useState(false);
@@ -21,7 +21,7 @@ const ReportedUser = () => {
      
       joinDate: '12 Jan 2024',
       plan: 'Free',
-      status: 'Block'
+      status: 'Verified'
     },
     {
       id: 1356,
@@ -31,7 +31,7 @@ const ReportedUser = () => {
       
       joinDate: '12 Jan 2024',
       plan: 'Gold',
-      status: 'Block'
+      status: 'Verified'
     },
     {
       id: 5688,
@@ -41,7 +41,7 @@ const ReportedUser = () => {
      
       joinDate: '12 Jan 2024',
       plan: 'Premium',
-      status: 'Block'
+      status: 'Unverified'
     },
     {
       id: 8765,
@@ -51,7 +51,7 @@ const ReportedUser = () => {
      
       joinDate: '12 Jan 2024',
       plan: 'Free',
-      status: 'Block'
+      status: 'Verified'
     },
     {
       id: 8765,
@@ -61,7 +61,7 @@ const ReportedUser = () => {
     
       joinDate: '12 Jan 2024',
       plan: 'Premium',
-      status: 'Block'
+      status: 'Verified'
     },
     {
       id: 8765,
@@ -71,7 +71,7 @@ const ReportedUser = () => {
      
       joinDate: '12 Jan 2024',
       plan: 'Free',
-      status: 'Block'
+      status: 'Unverified'
     },
     {
       id: 8765,
@@ -81,7 +81,7 @@ const ReportedUser = () => {
      
       joinDate: '12 Jan 2024',
       plan: 'Premium',
-      status: 'Block'
+      status: 'Verified'
     },
     {
       id: 8765,
@@ -91,7 +91,7 @@ const ReportedUser = () => {
      
       joinDate: '12 Jan 2024',
       plan: 'Free',
-      status: 'Block'
+      status: 'Verified'
     },
     {
       id: 8765,
@@ -101,7 +101,7 @@ const ReportedUser = () => {
     
       joinDate: '12 Jan 2024',
       plan: 'Free',
-      status: 'Block'
+      status: 'Unverified'
     },
     {
       id: 8765,
@@ -111,17 +111,16 @@ const ReportedUser = () => {
   
       joinDate: '12 Jan 2024',
       plan: 'Premium',
-      status: 'Block'
+      status: 'Verified'
     }
   ];
 
   return (
     <div className="flex min-h-screen font-sans">
-     <Sidebar />
+       <Sidebar />
     <main className="flex-1 bg-white p-6">
         {/* Topbar */}
         <Topbar />
-
         {/* Stat Cards */}
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
   {[
@@ -210,11 +209,25 @@ const ReportedUser = () => {
         {/* User Table */}
         <div className="bg-white rounded-xl p-6 mt-8 shadow-sm">
           <div className="flex justify-between items-center mb-4">
-               <div className="flex gap-10">
-            <h3 className="text-lg font-semibold ">All Users</h3>
-            <h3 className="text-lg font-semibold ">Reported Users </h3>
-            <h3 className="text-lg font-semibold text-purple-700 border-b-2 border-purple-700 pb-1">Blocked Users</h3>
-         </div>
+             <div className="flex gap-10 z-20 relative">
+          <Link href="/admin/usermanagement">
+          <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
+            All Users
+          </h3>
+        </Link>
+  
+        <Link href="/management/reporteduser">
+        <h3 className="text-lg font-semibold text-purple-700 border-b-2 border-purple-700 pb-1 cursor-pointer">
+          Reported Users
+        </h3>
+        </Link>
+  
+        <Link href="/management/blockeduser">
+        <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
+          Blocked Users
+        </h3>
+        </Link>
+          </div>
             
           <div className="relative inline-block text-left">
   <button
@@ -226,16 +239,17 @@ const ReportedUser = () => {
   </button>
 
   {isFilterOpen && (
-    <div className="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg z-10 border border-gray-200">
-      {['Weekly', 'Monthly', 'Yearly'].map((option) => (
+    <div className="absolute right-0 mt-1 w-36 bg-white rounded-md shadow-lg z-10 border border-gray-200">
+      {['Week', 'Month', 'Year'].map((option) => (
         <button
           key={option}
-          className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+          className={`flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700`}
           onClick={() => {
             setSelectedFilter(option);
             setIsFilterOpen(false);
           }}
         >
+          <Image src="/assets/time.png" alt="Time" width={14} height={14} />
           {option}
         </button>
       ))}
@@ -274,11 +288,10 @@ const ReportedUser = () => {
                   <td>
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  user.status === 'Block'
-                            ? 'bg-red-100 text-red-500'
-                                     : 'bg-green-100 text-green-500'
-                                        }`}
-
+                        user.status === 'Verified' || user.status === 'D. View Details'
+                          ? 'bg-green-100 text-green-500'
+                          : 'bg-red-100 text-red-500'
+                      }`}
                     >
                       {user.status}
                     </span>
@@ -297,13 +310,18 @@ const ReportedUser = () => {
               {openMenu === i && (
                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md z-10">
   <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/view-file.png" alt="view" width={16} height={16} />
+    <Image src="/assets/view-file.png" alt="view" width={18} height={18} />
     <span className="whitespace-nowrap">View Details</span>
   </button>
 
   <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/suspend.png" alt="delete" width={16} height={16} />
-    <span className="whitespace-nowrap">Unblock</span>
+    <Image src="/assets/suspend.png" alt="Suspend" width={50} height={50} />
+    <span className="whitespace-nowrap">Temporary Suspend</span>
+  </button>
+
+  <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
+    <Image src="/assets/delete.png" alt="delete" width={16} height={16} />
+    <span className="whitespace-nowrap">Delete User</span>
   </button>
 </div>
 

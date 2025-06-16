@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Sidebar from '../components/layout/SideBar';
-import Topbar from '../components/layout/TopBar'; 
+import Sidebar from '../../components/layout/SideBar';
+import Topbar from '../../components/layout/TopBar'; 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Dashboard = () => {
   // State for filter dropdown
@@ -108,7 +109,7 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar />
-    <main className="flex-1 bg-white p-6">
+    <main className="flex-1 bg-white p-6 pt-28">
         {/* Topbar */}
         <Topbar />
         {/* Stat Cards */}
@@ -201,14 +202,21 @@ const Dashboard = () => {
           <div className="flex justify-between items-center mb-4">
                <div className="flex gap-10">
             <h3 className="text-lg font-semibold text-purple-700 border-b-2 border-purple-700 pb-1">All Users</h3>
-            <h3 className="text-lg font-semibold ">
+            <Link href="/management/reporteduser">
+            <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
             Reported Users
-               </h3>
+            </h3>
+            </Link>
 
-                <h3 className="text-lg font-semibold">Blocked Users</h3>
+                <Link href="/management/blockeduser">
+            <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
+            Blocked Users
+            </h3>
+                </Link>
+
          </div>
             
-          <div className="relative inline-block text-left">
+         <div className="relative inline-block text-left">
   <button
     onClick={() => setIsFilterOpen(!isFilterOpen)}
     className="text-black border border-gray-300 px-3 py-1 rounded-md bg-[#F9F9F9] text-sm flex items-center gap-2"
@@ -218,24 +226,23 @@ const Dashboard = () => {
   </button>
 
   {isFilterOpen && (
-    <div className="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg z-10 border border-gray-200">
+    <div className="absolute right-0 mt-1 w-36 bg-white rounded-md shadow-lg z-10 border border-gray-200">
       {['Week', 'Month', 'Year'].map((option) => (
         <button
           key={option}
-          className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+          className={`flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700`}
           onClick={() => {
             setSelectedFilter(option);
             setIsFilterOpen(false);
           }}
         >
+          <Image src="/assets/time.png" alt="Time" width={14} height={14} />
           {option}
         </button>
-      ))}
-    </div>
-  )}
-</div>
-
-            
+             ))}
+           </div>
+        )}
+      </div>
           </div>
 
           <table className="w-full text-left text-sm">
@@ -285,7 +292,7 @@ const Dashboard = () => {
               {openMenu === i && (
                 <div className="absolute right-0 mt-2 w-32 bg-white border rounded-md shadow-md z-10">
                  <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-  <Image src="/assets/view-file.png" alt="view" width={20} height={20} />
+  <Image src="/assets/view-file.png" alt="view" width={35} height={35} />
   View Details
 </button>
 

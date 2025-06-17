@@ -129,7 +129,7 @@ const Dashboard = () => {
       count: '2,149',
       percentage: '+15.03%',
       bg: '#EAE9FB',
-      icon: '/assets/nouser.png',
+      icon: '/assets/purple.png',
       percentColor: 'text-green-600',
       arrow: '/assets/trend.png',
     },
@@ -138,7 +138,7 @@ const Dashboard = () => {
       count: '7,893',
       percentage: '+15.03%',
       bg: '#F4E1FD',
-      icon: '/assets/warning.png',
+      icon: '/assets/pink.png',
       percentColor: 'text-red-600',
       arrow: '/assets/red-trend.png',
     },
@@ -290,18 +290,18 @@ const Dashboard = () => {
               </button>
 
               {openMenu === i && (
-                <div className="absolute right-0 mt-2 w-32 bg-white border rounded-md shadow-md z-10">
-                 <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-  <Image src="/assets/view-file.png" alt="view" width={35} height={35} />
-  View Details
-</button>
+            <div className="absolute right-0 mt-2 w-32 bg-white border rounded-md shadow-md z-10">
+  <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
+    <Image src="/assets/view-file.png" alt="view" width={20} height={20}  className="object-contain"/>
+    View Details
+  </button>
 
-                <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-  <Image src="/assets/delete.png" alt="delete" width={16} height={16} />
-  Delete User
-</button>
+  <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
+    <Image src="/assets/delete.png" alt="delete" width={16} height={16} />
+    Delete User
+  </button>
+</div>
 
-                </div>
               )}
             </td>
                 </tr>

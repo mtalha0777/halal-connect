@@ -118,7 +118,7 @@ const ReportedUser = () => {
   return (
     <div className="flex min-h-screen font-sans">
        <Sidebar />
-    <main className="flex-1 bg-white p-6">
+    <main className="flex-1 bg-white p-6 pt-24">
         {/* Topbar */}
         <Topbar />
         {/* Stat Cards */}
@@ -138,7 +138,7 @@ const ReportedUser = () => {
       count: '2,149',
       percentage: '+15.03%',
       bg: '#EAE9FB',
-      icon: '/assets/nouser.png',
+      icon: '/assets/purple.png',
       percentColor: 'text-green-600',
       arrow: '/assets/trend.png',
     },
@@ -147,7 +147,7 @@ const ReportedUser = () => {
       count: '7,893',
       percentage: '+15.03%',
       bg: '#F4E1FD',
-      icon: '/assets/warning.png',
+      icon: '/assets/nouser.png',
       percentColor: 'text-red-600',
       arrow: '/assets/red-trend.png',
     },
@@ -306,26 +306,32 @@ const ReportedUser = () => {
               >
                 ⋮
               </button>
-
-              {openMenu === i && (
-               <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md z-10">
-  <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/view-file.png" alt="view" width={18} height={18} />
+{openMenu === i && (
+  <div className="absolute right-0 mt-2 w-44 bg-white border rounded-md shadow-md z-10">
+  {/* ✅ View Details → Navigates to view page */}
+  <Link
+    href="/contentdetails/viewdetails"
+    className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
+  >
+    <Image src="/assets/view-file.png" alt="view" width={20} height={20} />
     <span className="whitespace-nowrap">View Details</span>
-  </button>
+  </Link>
 
-  <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/suspend.png" alt="Suspend" width={50} height={50} />
+  {/* 🚫 Suspend Button */}
+  <button className="flex items-center gap-1 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
+    <Image src="/assets/suspend.png" alt="Suspend" width={24} height={24} />
     <span className="whitespace-nowrap">Temporary Suspend</span>
   </button>
 
+  {/* 🗑️ Delete Button */}
   <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/delete.png" alt="delete" width={16} height={16} />
+    <Image src="/assets/delete.png" alt="delete" width={20} height={20} />
     <span className="whitespace-nowrap">Delete User</span>
   </button>
 </div>
 
-              )}
+)}
+
             </td>
                 </tr>
               ))}

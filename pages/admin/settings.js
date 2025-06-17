@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/layout/SideBar';
 import Topbar from '../../components/layout/TopBar';
-import AdminProfileCard from '../../components/admin/AdminProfileCard';
+// import AdminProfileCard from '../../components/admin/AdminProfileCard';
 import ProfileInfoSection from '../../components/admin/ProfileInfoSection';
 import EditModal from '../../components/admin/EditModal';
 import Image from 'next/image';

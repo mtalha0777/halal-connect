@@ -12,7 +12,6 @@ const Dashboard = () => {
     <div className="flex min-h-screen font-sans">
        <Sidebar />
     <main className="flex-1 bg-white p-6 pt-28 ">
-    {/* <main className=" pt-28 px-6 bg-white min-h-screen"> */}
         {/* Topbar */}
         <Topbar />
          {/* Stat Cards */}

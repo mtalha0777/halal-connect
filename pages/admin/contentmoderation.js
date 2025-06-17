@@ -1,25 +1,33 @@
-// 'use client';
+ 'use client';
 
 import React from 'react';
+import { useState } from 'react';
 import Sidebar from '../../components/layout/SideBar';
 import Topbar from '../../components/layout/TopBar';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { MoreVertical } from 'lucide-react';
 
 const reportedProfiles = [
   { id: '1234', name: 'Ahmed Raza', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Fatima Noor', status: 'Active' },
   { id: '1356', name: 'Rabia Siddiqui', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Hassan Shah', status: 'Active' },
   { id: '5688', name: 'Hamza Farooq', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Ahmed Raza', status: 'Active' },
-  { id: '8765', name: 'Mahnoor Javed', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Rabia Siddiqui', status: 'Blocked' },
-  { id: '8765', name: 'Fahad Iqbal', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Hamza Farooq', status: 'Active' },
-  { id: '8765', name: 'Fatima Noor', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Mahnoor Javed', status: 'Blocked' },
-  { id: '8765', name: 'Hassan Shah', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Fahad Iqbal', status: 'Active' },
+  { id: '8761', name: 'Mahnoor Javed', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Rabia Siddiqui', status: 'Blocked' },
+  { id: '8762', name: 'Fahad Iqbal', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Hamza Farooq', status: 'Active' },
+  { id: '8763', name: 'Fatima Noor', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Mahnoor Javed', status: 'Blocked' },
+  { id: '8764', name: 'Hassan Shah', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Fahad Iqbal', status: 'Active' },
   { id: '8765', name: 'Ayesha Khan', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Ayesha Khan', status: 'Active' },
-  { id: '8765', name: 'Zain Ul Abideen', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Zain Ul Abideen', status: 'Blocked' },
-  { id: '8765', name: 'Hina Tariq', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Hina Tariq', status: 'Active' },
+  { id: '8766', name: 'Zain Ul Abideen', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Zain Ul Abideen', status: 'Blocked' },
+  { id: '8767', name: 'Hina Tariq', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Hina Tariq', status: 'Active' },
 ];
 
 export default function ContentModeration() {
+const [openMenuId, setOpenMenuId] = useState(null);
+
+const handleMenuToggle = (id) => {
+  setOpenMenuId(openMenuId === id ? null : id);
+};
   const cards = [
      {
       title: 'Total Reported Profiles',
@@ -33,14 +41,14 @@ export default function ContentModeration() {
       count: '40,689',
       bg: '#DD83FF99',
       trend: '3.48%',
-      icon: '/assets/greenicon.png',
+      icon: '/assets/purpleicon.png',
     },
     {
       title: 'Banned Profiles',
       count: '40,689',
       bg: '#6ED39799',
       trend: '3.48%',
-      icon: '/assets/purpleicon.png',
+      icon: '/assets/greenicon.png',
     },
     {
       title: 'Resolved Reports',
@@ -122,9 +130,6 @@ export default function ContentModeration() {
     height={16}
   />
 </button>
-
-
-
             <button className="px-4 py-1 bg-[#5D5FEF] hover:bg-[#3d3fea] text-white text-sm rounded">
               View all
             </button>
@@ -164,17 +169,39 @@ export default function ContentModeration() {
                       {profile.status}
                     </span>
                   </td>
-                  <td className="px-4 py-2 relative">
-                    <div className="group relative inline-block">
-                      <MoreVertical className="w-4 h-4 text-gray-600 cursor-pointer" />
-                      <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                        <button className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">View Details</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">Approve</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">Issue Warning</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">Delete User</button>
-                      </div>
-                    </div>
-                  </td>
+               <td className="px-4 py-2 relative">
+  <div className="relative inline-block">
+    <MoreVertical
+      className="w-4 h-4 text-gray-600 cursor-pointer"
+      onClick={() => handleMenuToggle(profile.id)}
+    />
+    
+    {openMenuId === profile.id && (
+      <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+        <Link
+          href="/management/userdetails"
+          className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
+        >
+          <Image src="/assets/view-file.png" alt="view" width={16} height={16} />
+          View Details
+        </Link>
+        <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
+          <Image src="/assets/approve.png" alt="approve" width={16} height={16} />
+          Approve
+        </button>
+        <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
+          <Image src="/assets/warning.png" alt="warn" width={16} height={16} />
+          Issue Warning
+        </button>
+        <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
+          <Image src="/assets/delete.png" alt="delete" width={16} height={16} />
+          Delete User
+        </button>
+      </div>
+    )}
+  </div>
+</td>
+
                 </tr>
               ))}
             </tbody>

@@ -11,6 +11,7 @@ export default function SubscribeCard({
   bg = '#D3F0F8',
   borderColor = '#1CDACD', // Default border color
   cloudRightImage,
+   backgroundRGBA,
 }) {
   return (
     <div
@@ -46,20 +47,21 @@ export default function SubscribeCard({
 
       {/* Percentage Circle */}
       <div
-        className="absolute bottom-4 right-4 flex items-center gap-2 z-10"
-        style={{
-          width: '101px',
-          height: '32px',
-          padding: '2px 8px',
-          borderRadius: '100px',
-          border: `1px solid ${borderColor}`,
-          backgroundColor: borderColor,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'black',
-        }}
-      >
+  className="absolute bottom-4 right-4 flex items-center gap-2 z-10"
+  style={{
+    width: '101px',
+    height: '32px',
+    padding: '2px 8px',
+    borderRadius: '100px',
+    border: `1px solid ${borderColor}`,
+    backgroundColor: backgroundRGBA || borderColor, // ✅ Use transparent only if provided
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'black',
+  }}
+>
+
         <span className="text-sm font-semibold">{percentage}</span>
         {arrow && (
           <Image

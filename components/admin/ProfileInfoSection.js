@@ -1,21 +1,37 @@
-'use client';
-import React from 'react';
 import Image from 'next/image';
 
-const ProfileInfoSection = ({ title, data, onEdit }) => {
+const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-md font-semibold text-gray-800">{title}</h3>
-        <button onClick={onEdit} className="flex items-center text-[#5D5FEF] hover:underline text-sm">
+    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+      {/* Title with Icon */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          {icon && (
+            <Image
+              src={icon}
+              alt="section icon"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+          )}
+          <h3 className="text-lg font-bold text-gray-800">{title}</h3>
+        </div>
+        <button
+          onClick={onEdit}
+          className="text-[#5D5FEF] text-sm hover:underline"
+        >
           Edit
-          <Image src="/assets/edit.png" alt="edit" width={16} height={16} className="ml-1" />
         </button>
       </div>
-      <div className="space-y-2 text-sm text-gray-600">
-        {data.map((item, i) => (
-          <div key={i}>
-            <span className="font-medium text-black">{item.label}:</span> {item.value || 'N/A'}
+
+      {/* Info Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-4">
+
+        {data.map((item, index) => (
+          <div key={index}>
+            <p className="text-sm text-gray-500">{item.label}</p>
+            <p className="text-sm text-gray-800 mt-1">{item.value}</p>
           </div>
         ))}
       </div>

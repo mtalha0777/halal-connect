@@ -4,6 +4,10 @@ import Image from 'next/image';
 const SubscriptionUserList = () => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [tooltipTarget, setTooltipTarget] = useState(null);
+const [openMenu, setOpenMenu] = useState(null);
+const handleViewDetails = () => {
+  window.location.href = '/subscription/details';
+};
 
   const subscriptionUsers = [
     {
@@ -162,17 +166,27 @@ const SubscriptionUserList = () => {
                    </td>
 
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 relative group">
-                <MoreVertical className="h-5 w-5 text-gray-600" />
-                {/* Tooltip */}
-                {tooltipOpen && tooltipTarget === event.currentTarget && (
-                  <div
-                    className="absolute z-10 mt-2 py-1.5 px-4 bg-white shadow-xl rounded-md border border-gray-200"
-                    style={{ top: 'calc(100% + 8px)', left: '-50%' }}
-                  >
-                    <Eye className="mr-2 h-4 w-4 text-gray-500" />
-                    View Details
-                  </div>
-                )}
+               <div className="relative">
+                                  <MoreVertical
+                                    className="h-5 w-5 text-gray-500 cursor-pointer"
+                                    onClick={() => setOpenMenu(openMenu === index ? null : index)}
+                                  />
+                                  {openMenu === index && (
+                                    <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
+                                      <div className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                   onClick={handleViewDetails}
+                                      >
+                                       <Image src="/assets/view-file.png"
+                                        alt="Edit"
+                                         width={16} 
+                                         height={16} 
+                                         className="mr-2" />
+                                        <span>View Details</span>
+                                      </div>
+                                    
+                                    </div>
+                                  )}
+                                </div>
               </td>
             </tr>
           ))}

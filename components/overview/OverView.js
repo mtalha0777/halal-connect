@@ -1,19 +1,22 @@
+'use client';
+
 import React from 'react';
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
+  ResponsiveContainer,
+  CartesianGrid,
   BarChart,
   Bar,
+  Legend,
 } from 'recharts';
 import Image from 'next/image';
 
 const Overview = () => {
-  const totalRevenueData = [
+  const revenueData = [
     { month: 'Jan', revenue: 30 },
     { month: 'Feb', revenue: 50 },
     { month: 'Mar', revenue: 80 },
@@ -48,6 +51,7 @@ const Overview = () => {
       <h3 className="text-lg font-semibold mb-4">Overview</h3>
 
       <div className="flex justify-between gap-2">
+        {/* ✅ Total Revenue (with gradient smooth Area Chart) */}
         <div className="w-full max-w-[480px]">
           <div className="flex justify-between items-center mb-4">
             <h4 className="font-medium">Total Revenue</h4>
@@ -56,35 +60,43 @@ const Overview = () => {
               <Image src="/assets/arrowdown.png" alt="Arrow" width={12} height={12} />
             </button>
           </div>
-          <LineChart
-            width={480}
-            height={240}
-            data={totalRevenueData}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis ticks={[0, 20, 40, 60, 80, 100]} domain={[0, 100]} />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="revenue"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
+          <ResponsiveContainer width="100%" height={240}>
+  <AreaChart data={revenueData} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
+    <defs>
+      <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#5D5FEF" stopOpacity={0.4} />
+        <stop offset="100%" stopColor="#5D5FEF" stopOpacity={0.1} />
+      </linearGradient>
+    </defs>
+    <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
+    <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#000' }} />
+    <YAxis
+      tick={{ fontSize: 12, fill: '#000' }}
+      domain={[0, 100]}
+      ticks={[0, 20, 40, 60, 80, 100]} // ✅ Here!
+    />
+    <Tooltip />
+    <Area
+      type="monotone"
+      dataKey="revenue"
+      stroke="#5D5FEF"
+      fill="url(#revenueGradient)"
+      strokeWidth={2}
+      dot={false}
+    />
+  </AreaChart>
+</ResponsiveContainer>
+
         </div>
 
+        {/* 📊 Subscription Buy (Bar Chart) */}
         <div className="w-full max-w-[480px]">
           <div className="flex justify-between items-center mb-4">
             <h4 className="font-medium">Subscription Buy</h4>
-            <div className="flex space-x-2">
-              <button className="px-3 py-1 bg-white border border-gray-400 text-black rounded-md text-sm flex items-center gap-1">
-                Yearly
-                <Image src="/assets/arrowdown.png" alt="Arrow" width={12} height={12} />
-              </button>
-            </div>
+            <button className="px-3 py-1 bg-white border border-gray-400 text-black rounded-md text-sm flex items-center gap-1">
+              Yearly
+              <Image src="/assets/arrowdown.png" alt="Arrow" width={12} height={12} />
+            </button>
           </div>
           <BarChart
             width={480}

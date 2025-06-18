@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 import { Line, Bar, Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-
+import Image from 'next/image';
 import React from 'react';
 
 ChartJS.register(
@@ -96,24 +96,41 @@ const ReportsCharts = () => {
 return (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
     {/* Matches Line Chart */}
-    {/* <div className="bg-white rounded-xl shadow border p-4 h-[300px]"> */}
+    
     <div className="bg-white rounded-xl shadow p-4 h-[300px]" style={{ border: '1px solid #0000001F' }}>
-
       <h4 className="text-sm font-semibold mb-2">Matches Details</h4>
+      {/* Yearly Dropdown Button */}
+           <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
+            Yearly
+         <Image src="/assets/arrowdown.png" alt="Arrow Down" width={12} height={12} />
+          </button>
       <div className="relative h-full w-full">
         <Line
           data={matchesLineData}
           options={{
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: {
-              padding: { bottom: 20 },
-            },
-            scales: {
-              x: { ticks: { color: '#000', font: { size: 10 } } },
-              y: { ticks: { color: '#000', font: { size: 10 } } },
-            },
-          }}
+  responsive: true,
+  maintainAspectRatio: false,
+  layout: { padding: { bottom: 20 } },
+  plugins: {
+    legend: {
+      labels: {
+        usePointStyle: true, // ✅ makes it circle
+        pointStyle: 'circle', 
+        boxWidth: 10,
+        boxHeight: 10,
+        color: '#000',
+        font: {
+          size: 10,
+        },
+      },
+    },
+  },
+  scales: {
+    x: { ticks: { color: '#000', font: { size: 10 } } },
+    y: { ticks: { color: '#000', font: { size: 10 } } },
+  },
+}}
+
         />
       </div>
     </div>
@@ -121,6 +138,11 @@ return (
     {/* Pie Chart */}
     <div className="bg-white rounded-xl shadow p-4 h-[300px]" style={{ border: '1px solid #0000001F' }}>
   <h4 className="text-sm font-semibold mb-2">User Details</h4>
+  {/* Yearly Dropdown Button */}
+    <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
+      Yearly
+      <Image src="/assets/arrowdown.png" alt="Arrow Down" width={12} height={12} />
+    </button>
   <div className="relative h-[180px] w-full">
     <Pie
       data={pieData}
@@ -164,33 +186,80 @@ return (
 
 
     {/* Matches Bar Chart */}
-    {/* <div className="bg-white rounded-xl shadow border p-4 h-[300px]"> */}
-    <div className="bg-white rounded-xl shadow p-4 h-[300px]" style={{ border: '1px solid #0000001F' }}>
+<div className="bg-white rounded-xl shadow p-4 h-[300px]" style={{ border: '1px solid #0000001F' }}>
+  {/* Header Row */}
+  <div className="flex justify-between items-center mb-2">
+    <h4 className="text-sm font-semibold">Matches Details </h4>
 
-      <h4 className="text-sm font-semibold mb-2">Matches Details</h4>
-      <div className="relative h-full w-full">
-        <Bar
-          data={matchBarData}
-          options={{
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: {
-              padding: { bottom: 20 },
+    {/* Yearly Dropdown Button */}
+    <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
+      Yearly
+      <Image src="/assets/arrowdown.png" alt="Arrow Down" width={12} height={12} />
+    </button>
+  </div>
+
+  {/* Chart */}
+  <div className="relative h-full w-full">
+    <Bar
+      data={matchBarData}
+      options={{
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { bottom: 20 } },
+        plugins: {
+  datalabels: { display: false },
+  legend: {
+    labels: {
+      usePointStyle: true,
+      pointStyle: 'circle', // ✅ this makes the icon circular
+      boxWidth: 10,
+      boxHeight: 10,
+      color: '#000',
+      font: {
+        size: 10,
+      },
+    },
+  },
+},
+
+        scales: {
+          x: {
+            ticks: {
+              color: '#000',
+              font: { size: 10 },
             },
-            scales: {
-              x: { ticks: { color: '#000', font: { size: 10 } } },
-              y: { ticks: { color: '#000', font: { size: 10 } } },
+          },
+          y: {
+            ticks: {
+              color: '#000',
+              font: { size: 10 },
+              stepSize: 20, // ✅ Show even intervals
+              callback: function (value) {
+                return value % 20 === 0 ? value : '';
+              },
             },
-          }}
-        />
-      </div>
-    </div>
+            beginAtZero: true,
+            max: 100,
+          },
+        },
+      }}
+      plugins={[ChartDataLabels]} // Still required to control label visibility
+    />
+  </div>
+</div>
+
+
 
     {/* Subscription Line Chart */}
     {/* <div className="bg-white rounded-xl shadow border p-4 h-[300px]"> */}
     <div className="bg-white rounded-xl shadow p-4 h-[300px]" style={{ border: '1px solid #0000001F' }}>
 
       <h4 className="text-sm font-semibold mb-2">Total Subscription Revenue</h4>
+      {/* Yearly Dropdown Button */}
+    <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
+      Yearly
+      <Image src="/assets/arrowdown.png" alt="Arrow Down" width={12} height={12} />
+    </button>
       <div className="relative h-full w-full">
         <Line
           data={subscriptionData}

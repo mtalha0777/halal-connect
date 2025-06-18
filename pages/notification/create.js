@@ -73,8 +73,6 @@ export default function CreateNotificationPage() {
 
 </div>
 
-
-
             {/* Notification Name */}
             <div>
               <label className="block text-sm font-medium mb-1">Notification Name</label>

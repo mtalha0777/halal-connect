@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/layout/SideBar';
 import Topbar from '../../components/layout/TopBar';
-// import AdminProfileCard from '../../components/admin/AdminProfileCard';
 import ProfileInfoSection from '../../components/admin/ProfileInfoSection';
 import EditModal from '../../components/admin/EditModal';
 import Image from 'next/image';
 import AdminProfileCard from '../../components/admin/AdminProfileCard';
 const Settings = () => {
   const [activeModal, setActiveModal] = useState(null);
+ const [showUploadModal, setShowUploadModal] = useState(false);
 
   const [admin, setAdmin] = useState({
     name: 'Liam James',
@@ -84,47 +84,52 @@ const Settings = () => {
                     <p className="text-sm text-gray-500">Admin</p>
                   </div>
                 </div>
-                <button
-                  onClick={() => alert('Upload a picture popup coming soon')}
-                  className="px-4 py-2 text-sm text-[#5D5FEF] underline hover:text-[#2e2fff] transition"
+               <button
+              onClick={() => setShowUploadModal(true)}
+              className="px-4 py-2 text-sm text-[#5D5FEF] no-underline hover:underline hover:text-[#2e2fff] transition cursor-pointer"
                 >
-                  Upload Picture
-                </button>
+                   Upload Picture
+              </button>
+
+
               </div>
 
               <div className="space-y-6">
-                <ProfileInfoSection
-                  title="Personal Information"
-                  data={[
-                    { label: 'Name', value: admin.name },
-                    { label: 'Age', value: admin.age },
-                    { label: 'Gender', value: admin.gender },
-                    { label: 'Date of Birth', value: admin.dob },
-                  ]}
-                  onEdit={() => setActiveModal('personal')}
-                  icon="/assets/personaluser.png"
-                />
+               <ProfileInfoSection
+              title="Personal Information"
+            data={[
+           // First row
+           { label: 'Name:', value: admin.name },
+          { label: 'Age', value: admin.age },
+          { label: 'Gender:', value: admin.gender },
+          // Second row (separately rendered)
+          { label: 'Date of Birth:', value: admin.dob },
+           ]}
+            onEdit={() => setActiveModal('personal')}
+          icon="/assets/personaluser.png"
+/>
+
 
                 <ProfileInfoSection
-                  title="Contact"
-                  data={[
-                    { label: 'Email Address', value: admin.email },
-                    { label: 'Location', value: admin.phone },
-                  ]}
-                  onEdit={() => setActiveModal('contact')}
-                  icon="/assets/contactuser.png"
-                />
+               title="Contact"
+                data={[
+               { label: 'Email Address:', value: admin.email },
+               { label: 'Location', value: admin.phone },
+                 ]}
+                onEdit={() => setActiveModal('contact')}
+                icon="/assets/contactuser.png"    
+              />
 
                 <ProfileInfoSection
                   title="Location"
-                  data={[{ label: 'Address', value: admin.address }]}
+                  data={[{ label: 'Address:', value: admin.address }]}
                   onEdit={() => setActiveModal('location')}
                   icon="/assets/location.png"
                 />
 
                 <ProfileInfoSection
                   title="Language"
-                  data={[{ label: 'Address', value: admin.language }]}
+                  data={[{ label: 'Address:', value: admin.language }]}
                   onEdit={() => setActiveModal('language')}
                   icon="/assets/language.png"
                 />
@@ -133,6 +138,37 @@ const Settings = () => {
           </div>
         </main>
       </div>
+{/* Upload Modal */}
+{showUploadModal && (
+  <div className="fixed inset-0 z-50 bg-[#00000099] flex items-center justify-center">
+    <div className="w-[660px] h-[355px] bg-white rounded-[12px] p-[32px] flex flex-col gap-[40px]">
+      <h2 className="text-xl font-bold text-[#000]">Profile Picture</h2>
+
+      <div className="w-[596px] h-[151px] border border-[#00000066] rounded-[8px] flex flex-col items-center justify-center mx-auto">
+        <Image src="/assets/upload.png" alt="Upload" width={40} height={40} />
+        <p className="mt-2 text-sm text-gray-600">Upload Profile Pic</p>
+      </div>
+
+      <div className="flex justify-between w-full">
+        <button
+          onClick={() => setShowUploadModal(false)}
+          className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
+        >
+          Close
+        </button>
+        <button
+          onClick={() => alert('Saved!')}
+          className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-[#5D5FEF] text-white hover:bg-[#4b4df0] transition"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
 
       {/* Modals */}
       <EditModal
@@ -159,15 +195,45 @@ const Settings = () => {
         onSave={(fields) => handleSave('contact', fields)}
       />
 
-      <EditModal
-        visible={activeModal === 'location'}
-        title="Edit Location"
-        fields={[
-          { name: 'address', label: 'Address', value: admin.address },
-        ]}
-        onClose={() => setActiveModal(null)}
-        onSave={(fields) => handleSave('location', fields)}
-      />
+      {activeModal === 'location' && (
+  <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center">
+   <div className="w-[660px] h-[272px] bg-white rounded-[12px] p-8 flex flex-col gap-[40px] z-50 relative">
+
+      {/* Title */}
+      <h2 className="text-xl font-semibold text-gray-800">Location</h2>
+
+      {/* Address Input Box with Image */}
+      <div className="w-[596px] h-[44px] border border-[#00000066] rounded-[8px] flex items-center justify-between px-4 mx-auto">
+  <input
+    type="text"
+    value={admin.address}
+    onChange={(e) => setAdmin({ ...admin, address: e.target.value })}
+    className="w-full h-full outline-none text-sm text-gray-700 bg-transparent pr-4"
+    placeholder="Enter your address"
+  />
+  <Image src="/assets/locationblue.png" alt="Location Icon" width={20} height={20} />
+</div>
+
+
+      {/* Action Buttons */}
+      <div className="flex justify-between">
+        <button
+    onClick={() => setShowUploadModal(false)}
+    className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
+  >
+    Close
+  </button>
+        <button
+          onClick={() => handleSave('location', { address: admin.address })}
+          className="w-[288px] h-[48px] rounded-[8px] bg-[#5D5FEF] text-white text-sm font-medium"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       <EditModal
         visible={activeModal === 'language'}

@@ -86,8 +86,6 @@ const ReportsAndAnalytics = () => {
         <div className="w-full max-w-full overflow-hidden mt-6">
   <ReportsCharts />
 </div>
-
-
       </main>
     </div>
   );

@@ -28,7 +28,25 @@ const FeatureSubscriptionPlans = () => {
 
   return (
     <div className="bg-white rounded-lg shadow p-4 mb-6">
-      <h3 className="text-lg font-semibold mb-4">Feature Subscription Plans</h3>
+     <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Features Subscription Plans</h3>
+        <div className="flex gap-8">
+             {['Boost Profile', 'Super Message', 'Super Like'].map((plan, idx) => (
+            <button
+              key={idx}
+              className={`relative text-sm font-medium ${
+                plan === 'Super Like' ? 'text-[#5D5FEF]' : 'text-gray-700'
+              }`}
+             >
+              {plan}
+              {plan === 'Super Like' && (
+                <span className="absolute bottom-[-4px] left-0 right-0 h-[2px] bg-[#5D5FEF]" />
+                )}
+              </button>
+                ))}
+           </div>
+      </div>
+      
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
            <tr  className="bg-gray-100 rounded-md">

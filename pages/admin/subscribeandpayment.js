@@ -17,12 +17,19 @@ export default function SubscribeAndPaymentPage() {
       <Sidebar />
       <div className="flex-1 bg-[#f5f5f5] min-h-screen">
         <Topbar />
-        <main className="p-6">
-          <h2 className="text-2xl font-bold mb-6">Subscription & Payments</h2>
-          {/* Subcription and Payments */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-            {[
-              {
+        {/* <main className="p-6"> */}
+  {/* Page Title */}
+ <main className="p-6 pt-20">
+
+  <div className="mb-6">
+    <h1 className="text-xl font-bold text-black">Subscription & Payments</h1>
+  </div>
+
+
+  {/* Subcription and Payments Cards */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+    {[ 
+      { 
                 title: 'Total Revenue',
                 count: '12,579',
                 percentage: '+15.03%',
@@ -30,6 +37,7 @@ export default function SubscribeAndPaymentPage() {
                 arrow: '/assets/trend.png',
                 bg: '#7DE4DD',
                 borderColor: '#1CDACD',
+                backgroundRGBA: 'rgba(28, 218, 205, 0.12)',
                 cloudRightImage: '/assets/cloudblue.png',
               },
               {
@@ -40,6 +48,7 @@ export default function SubscribeAndPaymentPage() {
                 arrow: '/assets/trend.png',
                 bg: '#948DC4',
                 borderColor: '#786BD3',
+                backgroundRGBA: 'rgba(120, 107, 211, 1)',
                 cloudRightImage: '/assets/cloudpurple.png',
               },
               {
@@ -50,33 +59,35 @@ export default function SubscribeAndPaymentPage() {
                 arrow: '/assets/trend.png',
                 bg: '#CB7B8D',
                 borderColor: '#CA5C74',
+                backgroundRGBA: 'rgba(202, 92, 116, 1)',
                 cloudRightImage: '/assets/cloudpink.png',
               },
-            ].map((card, i) => (
-              <SubscribeCard key={i} {...card} />
-            ))}
-          </div>
+].map((card, i) => (
+      <SubscribeCard key={i} {...card} />
+    ))}
+  </div>
 
-          {/* Overview */}
-          <div>
-            <Overview />
-          </div>
+  {/* Overview */}
+  <div>
+    <Overview />
+  </div>
 
-          {/* Subscription Plans Section */}
-          <div>
-            <SubscriptionPlans />
-          </div>
+  {/* Subscription Plans Section */}
+  <div>
+    <SubscriptionPlans />
+  </div>
 
-          {/* Feature Subscription Plans */}
-          <div>
-            <FeatureSubscriptionPlans />
-          </div>
+  {/* Feature Subscription Plans */}
+  <div>
+    <FeatureSubscriptionPlans />
+  </div>  
 
-          {/* Subscription User List */}
-          <div>
-            <SubscriptionUserList />
-          </div>
-        </main>
+  {/* Subscription User List */}
+  <div>
+    <SubscriptionUserList />
+  </div>
+</main>
+
       </div>
     </div>
   );

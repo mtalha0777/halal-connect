@@ -102,17 +102,36 @@ const Dashboard = () => {
         </div>
 
         {/* Cloud bottom-right with blur background */}
-        <div
-        className="absolute bottom-0 right-0 w-20 h-20 rounded-full overflow-hidden"
-        style={{ backgroundColor: cloudColor[i], zIndex: 0 }}
-        >
-        <Image
-            src="/assets/cloud.png"
-            alt="Cloud"
-            fill
-            className="object-contain opacity-80"
-        />
-        </div>
+<div className="absolute bottom-0 right-0 w-18 h-14 z-0">
+  {/* Optional blur effect behind cloud */}
+  <div
+    className="absolute bottom-2 right-2 w-16 h-16 rounded-full"
+    style={{
+      backgroundColor: cloudColor[i],
+      filter: 'blur(8px)',
+      zIndex: 0,
+    }}
+  />
+  <Image
+    src="/assets/cloud.png"
+    alt="Cloud"
+    width={70}
+    height={70}
+    className="object-contain opacity-90 relative z-10"
+    style={{
+      transform: 'rotate(10.73deg)',
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+    }}
+  />
+</div>
+
+
+
+
+
+        
 
       </div>
       ));

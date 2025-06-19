@@ -23,34 +23,37 @@ const EditModal = ({ visible, title, fields, onSave, onClose }) => {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg p-6 w-[90%] max-w-md shadow-lg relative">
-        <h3 className="text-lg font-semibold mb-4">{title}</h3>
+    <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center">
+      <div className="w-[660px] h-[360px] bg-white rounded-[12px] p-[32px] flex flex-col gap-[40px] z-50 relative">
+        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
 
-        {fields.map((field, i) => (
-          <div key={i} className="mb-4">
-            <label className="block text-sm font-medium mb-1">{field.label}</label>
-            <input
-              type="text"
-              value={formData[field.name] || ''}
-              onChange={(e) => handleChange(field.name, e.target.value)}
-              className="w-full border px-3 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-        ))}
+        <div className="flex flex-col gap-4">
+          {fields.map((field, i) => (
+            <div key={i} className="flex flex-col gap-1">
+              <label className="text-sm text-gray-600">{field.label}</label>
+              <input
+                type="text"
+                value={formData[field.name] || ''}
+                onChange={(e) => handleChange(field.name, e.target.value)}
+                placeholder={field.label}
+                className="w-full h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+              />
+            </div>
+          ))}
+        </div>
 
-        <div className="flex justify-end gap-2 mt-6">
+        <div className="flex justify-between mt-auto">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300"
+            className="w-[288px] h-[48px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
           >
-            Cancel
+            Close
           </button>
           <button
             onClick={handleSave}
-            className="px-4 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700"
+            className="w-[288px] h-[48px] rounded-[8px] bg-[#5D5FEF] text-white text-sm font-medium hover:bg-[#4b4df0] transition"
           >
-            Save
+            Save Changes
           </button>
         </div>
       </div>
@@ -59,4 +62,3 @@ const EditModal = ({ visible, title, fields, onSave, onClose }) => {
 };
 
 export default EditModal;
-

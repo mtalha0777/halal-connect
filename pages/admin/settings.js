@@ -5,7 +5,7 @@ import Topbar from '../../components/layout/TopBar';
 import ProfileInfoSection from '../../components/admin/ProfileInfoSection';
 import EditModal from '../../components/admin/EditModal';
 import Image from 'next/image';
-import AdminProfileCard from '../../components/admin/AdminProfileCard';
+// import AdminProfileCard from '../../components/admin/AdminProfileCard';
 const Settings = () => {
   const [activeModal, setActiveModal] = useState(null);
  const [showUploadModal, setShowUploadModal] = useState(false);
@@ -96,18 +96,18 @@ const Settings = () => {
 
               <div className="space-y-6">
                <ProfileInfoSection
-              title="Personal Information"
-            data={[
-           // First row
-           { label: 'Name:', value: admin.name },
-          { label: 'Age', value: admin.age },
-          { label: 'Gender:', value: admin.gender },
-          // Second row (separately rendered)
-          { label: 'Date of Birth:', value: admin.dob },
-           ]}
-            onEdit={() => setActiveModal('personal')}
-          icon="/assets/personaluser.png"
-/>
+                title="Personal Information"
+                data={[
+                // First row
+                 { label: 'Name:', value: admin.name },
+                  { label: 'Age', value: admin.age },
+                  { label: 'Gender:', value: admin.gender },
+                // Second row (separately rendered)
+                  { label: 'Date of Birth:', value: admin.dob },
+                   ]}
+                  onEdit={() => setActiveModal('personal')}
+                  icon="/assets/personaluser.png"
+                />
 
 
                 <ProfileInfoSection
@@ -167,62 +167,187 @@ const Settings = () => {
   </div>
 )}
 
-
-
-
-      {/* Modals */}
-      <EditModal
-        visible={activeModal === 'personal'}
-        title="Edit Personal Information"
-        fields={[
-          { name: 'name', label: 'Name', value: admin.name },
-          { name: 'age', label: 'Age', value: admin.age },
-          { name: 'gender', label: 'Gender', value: admin.gender },
-          { name: 'dob', label: 'Date of Birth', value: admin.dob },
-        ]}
-        onClose={() => setActiveModal(null)}
-        onSave={(fields) => handleSave('personal', fields)}
-      />
-
-      <EditModal
-        visible={activeModal === 'contact'}
-        title="Edit Contact"
-        fields={[
-          { name: 'email', label: 'Email Address', value: admin.email },
-          { name: 'phone', label: 'Phone', value: admin.phone },
-        ]}
-        onClose={() => setActiveModal(null)}
-        onSave={(fields) => handleSave('contact', fields)}
-      />
-
-      {activeModal === 'location' && (
+     
+{activeModal === 'personal' && (
   <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center">
-   <div className="w-[660px] h-[272px] bg-white rounded-[12px] p-8 flex flex-col gap-[40px] z-50 relative">
+    <div className="w-[660px] bg-white rounded-[12px] p-[32px] flex flex-col gap-[40px] z-50 relative">
+      <h2 className="text-xl font-semibold text-gray-800">Edit Personal Information</h2>
+
+      <div className="flex flex-col gap-6">
+        {/* Row 1: Name + Age */}
+        <div className="flex gap-4">
+          {/* Name */}
+          <div className="w-1/2 flex flex-col gap-1">
+            <label className="text-sm text-gray-600">Name</label>
+            <input
+              type="text"
+              value={admin.name}
+              onChange={(e) => setAdmin({ ...admin, name: e.target.value })}
+              placeholder="Enter name"
+              className="h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+            />
+          </div>
+
+          {/* Age */}
+          <div className="w-1/2 flex flex-col gap-1">
+            <label className="text-sm text-gray-600">Age</label>
+            <input
+              type="text"
+              value={admin.age}
+              onChange={(e) => setAdmin({ ...admin, age: e.target.value })}
+              placeholder="Enter age"
+              className="h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+            />
+          </div>
+        </div>
+
+        {/* Row 2: Gender + DOB */}
+        <div className="flex gap-4">
+          {/* Gender */}
+          <div className="w-1/2 flex flex-col gap-1">
+            <label className="text-sm text-gray-600">Gender</label>
+            <input
+              type="text"
+              value={admin.gender}
+              onChange={(e) => setAdmin({ ...admin, gender: e.target.value })}
+              placeholder="Enter gender"
+              className="h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+            />
+          </div>
+
+          {/* Date of Birth */}
+          <div className="w-1/2 flex flex-col gap-1">
+            <label className="text-sm text-gray-600">Date of Birth</label>
+        <input
+  type="text"
+  value={admin.dob === '01-10-2000' ? '' : admin.dob}
+  onChange={(e) => setAdmin({ ...admin, dob: e.target.value })}
+  placeholder="DD/MM/YYYY"
+  className="h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+/>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex justify-between pt-2">
+        <button
+          onClick={() => setActiveModal(null)}
+          className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
+        >
+          Close
+        </button>
+        <button
+          onClick={() =>
+            handleSave('personal', {
+              name: admin.name,
+              age: admin.age,
+              gender: admin.gender,
+              dob: admin.dob,
+            })
+          }
+          className="w-[288px] h-[48px] rounded-[8px] bg-[#5D5FEF] text-white text-sm font-medium"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
+{activeModal === 'contact' && (
+  <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center">
+    <div className="w-[660px] bg-white rounded-[12px] p-[32px] flex flex-col gap-[40px] z-50 relative">
+      {/* Title */}
+      <h2 className="text-xl font-semibold text-gray-800">Contact</h2>
+
+      {/* Inputs Section */}
+      <div className="flex flex-col gap-6">
+        {/* Email */}
+        <div className="flex flex-col gap-1">
+          <label className="text-sm text-gray-600">Email Address</label>
+          <input
+            type="text"
+            value={admin.email}
+            onChange={(e) => setAdmin({ ...admin, email: e.target.value })}
+            placeholder="Enter email"
+            className="w-full h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+          />
+        </div>
+
+        {/* Phone */}
+        <div className="flex flex-col gap-1">
+          <label className="text-sm text-gray-600">Phone</label>
+          <input
+            type="text"
+            value={admin.phone}
+            onChange={(e) => setAdmin({ ...admin, phone: e.target.value })}
+            placeholder="Enter phone number"
+            className="w-full h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+          />
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex justify-between pt-2">
+        <button
+          onClick={() => setActiveModal(null)}
+          className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
+        >
+          Close
+        </button>
+        <button
+          onClick={() =>
+            handleSave('contact', {
+              email: admin.email,
+              phone: admin.phone,
+            })
+          }
+          className="w-[288px] h-[48px] rounded-[8px] bg-[#5D5FEF] text-white text-sm font-medium"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+{activeModal === 'location' && (
+  <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center">
+    <div className="w-[660px] h-[272px] bg-white rounded-[12px] p-8 flex flex-col gap-[40px] z-50 relative">
 
       {/* Title */}
       <h2 className="text-xl font-semibold text-gray-800">Location</h2>
 
-      {/* Address Input Box with Image */}
-      <div className="w-[596px] h-[44px] border border-[#00000066] rounded-[8px] flex items-center justify-between px-4 mx-auto">
-  <input
-    type="text"
-    value={admin.address}
-    onChange={(e) => setAdmin({ ...admin, address: e.target.value })}
-    className="w-full h-full outline-none text-sm text-gray-700 bg-transparent pr-4"
-    placeholder="Enter your address"
-  />
-  <Image src="/assets/locationblue.png" alt="Location Icon" width={20} height={20} />
-</div>
+      {/* Label + Input with icon */}
+      <div className="flex flex-col gap-1">
+        <label className="text-sm text-gray-600 ml">Location</label>
 
+        <div className="w-[596px] h-[44px] border border-[#00000066] rounded-[8px] flex items-center justify-between px-4 mx-auto">
+          <input
+            type="text"
+            value={admin.address}
+            onChange={(e) => setAdmin({ ...admin, address: e.target.value })}
+            className="w-full h-full outline-none text-sm text-gray-700 bg-transparent pr-4"
+            placeholder="Enter your address"
+          />
+          <Image src="/assets/locationblue.png" alt="Location Icon" width={20} height={20} />
+        </div>
+      </div>
 
       {/* Action Buttons */}
       <div className="flex justify-between">
         <button
-    onClick={() => setShowUploadModal(false)}
-    className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
-  >
-    Close
-  </button>
+          onClick={() => setActiveModal(null)}
+          className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
+        >
+          Close
+        </button>
+
         <button
           onClick={() => handleSave('location', { address: admin.address })}
           className="w-[288px] h-[48px] rounded-[8px] bg-[#5D5FEF] text-white text-sm font-medium"
@@ -235,15 +360,46 @@ const Settings = () => {
 )}
 
 
-      <EditModal
-        visible={activeModal === 'language'}
-        title="Edit Language"
-        fields={[
-          { name: 'language', label: 'Language', value: admin.language },
-        ]}
-        onClose={() => setActiveModal(null)}
-        onSave={(fields) => handleSave('language', fields)}
-      />
+
+     
+{activeModal === 'language' && (
+  <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center">
+    <div className="w-[660px] bg-white rounded-[12px] p-[32px] flex flex-col gap-[40px] z-50 relative">
+      {/* Title */}
+      <h2 className="text-xl font-semibold text-gray-800">Language</h2>
+
+      {/* Input Field with Label */}
+      <div className="flex flex-col gap-1">
+        <label className="text-sm text-gray-600">Add Language</label>
+        <input
+          type="text"
+          value={admin.language}
+          onChange={(e) => setAdmin({ ...admin, language: e.target.value })}
+          placeholder="Language"
+          className="w-full h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"
+        />
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex justify-between">
+        <button
+          onClick={() => setActiveModal(null)}
+          className="w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
+        >
+          Close
+        </button>
+        <button
+          onClick={() => handleSave('language', { language: admin.language })}
+          className="w-[288px] h-[48px] rounded-[8px] bg-[#5D5FEF] text-white text-sm font-medium"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 };

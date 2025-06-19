@@ -54,7 +54,7 @@ return (
           {/* Mark all as read */}
           <label className="ml-auto flex items-center gap-2 text-sm text-[#1E1D31]">
   <input type="checkbox" /> Mark all as read
-</label>
+      </label>
 
         </div>
       </div>
@@ -62,16 +62,20 @@ return (
       {/* Notifications List */}
       <div className="flex-1 space-y-4 overflow-y-auto pr-2">
         {notifications.map((item, index) => (
+          
           <div
-            key={index}
-            className="flex items-start gap-4 bg-[#F6F6F6] p-4 rounded-lg shadow-sm"
-          >
+         key={index}
+         className={`flex items-start gap-4 bg-[#F6F6F6] p-4 rounded-lg shadow-sm ${
+        index < 3 ? 'border-l-2 border-[#5D5FEF]' : ''
+        }`}
+        >
+
             <Image
               src={item.img}
               alt="user"
               width={45}
               height={45}
-              className="rounded-full"
+              className="rounded-full self-center"
             />
             <div className="flex-1">
               <div className="flex justify-between items-start">
@@ -102,7 +106,6 @@ return (
 
       </div>
     </div>
-//   </div>
 );
 
 };

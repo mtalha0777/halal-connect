@@ -10,7 +10,6 @@ import SubscriptionPlans from "../../components/subscribe/SubscriptionPlans";
 import FeatureSubscriptionPlans from "../../components/subscribe/FeatureSubscriptionPlans";
 import SubscriptionUserList from "../../components/subscribe/SubscriptionUserList";
 
-import { MoreVertical, Edit, Trash2, Crown, CreditCard, ShoppingCart, History } from "lucide-react";
 export default function SubscribeAndPaymentPage() {
   return (
     <div className="flex">
@@ -27,7 +26,10 @@ export default function SubscribeAndPaymentPage() {
 
 
   {/* Subcription and Payments Cards */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+ 
+ <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+
+
     {[ 
       { 
                 title: 'Total Revenue',

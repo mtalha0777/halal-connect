@@ -70,10 +70,9 @@ const Sidebar = () => {
         height={18}
         className={`object-contain ${isActive ? 'brightness-0' : 'invert brightness-0'}`}
       />
-    </div>
-  </div>
-</Link>
-
+        </div>
+          </div>
+            </Link>
               );
             })}
           </nav>
@@ -94,7 +93,7 @@ const Sidebar = () => {
       <p className="text-xs text-gray-300">liam@gmail.com</p>
     </div>
     <Image
-      src="/assets/arrowright.png"
+      src="/assets/brightarrow.png"
       alt="Go"
       width={18}
       height={18}

@@ -59,8 +59,8 @@ const Topbar = () => {
               />
             </div>
 
-            {/* Bell Icon + Notification Popup Wrapper */}
-          <div className="relative">
+           {/* Bell Icon + Notification Popup Wrapper */}
+<div className="relative">
   <Image
     src="/assets/bellicon.png"
     alt="Notifications"
@@ -69,15 +69,22 @@ const Topbar = () => {
     className="cursor-pointer"
     onClick={() => setShowPopup(!showPopup)}
   />
-             {showPopup && (
-    <div className="fixed inset-0 bg-[#00000099] z-40">
-      {/* Popup box aligned to top-right under bell icon */}
-      <div className="absolute top-16 right-6">
+
+  {showPopup && (
+    <>
+      {/* Background Blur Layer */}
+      <div
+        className="fixed inset-0 bg-[#00000099] z-40"
+        onClick={() => setShowPopup(false)}
+      ></div>
+
+      {/* Popup Box Positioned Below Bell Icon */}
+      <div className="absolute top-10 right-0 z-50">
         <NotificationPopup onClose={() => setShowPopup(false)} />
-          </div>
-          </div>
-              )}
-            </div>
+      </div>
+    </>
+  )}
+</div>
 
             {/* Settings Icon */}
             <Link href="/admin/settings">

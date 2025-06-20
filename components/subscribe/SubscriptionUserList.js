@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { MoreVertical, Eye } from 'lucide-react';
 import Image from 'next/image';
 const SubscriptionUserList = () => {
   const [tooltipOpen, setTooltipOpen] = useState(false);

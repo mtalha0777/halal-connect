@@ -10,7 +10,7 @@ export default function Signup() {
         
         {/* Logo + Name */}
         <div className="flex items-center justify-center gap-2 mb-6">
-          <Image src="/assets/logo.png" alt="Halal Connect" width={40} height={40} />
+          <Image src="/assets/halallogo.svg" alt="Halal Connect" width={40} height={40} />
           <span className="text-lg font-semibold text-black">Halal Connect</span>
         </div>
 
@@ -88,7 +88,7 @@ export default function Signup() {
         {/* Already have account */}
         <p className="text-center text-sm mt-6">
           Already have an account?{' '}
-          <a href="/login" className="font-semibold hover:underline text-[#5D5FEF]">
+          <a href="/Login/login" className="font-semibold hover:underline text-[#5D5FEF]">
             Sign in
           </a>
         </p>

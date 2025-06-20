@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
-import Image from 'next/image';
-import Sidebar from '../../components/layout/SideBar';
-import Topbar from '../../components/layout/TopBar';
+"use client";
+import React from "react";
+import Image from "next/image";
+import Sidebar from "../../components/layout/SideBar";
+import Topbar from "../../components/layout/TopBar";
 const ReportedUserDetails = () => {
   // User data
   const user = {
@@ -24,17 +24,17 @@ const ReportedUserDetails = () => {
     report: {
       id: "#679467",
       reportedBy: "Majeed",
-    //   reason: "Inappropriate behavior",
       date: "17 Jun, 2022",
       count: 10,
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus nec justo gravida facilisis. Proin dictum sapien vel ligula hendrerit, non vehicula neque tincidunt. Fusce tincidunt, quam at suscipit dictum, odio metus lacinia felis, sit amet facilisis lacus arcu in ex. Vivamus auctor, tortor et sagittis tincidunt!"
-    }
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus nec justo gravida facilisis. Proin dictum sapien vel ligula hendrerit, non vehicula neque tincidunt. Fusce tincidunt, quam at suscipit dictum, odio metus lacinia felis, sit amet facilisis lacus arcu in ex. Vivamus auctor, tortor et sagittis tincidunt!",
+    },
   };
 
   return (
     <div className="flex min-h-screen font-sans">
- <Sidebar />
-    <main className="flex-1 bg-white p-6">
+      <Sidebar />
+      <main className="flex-1 bg-white p-6">
         {/* Topbar */}
         <Topbar />
         {/* User Card */}
@@ -56,24 +56,30 @@ const ReportedUserDetails = () => {
                   <p className="text-gray-600">{user.email}</p>
                 </div>
                 <button className="flex items-center gap-1 text-[#5D5FEF]">
-                
                   <span>Edit</span>
-                    <Image src="/assets/edit.png" alt="Edit" width={16} height={16} />
+                  <Image
+                    src="/assets/edit.svg"
+                    alt="Edit"
+                    width={16}
+                    height={16}
+                  />
                 </button>
               </div>
-              
+
               <div className="flex items-center gap-2 mt-2">
-                 <Image 
-                                    src="/assets/verified.png" 
-                                    alt="Verified" 
-                                    width={16} 
-                                    height={16} 
-                                  />
-                <span className={`inline-block px-3 py-1 text-sm rounded ${
-  user.verified ? 'text-gray-500' : 'text-gray-600'
-}`}>
-  {user.verified ? 'Verified' : 'Unverified'}
-</span>
+                <Image
+                  src="/assets/verified.svg"
+                  alt="Verified"
+                  width={16}
+                  height={16}
+                />
+                <span
+                  className={`inline-block px-3 py-1 text-sm rounded ${
+                    user.verified ? "text-gray-500" : "text-gray-600"
+                  }`}
+                >
+                  {user.verified ? "Verified" : "Unverified"}
+                </span>
               </div>
             </div>
           </div>
@@ -109,41 +115,44 @@ const ReportedUserDetails = () => {
 
           {/* Report Summary Section */}
           <div className="mt-8 pt-6 border-t border-gray-200">
-          <div className="flex items-center gap-2 mb-4">
-    <Image 
-      src="/assets/reportuser.png"  // Make sure this matches your icon file name
-      alt="Report" 
-      width={20} 
-      height={20}
-      className="w-5 h-5 object-contain"
-    />
-    <h3 className="text-xl font-bold">Report Summary</h3>
-  </div>
+            <div className="flex items-center gap-2 mb-4">
+              <Image
+                src="/assets/reportuser.svg" // Make sure this matches your icon file name
+                alt="Report"
+                width={20}
+                height={20}
+                className="w-5 h-5 object-contain"
+              />
+              <h3 className="text-xl font-bold">Report Summary</h3>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <DetailItem label="Report ID" value={user.report.id} />
-                <DetailItem label="Reported By" value={user.report.reportedBy} />
+                <DetailItem
+                  label="Reported By"
+                  value={user.report.reportedBy}
+                />
                 {/* <DetailItem label="Report Reason" value={user.report.reason} /> */}
               </div>
-              
+
               <div className="space-y-4">
                 <DetailItem label="Report Date" value={user.report.date} />
                 <DetailItem label="Total Reports" value={user.report.count} />
               </div>
             </div>
 
-       <div className="mt-6">
-  <p className="text-lg font-bold text-black mb-2">Report Description:</p>
-  <div className="bg-gray-50 p-4 rounded-lg">
-    <p className="text-gray-700">{user.report.description}</p>
-  </div>
-</div>
+            <div className="mt-6">
+              <p className="text-lg font-bold text-black mb-2">
+                Report Description:
+              </p>
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <p className="text-gray-700">{user.report.description}</p>
+              </div>
+            </div>
           </div>
         </div>
-       
       </main>
-       </div>
-    
+    </div>
   );
 };
 
@@ -151,7 +160,7 @@ const ReportedUserDetails = () => {
 const DetailItem = ({ label, value }) => (
   <div>
     <p className="text-sm text-gray-500">{label}:</p>
-    <p className="font-medium">{value || 'N/A'}</p>
+    <p className="font-medium">{value || "N/A"}</p>
   </div>
 );
 

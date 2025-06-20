@@ -11,7 +11,7 @@ export default function ForgotPassword() {
       {/* Forgot Password Card */}
         {/* Logo with Text */}
         <div className="flex items-center justify-center gap-2 mb-6">
-          <Image src="/assets/logo.png" alt="Halal Connect" width={40} height={40} />
+          <Image src="/assets/halallogo.svg" alt="Halal Connect" width={40} height={40} />
           <span className="text-lg font-semibold text-black">Halal Connect</span>
         </div>
 
@@ -47,7 +47,7 @@ export default function ForgotPassword() {
         <p className="text-center text-sm mt-6 text-black">
           Back to{' '}
           <a
-            href="/login"
+            href="/Login/login"
             className="font-semibold hover:underline text-[#5D5FEF]"
           >
             Login

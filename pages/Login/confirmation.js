@@ -27,7 +27,7 @@ export default function Confirmation() {
 
         {/* Log In Button */}
         <a
-          href="/login"
+          href="/Login/login"
           className="inline-block w-full bg-[#5D5FEF] hover:brightness-110 text-white text-sm font-medium py-2 rounded-md transition shadow-md"
         >
           Log In

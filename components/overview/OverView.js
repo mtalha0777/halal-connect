@@ -12,7 +12,6 @@ import {
   Bar,
 } from 'recharts';
 import Image from 'next/image';
-import { ChevronDown } from 'lucide-react';
 
 const Overview = () => {
   const revenueData = [

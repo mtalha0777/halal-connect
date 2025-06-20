@@ -12,7 +12,7 @@ export default function OTPVerification() {
       <div className="relative z-10 max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
         {/* Logo + Name */}
         <div className="flex items-center justify-center gap-2 mb-6">
-          <Image src="/assets/logo.png" alt="Halal Connect" width={40} height={40} />
+          <Image src="/assets/halallogo.svg" alt="Halal Connect" width={40} height={40} />
           <span className="text-lg font-semibold text-black">Halal Connect</span>
         </div>
 

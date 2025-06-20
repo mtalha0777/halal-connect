@@ -5,7 +5,7 @@ import Link from "next/link"; // ✅ Link import added
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 
-const DetailsPage = () => {
+const BlockedDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState({
     id: 36666,
@@ -23,11 +23,12 @@ const DetailsPage = () => {
     plan: "Gold",
     notches: 344,
     verified: true,
-    subscriptionPlan: "Premium",
-    planPrice: "20.99$",
-    duration: "30 Day's",
-    subscriptionStartDate: "17 Jun, 2022",
-    subscriptionExpiryDate: "17 Feb, 2022",
+    reportId: "#679467",
+    reportedBy: "Majeed",
+    reportReason: "Inappropriate Behavior",
+    reportDate: "17 Jun, 2022",
+    reportDescription:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus nec justo gravida facilisis. Proin dictum sapien vel ligula hendrerit, non vehicula neque tincidunt. Fusce tincidunt, quam at suscipit dictum, odio metus lacinia felis, sit amet facilisis lacus arcu in ex. Vivamus auctor, tortor et sagittis tincidunt.",
   });
 
   const handleChange = (field, value) => {
@@ -44,10 +45,10 @@ const DetailsPage = () => {
           {/* Breadcrumb */}
           <p className="text-sm text-gray-500 mb-4">
             <Link
-              href="/admin/subscribe-and-payment"
+              href="/admin/user-management"
               className="hover:underline text-gray-600"
             >
-              Subscription & Payment
+              User Management
             </Link>
             <span className="mx-1">{">"}</span>
             <span className="font-semibold text-black">Details</span>
@@ -72,18 +73,22 @@ const DetailsPage = () => {
                     <h2 className="text-xl font-bold">{user.name}</h2>
                     <p className="text-gray-600">{user.email}</p>
                   </div>
+                  <div className="px-3 py-1 rounded-full border border-[#FF47471F] bg-[#FF47471F] text-[#FF4747] text-sm font-semibold">
+                    Block
+                  </div>
                 </div>
                 <div className="flex items-center gap-2 mt-2">
                   <Image
                     src="/assets/verified.svg"
-                    alt="verified"
+                    alt="Unverified"
                     width={16}
                     height={16}
                   />
-                  <span className="text-md text-gray-700">verified</span>
+                  <span className="text-md text-gray-700">Unverified</span>
                 </div>
               </div>
             </div>
+
             <hr className="my-6 border-gray-200" />
 
             {/* Details Grid */}
@@ -147,47 +152,43 @@ const DetailsPage = () => {
                 <DetailItem label="Notches Found" value={user.notches} />
               </div>
             </div>
-
-            {/* ✅ Details */}
+            {/* ✅ Reported Issues Section */}
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-10">
               <div className="flex items-center gap-2 mb-4">
                 <Image
-                  src="/assets/diamond.svg"
+                  src="/assets/reportuser.svg"
                   alt="icon"
                   width={20}
                   height={20}
                 />
-                <h2 className="text-lg font-bold">Subscription Details</h2>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div>
-                  <p className="text-sm text-gray-500">Subcription Plan:</p>
-                  <p className="font-small">{user.subscriptionPlan}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Plan Price :</p>
-                  <p className="font-small">{user.planPrice}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Duration:</p>
-                  <p className="font-small">{user.duration}</p>
-                </div>
+                <h2 className="text-lg font-bold">Reported Summary</h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
                 <div>
-                  <p className="text-sm text-gray-500">
-                    Subscription Start Date:
-                  </p>
-                  <p className="font-small">{user.subscriptionStartDate}</p>
+                  <p className="text-sm text-gray-500">Report ID:</p>
+                  <p className="font-small">{user.reportId}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">
-                    Subscription Expiry Date:
-                  </p>
-                  <p className="font-small">{user.subscriptionExpiryDate}</p>
+                  <p className="text-sm text-gray-500">Report By:</p>
+                  <p className="font-small">{user.reportedBy}</p>
                 </div>
+                <div>
+                  <p className="text-sm text-gray-500">Report Reason:</p>
+                  <p className="font-small">{user.reportReason}</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-sm text-gray-500">Report Date:</p>
+                <p className="font-small">{user.reportDate}</p>
+              </div>
+
+              <div>
+                <p className="text-md font-semibold">Report Description:</p>
+                <p className="font-small text-gray-700">
+                  {user.reportDescription}
+                </p>
               </div>
             </div>
           </div>
@@ -208,9 +209,9 @@ const DetailItem = ({ label, value, editable, onChange }) => (
         onChange={(e) => onChange(e.target.value)}
       />
     ) : (
-      <p className="text-md text-gray-900">{value || "N/A"}</p>
+      <p className="font-medium">{value || "N/A"}</p>
     )}
   </div>
 );
 
-export default DetailsPage;
+export default BlockedDetails;

@@ -1,9 +1,9 @@
-'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link'; // ✅ Link import added
-import Sidebar from '../../components/layout/SideBar';
-import Topbar from '../../components/layout/TopBar';
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link"; // ✅ Link import added
+import Sidebar from "../../components/layout/SideBar";
+import Topbar from "../../components/layout/TopBar";
 
 const ViewDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -22,7 +22,7 @@ const ViewDetails = () => {
     dob: "01-10-2000",
     plan: "Gold",
     notches: 344,
-    verified: true
+    verified: true,
   });
 
   const handleChange = (field, value) => {
@@ -30,19 +30,21 @@ const ViewDetails = () => {
   };
 
   return (
-   <div className="flex min-h-screen font-sans">
+    <div className="flex min-h-screen font-sans">
       <Sidebar />
       <div className="flex-1">
         <Topbar />
-      {/* <main className="pt-24 min-h-screen bg-white"> */}
-      <main className="pt-24 min-h-screen bg-white px-6 md:px-10">
-
+        {/* <main className="pt-24 min-h-screen bg-white"> */}
+        <main className="pt-24 min-h-screen bg-white px-6 md:px-10">
           {/* Breadcrumb */}
           <p className="text-sm text-gray-500 mb-4">
-            <Link href="/admin/usermanagement" className="hover:underline text-gray-600">
+            <Link
+              href="/admin/user-management"
+              className="hover:underline text-gray-600"
+            >
               User Management
             </Link>
-            <span className="mx-1">{'>'}</span>
+            <span className="mx-1">{">"}</span>
             <span className="font-semibold text-black">Details</span>
           </p>
 
@@ -67,12 +69,14 @@ const ViewDetails = () => {
                         <input
                           className="text-xl font-bold mb-1"
                           value={user.name}
-                          onChange={(e) => handleChange('name', e.target.value)}
+                          onChange={(e) => handleChange("name", e.target.value)}
                         />
                         <input
                           className="text-sm text-gray-600"
                           value={user.email}
-                          onChange={(e) => handleChange('email', e.target.value)}
+                          onChange={(e) =>
+                            handleChange("email", e.target.value)
+                          }
                         />
                       </>
                     ) : (
@@ -88,18 +92,27 @@ const ViewDetails = () => {
                     onClick={() => setIsEditing(!isEditing)}
                   >
                     <span>{isEditing ? "Save" : "Edit"}</span>
-                    <Image src="/assets/edit.svg" alt="Edit" width={18} height={18} />
+                    <Image
+                      src="/assets/edit.svg"
+                      alt="Edit"
+                      width={18}
+                      height={18}
+                    />
                   </button>
                 </div>
 
                 <div className="flex items-center gap-2 mt-2">
                   {user.verified && (
-                    <Image src="/assets/verified.svg" alt="Verified" width={16} height={16} />
+                    <Image
+                      src="/assets/verified.svg"
+                      alt="Verified"
+                      width={16}
+                      height={16}
+                    />
                   )}
                   <span className="text-sm text-gray-700">
-  {user.verified ? 'Verified' : 'Unverified'}
-</span>
-
+                    {user.verified ? "Verified" : "Unverified"}
+                  </span>
                 </div>
               </div>
             </div>
@@ -111,30 +124,65 @@ const ViewDetails = () => {
               {/* Column 1 */}
               <div className="space-y-4">
                 <DetailItem label="User ID" value={user.id} />
-                <DetailItem label="City" value={user.city} editable={isEditing} onChange={(val) => handleChange('city', val)} />
-                <DetailItem label="Marital Status" value={user.maritalStatus} editable={isEditing} onChange={(val) => handleChange('maritalStatus', val)} />
+                <DetailItem
+                  label="City"
+                  value={user.city}
+                  editable={isEditing}
+                  onChange={(val) => handleChange("city", val)}
+                />
+                <DetailItem
+                  label="Marital Status"
+                  value={user.maritalStatus}
+                  editable={isEditing}
+                  onChange={(val) => handleChange("maritalStatus", val)}
+                />
                 <DetailItem label="Last Login Date" value={user.lastLogin} />
               </div>
 
               {/* Column 2 */}
               <div className="space-y-4">
-                <DetailItem label="Phone" value={user.phone} editable={isEditing} onChange={(val) => handleChange('phone', val)} />
-                <DetailItem label="Gender" value={user.gender} editable={isEditing} onChange={(val) => handleChange('gender', val)} />
+                <DetailItem
+                  label="Phone"
+                  value={user.phone}
+                  editable={isEditing}
+                  onChange={(val) => handleChange("phone", val)}
+                />
+                <DetailItem
+                  label="Gender"
+                  value={user.gender}
+                  editable={isEditing}
+                  onChange={(val) => handleChange("gender", val)}
+                />
                 <DetailItem label="Join Date" value={user.joinDate} />
                 <DetailItem label="Profile Views" value={user.profileViews} />
               </div>
 
               {/* Column 3 */}
               <div className="space-y-4">
-                <DetailItem label="Country" value={user.country} editable={isEditing} onChange={(val) => handleChange('country', val)} />
-                <DetailItem label="Date of Birth" value={user.dob} editable={isEditing} onChange={(val) => handleChange('dob', val)} />
-                <DetailItem label="Subscription Plan" value={user.plan} editable={isEditing} onChange={(val) => handleChange('plan', val)} />
+                <DetailItem
+                  label="Country"
+                  value={user.country}
+                  editable={isEditing}
+                  onChange={(val) => handleChange("country", val)}
+                />
+                <DetailItem
+                  label="Date of Birth"
+                  value={user.dob}
+                  editable={isEditing}
+                  onChange={(val) => handleChange("dob", val)}
+                />
+                <DetailItem
+                  label="Subscription Plan"
+                  value={user.plan}
+                  editable={isEditing}
+                  onChange={(val) => handleChange("plan", val)}
+                />
                 <DetailItem label="Notches Found" value={user.notches} />
               </div>
             </div>
           </div>
-        {/* </div> */}
-      </main>
+          {/* </div> */}
+        </main>
       </div>
     </div>
   );
@@ -151,7 +199,7 @@ const DetailItem = ({ label, value, editable, onChange }) => (
         onChange={(e) => onChange(e.target.value)}
       />
     ) : (
-      <p className="font-medium">{value || 'N/A'}</p>
+      <p className="font-medium">{value || "N/A"}</p>
     )}
   </div>
 );

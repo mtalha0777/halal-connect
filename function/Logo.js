@@ -4,7 +4,7 @@ export default function Logo() {
   return (
     <div className="flex items-center">
       <Image 
-        src="/images/logo.png" 
+        src="/images/halallogo.svg" 
         alt="Halal Connect" 
         width={120} 
         height={40}

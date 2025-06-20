@@ -6,8 +6,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import NotificationPopup from '../modals/NotificationPopup';
 
-
-
 const Topbar = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');

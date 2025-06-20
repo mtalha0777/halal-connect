@@ -10,7 +10,7 @@ export default function ResetPassword() {
 
         {/* Logo with Text */}
         <div className="flex items-center justify-center gap-2 mb-6">
-          <Image src="/assets/logo.png" alt="Halal Connect" width={40} height={40} />
+          <Image src="/assets/halallogo.svg" alt="Halal Connect" width={40} height={40} />
           <span className="text-lg font-semibold text-black">Halal Connect</span>
         </div>
 

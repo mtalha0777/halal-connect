@@ -1,15 +1,18 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const router = useRouter(); 
   return (
+    
     <div className="w-full max-w-lg bg-white p-10 rounded-xl shadow-2xl relative z-10">
 
         {/* Logo + Name */}
         <div className="flex items-center justify-center gap-2 mb-6">
           <Image
-            src="/assets/logo.png"
+            src="/assets/halallogo.svg"
             alt="Halal Connect"
             width={32}
             height={32}
@@ -47,7 +50,7 @@ export default function Login() {
 
           <div className="text-right text-sm mb-4">
             <a
-              href="/forgotpassword"
+              href="/Login/forgotpassword"
               className="text-sm text-red-600 underline underline-offset-2 decoration-red-600 hover:opacity-90"
             >
               Forgot Password?
@@ -55,7 +58,8 @@ export default function Login() {
           </div>
 
           <button
-            type="submit"
+            type="button"
+            onClick={() => router.push("/admin/dashboard")}
             className="inline-block w-full bg-[#5D5FEF] hover:brightness-110 text-white text-sm font-medium py-2 rounded-md transition shadow-md"
           >
             Log in
@@ -101,7 +105,7 @@ export default function Login() {
         <p className="text-center text-sm mt-6">
           Don’t have an account?{" "}
           <a
-            href="/signup"
+            href="/Login/signup"
             className="font-semibold hover:underline"
             style={{ color: "#5D5FEF" }}
           >

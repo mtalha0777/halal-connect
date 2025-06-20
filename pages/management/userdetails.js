@@ -66,7 +66,7 @@ const UserDetailsPage = () => {
           {/* ✅ Unverified Badge with Icon */}
           <div className="flex items-center gap-2 mt-1">
             <Image
-              src="/assets/verified.png"
+              src="/assets/verified.svg"
               alt="Unverified Icon"
               width={16}
               height={16}
@@ -107,7 +107,7 @@ const UserDetailsPage = () => {
     {/* ✅ Reported Issues Section */}
     <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
       <div className="flex items-center gap-2 mb-4">
-        <Image src="/assets/reportuser.png" alt="icon" width={20} height={20} />
+        <Image src="/assets/reportuser.svg" alt="icon" width={20} height={20} />
         <h2 className="text-lg font-semibold">Reported Issues</h2>
       </div>
 

@@ -74,7 +74,7 @@ const DetailsPage = () => {
 
 </div>
             <div className="flex items-center gap-2 mt-2">
-            <Image src="/assets/verified.png" alt="verified" width={16} height={16} />
+            <Image src="/assets/verified.svg" alt="verified" width={16} height={16} />
              <span className="text-md text-gray-700">verified</span>
                 </div>
 
@@ -113,7 +113,7 @@ const DetailsPage = () => {
             {/* ✅ Details */}
                 <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-10">
                 <div className="flex items-center gap-2 mb-4">
-                <Image src="/assets/diamond.png" alt="icon" width={20} height={20} />
+                <Image src="/assets/diamond.svg" alt="icon" width={20} height={20} />
                   <h2 className="text-lg font-bold">Subscription Details</h2>
                 </div>
 

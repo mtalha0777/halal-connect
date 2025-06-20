@@ -120,7 +120,7 @@ const handleViewDetails = () => {
         <div className="flex space-x-2">
           <button className="px-3 py-1 bg-white border border-gray-400 text-black rounded-md text-sm flex items-center gap-1">
                           Yearly
-                          <Image src="/assets/arrowdown.png" alt="Arrow" width={12} height={12} />
+                          <Image src="/assets/dropdown.svg" alt="Arrow" width={15} height={15} />
                         </button>
           <button className="px-4 py-2 bg-indigo-500 text-white rounded-md text-sm">
             View all
@@ -165,29 +165,39 @@ const handleViewDetails = () => {
               </span>
                    </td>
 
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 relative group">
-               <div className="relative">
-                                  <MoreVertical
-                                    className="h-5 w-5 text-gray-500 cursor-pointer"
-                                    onClick={() => setOpenMenu(openMenu === index ? null : index)}
-                                  />
-                                  {openMenu === index && (
-                                    <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-                                      <div className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                                   onClick={handleViewDetails}
-                                      >
-                                       <Image src="/assets/view-file.png"
-                                        alt="Edit"
-                                         width={16} 
-                                         height={16} 
-                                         className="mr-2" />
-                                        <span>View Details</span>
-                                      </div>
-                                    
-                                    </div>
-                                  )}
-                                </div>
-              </td>
+             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 relative group">
+  <div className="relative">
+    {/* ✅ Custom dots image instead of MoreVertical icon */}
+    <Image
+      src="/assets/dots.svg"
+      alt="More Options"
+      width={20}
+      height={20}
+      className="cursor-pointer"
+      onClick={() => setOpenMenu(openMenu === index ? null : index)}
+    />
+
+    {/* ✅ Dropdown menu */}
+    {openMenu === index && (
+      <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
+        <div
+          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
+          onClick={handleViewDetails}
+        >
+          <Image
+            src="/assets/view-file.svg"
+            alt="Edit"
+            width={16}
+            height={16}
+            className="mr-2"
+          />
+          <span>View Details</span>
+        </div>
+      </div>
+    )}
+  </div>
+</td>
+
             </tr>
           ))}
         </tbody>

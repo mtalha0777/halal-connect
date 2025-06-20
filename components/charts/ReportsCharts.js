@@ -81,7 +81,7 @@ const ReportsCharts = () => {
   { month: 'May', total: 35, success: 28 },
   { month: 'Jun', total: 93, success: 39 },
   { month: 'Jul', total: 32, success: 44 },
-  { month: 'Agu', total: 90, success: 66 },
+  { month: 'Aug', total: 90, success: 66 },
   { month: 'Sep', total: 14, success: 20 },
   { month: 'Oct', total: 94, success: 36 },
   { month: 'Nov', total: 31, success: 14 },
@@ -129,7 +129,7 @@ return (
       {/* ✅ Button */}
      <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
         Yearly
-        <Image src="/assets/arrowdown.png" alt="Arrow Down" width={12} height={12} />
+        <Image src="/assets/dropdown.svg" alt="Arrow Down" width={16} height={16} />
       </button>
     </div>
   </div>
@@ -193,7 +193,7 @@ return (
     <h4 className="text-lg font-semibold">User Details</h4>
     <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
       Yearly
-      <Image src="/assets/arrowdown.png" alt="Arrow Down" width={12} height={12} />
+      <Image src="/assets/dropdown.svg" alt="Arrow Down" width={16} height={16} />
     </button>
   </div>
 
@@ -276,9 +276,10 @@ return (
           </div>
     
           {/* Yearly Dropdown */}
-          <select className="text-sm border border-[#E5E7EB] px-2 py-1 rounded-md focus:outline-none">
-            <option value="yearly">Yearly</option>
-          </select>
+           <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
+         Yearly
+      <Image src="/assets/dropdown.svg" alt="Arrow" width={16} height={16} />
+    </button>
         </div>
       </div>
     
@@ -323,7 +324,7 @@ return (
     <h4 className="text-lg font-semibold">Total  Subscription Revenue</h4>
     <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
       Yearly
-      <Image src="/assets/arrowdown.png" alt="Arrow" width={12} height={12} />
+      <Image src="/assets/dropdown.svg" alt="Arrow" width={16} height={16} />
     </button>
   </div>
   <div className="relative h-[240px] w-full">

@@ -88,13 +88,13 @@ const ViewDetails = () => {
                     onClick={() => setIsEditing(!isEditing)}
                   >
                     <span>{isEditing ? "Save" : "Edit"}</span>
-                    <Image src="/assets/edit.png" alt="Edit" width={18} height={18} />
+                    <Image src="/assets/edit.svg" alt="Edit" width={18} height={18} />
                   </button>
                 </div>
 
                 <div className="flex items-center gap-2 mt-2">
                   {user.verified && (
-                    <Image src="/assets/verified.png" alt="Verified" width={16} height={16} />
+                    <Image src="/assets/verified.svg" alt="Verified" width={16} height={16} />
                   )}
                   <span className="text-sm text-gray-700">
   {user.verified ? 'Verified' : 'Unverified'}

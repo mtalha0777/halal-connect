@@ -129,7 +129,7 @@ export default function SystemNotification() {
           <h2 className="text-2xl font-semibold">System Notification</h2>
           <Link href="/notification/create">
             <button className="flex items-center gap-2 bg-[#5D5FEF] hover:bg-[#3d3fea] text-white text-sm rounded px-4 py-2">
-              <Image src="/assets/plus.png" alt="plus icon" width={10} height={10} />
+              <Image src="/assets/plus.svg" alt="plus icon" width={20} height={20} />
               Create Notification
             </button>
           </Link>
@@ -167,40 +167,48 @@ export default function SystemNotification() {
                         {item.status}
                       </span>
                     </td>
-                    <td className="px-4 py-3 relative">
-                      <div className="relative inline-block text-left">
-                        <button
-                          onClick={() => setOpenDropdownIndex(openDropdownIndex === idx ? null : idx)}
-                          className="flex items-center"
-                        >
-                          <MoreVertical className="w-4 h-4 text-gray-400 cursor-pointer" />
-                        </button>
-                        {openDropdownIndex === idx && (
-                          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                            <button
-                              onClick={() => {
-                                if (item.status === 'Inactive') {
-                                  setPopup({ visible: true, item, index: idx });
-                                }
-                                setOpenDropdownIndex(null);
-                              }}
-                              className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                            >
-                              <img src="/assets/active.png" className="w-4 h-4" />
-                              Active
-                            </button>
-                            <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
-                              <img src="/assets/preview.png" className="w-4 h-4" />
-                              Preview
-                            </button>
-                            <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
-                              <img src="/assets/delete.png" className="w-4 h-4" />
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </td>
+                  <td className="px-4 py-3 relative">
+  <div className="relative inline-block text-left">
+    <button
+      onClick={() =>
+        setOpenDropdownIndex(openDropdownIndex === idx ? null : idx)
+      }
+      className="flex items-center"
+    >
+      <img
+        src="/assets/dots.svg"
+        alt="Menu"
+        className="w-5 h-5 cursor-pointer"
+      />
+    </button>
+
+    {openDropdownIndex === idx && (
+      <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+        <button
+          onClick={() => {
+            if (item.status === 'Inactive') {
+              setPopup({ visible: true, item, index: idx });
+            }
+            setOpenDropdownIndex(null);
+          }}
+          className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+        >
+          <img src="/assets/active.svg" className="w-4 h-4" />
+          Active
+        </button>
+        <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
+          <img src="/assets/preview.svg" className="w-4 h-4" />
+          Preview
+        </button>
+        <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
+          <img src="/assets/delete.svg" className="w-4 h-4" />
+          Delete
+        </button>
+      </div>
+    )}
+  </div>
+</td>
+
                   </tr>
                 ))}
               </tbody>
@@ -244,7 +252,7 @@ export default function SystemNotification() {
       onClick={handleGotIt}
       className="w-full bg-[#5D5FEF] hover:bg-[#3d3fea] text-white py-2 rounded"
     >
-      Got It
+      Got It!
     </button>
     </div>
     </div>

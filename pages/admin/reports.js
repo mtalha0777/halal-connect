@@ -12,25 +12,25 @@ const ReportsAndAnalytics = () => {
       title: 'Total Registered Users',
       count: '40,689',
       bg: '#FDEBD5',
-      icon: '/assets/blueiconreport.png',
+      icon: '/assets/blueiconreport.svg',
     },
     {
       title: 'Active User',
       count: '40,689',
       bg: '#FCE5F9',
-      icon: '/assets/blueiconreport.png',
+      icon: '/assets/blueiconreport.svg',
     },
     {
       title: 'New Signups',
       count: '40,689',
       bg: '#D1F6FE',
-      icon: '/assets/blueiconreport.png',
+      icon: '/assets/blueiconreport.svg',
     },
     {
       title: 'Total Reported User',
       count: '40,689',
       bg: '#E6FCE5',
-      icon: '/assets/blueiconreport.png',
+      icon: '/assets/blueiconreport.svg',
     },
   ];
 

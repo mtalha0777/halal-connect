@@ -47,7 +47,7 @@ const SubscriptionPlans = () => {
   className="flex items-center gap-2 text-[#0066FF] font-medium"
 >
   Add Field
-  <Image src="/assets/plusblue.png" alt="Plus" width={16} height={16} />
+  <Image src="/assets/blueplus.svg" alt="Plus" width={20} height={20} />
 </button>
 
 
@@ -84,41 +84,45 @@ const SubscriptionPlans = () => {
                     {plan.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 relative">
-                  <div className="relative">
-                    <MoreVertical
-  className="h-5 w-5 text-gray-500 cursor-pointer"
-  onClick={() => {
-    setOpenMenu(index); // ✅ only opens dropdown now
-  }}
-/>
+               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 relative">
+  <div className="relative">
+    {/* Custom Dots Icon instead of MoreVertical */}
+    <Image
+      src="/assets/dots.svg"
+      alt="More Options"
+      width={20}
+      height={20}
+      className="cursor-pointer"
+     onClick={() => {
+  setOpenMenu(openMenu === index ? null : index); // ✅ Toggle logic
+}}
+    />
 
+    {openMenu === index && (
+      <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
+        {/* Edit Click */}
+        <div
+          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
+          onClick={() => {
+            setPopupMode("edit");
+            setShowEditModal(true);
+            setOpenMenu(null);
+          }}
+        >
+          <Image src="/assets/editblack.svg" alt="Edit" width={16} height={16} className="mr-2" />
+          <span>Edit</span>
+        </div>
 
-                 {openMenu === index && (
-  <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-    {/* Edit Click */}
-    <div
-      className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-      onClick={() => {
-        setPopupMode("edit");
-        setShowEditModal(true); // ✅ now modal opens from dropdown
-        setOpenMenu(null);      // close the dropdown
-      }}
-    >
-      <Image src="/assets/edit-icon.png" alt="Edit" width={16} height={16} className="mr-2" />
-      <span>Edit</span>
-    </div>
-
-    {/* Delete (Optional) */}
-    <div className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer">
-      <Image src="/assets/delete.png" alt="Delete" width={16} height={16} className="mr-2" />
-      <span>Delete</span>
-    </div>
+        {/* Delete */}
+        <div className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer">
+          <Image src="/assets/delete.svg" alt="Delete" width={16} height={16} className="mr-2" />
+          <span>Delete</span>
+        </div>
+      </div>
+    )}
   </div>
-)}
+</td>
 
-                  </div>
-                </td>
               </tr>
             ))}
           </tbody>
@@ -147,16 +151,19 @@ const SubscriptionPlans = () => {
           </h2>
         )}
 
-        <button
-          onClick={() => {
-            setPopupMode("add");
-            setShowEditModal(true);
-          }}
-          className="group flex items-center gap-2 px-4 py-2 text-[#0066FF] font-medium"
-        >
-          Add Field
-          <Image src="/assets/plusblue.png" alt="Plus" width={16} height={16} />
-        </button>
+   <button
+  onClick={() => {
+    setPopupMode("add");
+    setShowEditModal(true);
+  }}
+  className="group flex items-center gap-2 px-4 py-2 text-[#0066FF] font-medium"
+>
+  <span className="border-b-[2px] border-[#0066FF] pb-0 leading-none">Add Field</span>
+  <Image src="/assets/blueplus.svg" alt="Plus" width={20} height={20} />
+</button>
+
+
+
       </div>
 
     {/* CONDITIONAL CONTENT */}
@@ -184,13 +191,27 @@ const SubscriptionPlans = () => {
   </div>
 
   {/* Status Dropdown */}
-  <div className="col-span-2 flex flex-col">
-    <label className="font-semibold text-[#000000B8] mb-1">Activate / Deactivate</label>
-    <select className="border border-gray-300 rounded px-3 py-2 text-sm text-[#000000B8]">
+ <div className="col-span-2 flex flex-col relative">
+  <label className="font-semibold text-[#000000B8] mb-1">Activate / Deactivate</label>
+  
+  {/* Custom Select Wrapper */}
+  <div className="relative">
+    <select
+      className="appearance-none border border-gray-300 rounded px-3 py-2 pr-10 text-sm text-[#000000B8] w-full"
+    >
       <option value="active">Active</option>
       <option value="inactive">Inactive</option>
     </select>
+
+    {/* Custom Arrow Icon */}
+    <img
+      src="/assets/arrowdown.svg"
+      alt="Dropdown"
+      className="w-6 h-6 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
+    />
   </div>
+</div>
+
 </div>
 
 
@@ -204,7 +225,7 @@ const SubscriptionPlans = () => {
         onClick={() => setPopupMode("add")}
       >
         <span>Add Field</span>
-        <img src="/assets/plusblue.png" alt="plus" className="w-4 h-4" />
+         <Image src="/assets/blueplus.svg" alt="Plus" width={20} height={20} />
       </button>
     </div>
 

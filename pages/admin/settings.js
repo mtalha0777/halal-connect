@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Sidebar from '../../components/layout/SideBar';
 import Topbar from '../../components/layout/TopBar';
 import ProfileInfoSection from '../../components/admin/ProfileInfoSection';
-import EditModal from '../../components/admin/EditModal';
+// import EditModal from '../../components/admin/EditModal';
 import Image from 'next/image';
 // import AdminProfileCard from '../../components/admin/AdminProfileCard';
 const Settings = () => {
@@ -47,7 +47,7 @@ const Settings = () => {
 {/* Password Setting Button */}
 <button className="w-full flex items-center justify-start gap-2 px-4 py-2 text-sm bg-transparent hover:bg-gray-100 text-[#000000] rounded">
   <Image
-    src="/assets/password.png"
+    src="/assets/password.svg"
     alt="Password"
     width={18}
     height={18}
@@ -59,7 +59,7 @@ const Settings = () => {
 {/* Logout Button */}
 <button className="w-full flex items-center justify-start gap-2 px-4 py-2 text-sm bg-transparent hover:bg-gray-100 text-[#000000] rounded">
   <Image
-    src="/assets/logout.png"
+    src="/assets/logout.svg"
     alt="Logout"
     width={18}
     height={18}
@@ -106,7 +106,7 @@ const Settings = () => {
                   { label: 'Date of Birth:', value: admin.dob },
                    ]}
                   onEdit={() => setActiveModal('personal')}
-                  icon="/assets/personaluser.png"
+                  icon="/assets/personaluser.svg"
                 />
 
 
@@ -117,21 +117,21 @@ const Settings = () => {
                { label: 'Location', value: admin.phone },
                  ]}
                 onEdit={() => setActiveModal('contact')}
-                icon="/assets/contactuser.png"    
+                icon="/assets/contact.svg"    
               />
 
                 <ProfileInfoSection
                   title="Location"
                   data={[{ label: 'Address:', value: admin.address }]}
                   onEdit={() => setActiveModal('location')}
-                  icon="/assets/location.png"
+                  icon="/assets/location.svg"
                 />
 
                 <ProfileInfoSection
                   title="Language"
                   data={[{ label: 'Address:', value: admin.language }]}
                   onEdit={() => setActiveModal('language')}
-                  icon="/assets/language.png"
+                  icon="/assets/language.svg"
                 />
               </div>
             </div>
@@ -145,7 +145,7 @@ const Settings = () => {
       <h2 className="text-xl font-bold text-[#000]">Profile Picture</h2>
 
       <div className="w-[596px] h-[151px] border border-[#00000066] rounded-[8px] flex flex-col items-center justify-center mx-auto">
-        <Image src="/assets/upload.png" alt="Upload" width={40} height={40} />
+        <Image src="/assets/upload.svg" alt="Upload" width={40} height={40} />
         <p className="mt-2 text-sm text-gray-600">Upload Profile Pic</p>
       </div>
 
@@ -335,7 +335,7 @@ const Settings = () => {
             className="w-full h-full outline-none text-sm text-gray-700 bg-transparent pr-4"
             placeholder="Enter your address"
           />
-          <Image src="/assets/locationblue.png" alt="Location Icon" width={20} height={20} />
+          <Image src="/assets/locationblue.svg" alt="Location Icon" width={20} height={20} />
         </div>
       </div>
 

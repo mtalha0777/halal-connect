@@ -120,27 +120,27 @@ const Dashboard = () => {
       count: '12,579',
       percentage: '+15.03%',
        bg: '#D3F0F8',
-      icon: '/assets/alluser.png',
+      icon: '/assets/alluser.svg',
       percentColor: 'text-green-600',
-      arrow: '/assets/trend.png',
+      arrow: '/assets/trendup.svg',
     },
     {
       title: 'Reported User',
       count: '2,149',
       percentage: '+15.03%',
       bg: '#EAE9FB',
-      icon: '/assets/purple.png',
+      icon: '/assets/purple.svg',
       percentColor: 'text-green-600',
-      arrow: '/assets/trend.png',
+      arrow: '/assets/trendup.svg',
     },
     {
       title: 'Blocked User',
       count: '7,893',
       percentage: '+15.03%',
       bg: '#F4E1FD',
-      icon: '/assets/pink.png',
+      icon: '/assets/nouser.svg',
       percentColor: 'text-red-600',
-      arrow: '/assets/red-trend.png',
+      arrow: '/assets/redtrendup.svg',
     },
   ].map((card, i) => (
     <div
@@ -177,22 +177,6 @@ const Dashboard = () => {
       >
         {card.title}
       </h4>
-
-      {/* Background Cloud */}
-      <div
-        className="absolute bottom-0 right-0 w-20 h-20 rounded-full overflow-hidden"
-        style={{
-          backgroundColor: ['#BFFFFB52', '#FFDACD52', '#FFC5D252'][i],
-          zIndex: 0,
-        }}
-      >
-        <Image
-          src="/assets/cloud.png"
-          alt="Cloud"
-          fill
-          className="object-contain opacity-80"
-        />
-      </div>
     </div>
   ))}
 </div>
@@ -222,7 +206,7 @@ const Dashboard = () => {
     className="text-black border border-gray-300 px-3 py-1 rounded-md bg-[#F9F9F9] text-sm flex items-center gap-2"
   >
     {selectedFilter}
-    <Image src="/assets/year.png" alt="Dropdown" width={16} height={16} />
+    <Image src="/assets/dropdown.svg" alt="Dropdown" width={16} height={16} />
   </button>
 
   {isFilterOpen && (
@@ -236,7 +220,7 @@ const Dashboard = () => {
             setIsFilterOpen(false);
           }}
         >
-          <Image src="/assets/time.png" alt="Time" width={14} height={14} />
+          <Image src="/assets/time.svg" alt="Time" width={14} height={14} />
           {option}
         </button>
              ))}
@@ -281,23 +265,27 @@ const Dashboard = () => {
                                   <td className="text-center relative whitespace-nowrap"> {/* Fixed spacing */}
 
               <button
-                onClick={() =>
-                  setOpenMenu(openMenu === i ? null : i)
-                }
-                className="text-lg text-gray-600"
-              >
-                ⋮
-              </button>
+                        onClick={() => setOpenMenu(openMenu === i ? null : i)}
+                         className="text-lg text-gray-600"
+                        >
+                        <Image
+                          src="/assets/dots.svg"
+                          alt="Actions"
+                          width={20}
+                          height={20}
+                          className="object-contain"
+                        />
+                        </button>
 
               {openMenu === i && (
             <div className="absolute right-0 mt-2 w-32 bg-white border rounded-md shadow-md z-10">
   <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/view-file.png" alt="view" width={20} height={20}  className="object-contain"/>
+    <Image src="/assets/view-file.svg" alt="view" width={16} height={16}  className="object-contain"/>
     View Details
   </button>
 
   <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/delete.png" alt="delete" width={16} height={16} />
+    <Image src="/assets/delete.svg" alt="delete" width={16} height={16} />
     Delete User
   </button>
 </div>

@@ -131,7 +131,7 @@ const ReportedUser = () => {
        bg: '#D3F0F8',
       icon: '/assets/alluser.png',
       percentColor: 'text-green-600',
-      arrow: '/assets/trend.png',
+      arrow: '/assets/trendup.svg',
     },
     {
       title: 'Reported User',
@@ -140,7 +140,7 @@ const ReportedUser = () => {
       bg: '#EAE9FB',
       icon: '/assets/purple.png',
       percentColor: 'text-green-600',
-      arrow: '/assets/trend.png',
+      arrow: '/assets/trendup.svg',
     },
     {
       title: 'Blocked User',
@@ -149,7 +149,7 @@ const ReportedUser = () => {
       bg: '#F4E1FD',
       icon: '/assets/nouser.png',
       percentColor: 'text-red-600',
-      arrow: '/assets/red-trend.png',
+      arrow: '/assets/redtrendup.svg',
     },
   ].map((card, i) => (
     <div
@@ -187,21 +187,7 @@ const ReportedUser = () => {
         {card.title}
       </h4>
 
-      {/* Background Cloud */}
-      <div
-        className="absolute bottom-0 right-0 w-20 h-20 rounded-full overflow-hidden"
-        style={{
-          backgroundColor: ['#BFFFFB52', '#FFDACD52', '#FFC5D252'][i],
-          zIndex: 0,
-        }}
-      >
-        <Image
-          src="/assets/cloud.png"
-          alt="Cloud"
-          fill
-          className="object-contain opacity-80"
-        />
-      </div>
+      
     </div>
   ))}
 </div>
@@ -235,7 +221,7 @@ const ReportedUser = () => {
     className="text-black border border-gray-300 px-3 py-1 rounded-md bg-[#F9F9F9] text-sm flex items-center gap-2"
   >
     {selectedFilter}
-    <Image src="/assets/year.png" alt="Dropdown" width={16} height={16} />
+    <Image src="/assets/dropdown.svg" alt="Dropdown" width={16} height={16} />
   </button>
 
   {isFilterOpen && (
@@ -249,7 +235,7 @@ const ReportedUser = () => {
             setIsFilterOpen(false);
           }}
         >
-          <Image src="/assets/time.png" alt="Time" width={14} height={14} />
+          <Image src="/assets/time.svg" alt="Time" width={14} height={14} />
           {option}
         </button>
       ))}
@@ -299,13 +285,17 @@ const ReportedUser = () => {
                                   <td className="text-center relative whitespace-nowrap"> {/* Fixed spacing */}
 
               <button
-                onClick={() =>
-                  setOpenMenu(openMenu === i ? null : i)
-                }
-                className="text-lg text-gray-600"
-              >
-                ⋮
-              </button>
+                        onClick={() => setOpenMenu(openMenu === i ? null : i)}
+                         className="text-lg text-gray-600"
+                        >
+                        <Image
+                          src="/assets/dots.svg"
+                          alt="Actions"
+                          width={20}
+                          height={20}
+                          className="object-contain"
+                        />
+                        </button>
 {openMenu === i && (
   <div className="absolute right-0 mt-2 w-44 bg-white border rounded-md shadow-md z-10">
   {/* ✅ View Details → Navigates to view page */}
@@ -313,19 +303,19 @@ const ReportedUser = () => {
     href="/contentdetails/viewdetails"
     className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
   >
-    <Image src="/assets/view-file.png" alt="view" width={20} height={20} />
+    <Image src="/assets/view-file.svg" alt="view" width={20} height={20} />
     <span className="whitespace-nowrap">View Details</span>
   </Link>
 
   {/* 🚫 Suspend Button */}
   <button className="flex items-center gap-1 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/suspend.png" alt="Suspend" width={24} height={24} />
+    <Image src="/assets/unblock.svg" alt="Suspend" width={24} height={24} />
     <span className="whitespace-nowrap">Temporary Suspend</span>
   </button>
 
   {/* 🗑️ Delete Button */}
   <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-    <Image src="/assets/delete.png" alt="delete" width={20} height={20} />
+    <Image src="/assets/delete.svg" alt="delete" width={20} height={20} />
     <span className="whitespace-nowrap">Delete User</span>
   </button>
 </div>

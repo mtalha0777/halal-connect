@@ -46,10 +46,11 @@ export default function CreateNotificationPage() {
       <option>Premium Users</option>
     </select>
     <img
-      src="/assets/arrowdown.png"
-      alt="Arrow Icon"
-      className="pointer-events-none absolute right-3 top-[58%] transform -translate-y-1/2 w-4 h-4"
-    />
+  src="/assets/arrowdown.svg"
+  alt="Arrow Icon"
+  className="pointer-events-none absolute right-3 top-[58%] transform -translate-y-1/2 w-6 h-6"
+/>
+
   </div>
 
   {/* Notification Type */}
@@ -64,11 +65,11 @@ export default function CreateNotificationPage() {
       <option>Push Notification</option>    
       <option>Email Notification</option>
     </select>
-    <img
-      src="/assets/arrowdown.png"
-      alt="Arrow Icon"
-      className="pointer-events-none absolute right-3 top-[58%] transform -translate-y-1/2 w-4 h-4"
-    />
+      <img
+  src="/assets/arrowdown.svg"
+  alt="Arrow Icon"
+  className="pointer-events-none absolute right-3 top-[58%] transform -translate-y-1/2 w-6 h-6"
+/>
   </div>
 
 </div>

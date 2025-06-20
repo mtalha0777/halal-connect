@@ -18,39 +18,44 @@ const Dashboard = () => {
       <div className="grid grid-cols-4 gap-4 mb-6">
          {(() => {
     const cards = [
-      { 
-        title: 'Total User',
-        count: '3,50,789',
-        bg: '#06D4C680',
-        light: '#06D4C620',
-        border: '#06D4C6',
-        icon: '/assets/icon.png',
-      },
-      {
-        title: 'New User',
-        count: '50,789',
-        bg: '#F8794B80',
-        light: '#F8794B20',
-        border: '#F8794B',
-        icon: '/assets/adduser.png',
-      },
-      {
-        title: 'Total Matchmade',
-        count: '1,50,356',
-        bg: '#FA5A7E80',
-        light: '#FA5A7E20',
-        border: '#FA5A7E',
-        icon: '/assets/heart.png',
-      },
-      {
-        title: 'Report Profile',
-        count: '20,689',
-        bg: '#8676FE66',
-        light: '#8676FE20',
-        border: '#8676FE',
-        icon: '/assets/report.png',
-      },
-    ];
+  { 
+    title: 'Total User',
+    count: '3,50,789',
+    bg: '#06D4C680',
+    light: '#06D4C620',
+    border: '#06D4C6',
+    icon: '/assets/icon1.svg',
+    cloud: '/assets/cloud.svg',
+  },
+  {
+    title: 'New User',
+    count: '50,789',
+    bg: '#F8794B80',
+    light: '#F8794B20',
+    border: '#F8794B',
+    icon: '/assets/adduser.svg',
+    cloud: '/assets/cloud2.svg',
+  },
+  {
+    title: 'Total Matchmade',
+    count: '1,50,356',
+    bg: '#FA5A7E80',
+    light: '#FA5A7E20',
+    border: '#FA5A7E',
+    icon: '/assets/heart.svg',
+    cloud: '/assets/cloud3.svg',
+  },
+  {
+    title: 'Report Profile',
+    count: '20,689',
+    bg: '#8676FE66',
+    light: '#8676FE20',
+    border: '#8676FE',
+    icon: '/assets/report.svg',
+    cloud: '/assets/cloud4.svg',
+  },
+];
+
 
     const cloudColor = [
       '#BFFFFB52', // Total User
@@ -65,7 +70,7 @@ const Dashboard = () => {
         className="relative p-4 rounded-xl overflow-hidden"
         style={{ backgroundColor: card.bg }}
       >
-        {/* Top right icon */}
+   
         <Image
           src={card.icon}
           alt="icon"
@@ -92,7 +97,7 @@ const Dashboard = () => {
               border: `1px solid ${card.border}`,
             }}
           >
-            <Image src="/assets/trend.png" alt="arrow" width={16} height={16} />
+            <Image src="/assets/trend.svg" alt="arrow" width={16} height={16} />
             3.48%
           </div>
 
@@ -113,26 +118,20 @@ const Dashboard = () => {
     }}
   />
   <Image
-    src="/assets/cloud.png"
-    alt="Cloud"
-    width={70}
-    height={70}
-    className="object-contain opacity-90 relative z-10"
-    style={{
-      transform: 'rotate(10.73deg)',
-      position: 'absolute',
-      bottom: 0,
-      right: 0,
-    }}
-  />
+  src={card.cloud}
+  alt="Cloud"
+  width={70}
+  height={70}
+  className="object-contain opacity-90 relative z-10"
+  style={{
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+  }}
+/>
+
+
 </div>
-
-
-
-
-
-        
-
       </div>
       ));
     })()}

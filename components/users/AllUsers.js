@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 const AllUsers = () => {
   const users = [
@@ -52,8 +53,15 @@ const AllUsers = () => {
                 </span>
               </td>
               <td>
-                <span className="cursor-pointer text-[#00000099]">⋮</span>
-              </td>
+              <Image
+              src="/assets/dots.svg"
+              alt="Actions"
+              width={20}
+              height={20}
+              className="cursor-pointer"
+              />
+            </td>
+
             </tr>
           ))}
         </tbody>

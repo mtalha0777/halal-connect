@@ -34,7 +34,7 @@ const Topbar = () => {
           {/* Welcome */}
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-semibold">Welcome Back</h2>
-            <Image src="/assets/wave.png" alt="wave" width={28} height={28} />
+            <Image src="/assets/wave.svg" alt="wave" width={28} height={28} />
           </div>
 
           {/* Right Side */}
@@ -50,7 +50,7 @@ const Topbar = () => {
                 className="pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none w-full placeholder-black text-black"
               />
               <Image
-                src="/assets/search1.png"
+                src="/assets/search.svg"
                 alt="Search"
                 width={22}
                 height={22}
@@ -62,7 +62,7 @@ const Topbar = () => {
            {/* Bell Icon + Notification Popup Wrapper */}
 <div className="relative">
   <Image
-    src="/assets/bellicon.png"
+    src="/assets/bellicon.svg"
     alt="Notifications"
     width={30}
     height={30}
@@ -89,7 +89,7 @@ const Topbar = () => {
             {/* Settings Icon */}
             <Link href="/admin/settings">
               <Image
-                src="/assets/setting.png"
+                src="/assets/setting.svg"
                 alt="Settings"
                 width={30}
                 height={30}

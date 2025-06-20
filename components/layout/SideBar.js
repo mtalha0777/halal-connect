@@ -11,12 +11,12 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true); // For responsive toggle
 
   const menuItems = [
-    { label: 'Dashboard', icon: '/assets/dashboard.png', path: '/admin/dashboard' },
-    { label: 'User Management', icon: '/assets/manage.png', path: '/admin/usermanagement' },
-    { label: 'Content Moderation', icon: '/assets/content.png', path: '/admin/contentmoderation' },
-    { label: 'Subscription & Payments', icon: '/assets/subscription.png', path: '/admin/subscribeandpayment' },
-    { label: 'Reports & Analytics', icon: '/assets/reportanalysis.png', path: '/admin/reports' },
-    {label: 'System Notification', icon: '/assets/systemnotification.png', path: '/admin/systemnotification' },
+    { label: 'Dashboard', icon: '/assets/dashboard.svg', path: '/admin/dashboard' },
+    { label: 'User Management', icon: '/assets/management.svg', path: '/admin/usermanagement' },
+    { label: 'Content Moderation', icon: '/assets/content.svg', path: '/admin/contentmoderation' },
+    { label: 'Subscription & Payments', icon: '/assets/subscription.svg', path: '/admin/subscribeandpayment' },
+    { label: 'Reports & Analytics', icon: '/assets/reportanalysis.svg', path: '/admin/reports' },
+    {label: 'System Notification', icon: '/assets/systemnotification.svg', path: '/admin/systemnotification' },
   ];
 
   return (
@@ -26,7 +26,7 @@ const Sidebar = () => {
         className="md:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded-md shadow"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <Image src="/assets/arrowright.png" alt="toggle" width={20} height={20} />
+        <Image src="/assets/arrowright.svg" alt="toggle" width={20} height={20} />
       </button>
 
       <aside className={`bg-[#1D225F] text-white p-6 flex flex-col justify-between
@@ -37,7 +37,7 @@ const Sidebar = () => {
         {/* Logo Section */}
         <div>
           <div className="flex items-center gap-2 mb-10">
-            <Image src="/assets/logo1.png" alt="logo" width={40} height={40} />
+            <Image src="/assets/logo1.svg" alt="logo" width={40} height={40} />
             <span className="text-base font-semibold">Halal Connect</span>
           </div>
 
@@ -64,7 +64,7 @@ const Sidebar = () => {
         <span className="whitespace-nowrap text-sm">{item.label}</span>
       </div>
       <Image
-        src="/assets/arrowright.png"
+        src="/assets/arrowright.svg"
         alt="arrow"
         width={18}
         height={18}
@@ -93,7 +93,7 @@ const Sidebar = () => {
       <p className="text-xs text-gray-300">liam@gmail.com</p>
     </div>
     <Image
-      src="/assets/brightarrow.png"
+      src="/assets/brightarrow.svg"
       alt="Go"
       width={18}
       height={18}

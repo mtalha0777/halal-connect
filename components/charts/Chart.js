@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
-import { Bar as ReBar } from 'recharts';
+import Image from 'next/image';
+
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   Chart as ChartJS,
@@ -48,7 +49,7 @@ const lineData = [
   { month: 'May', Verified: 25, Unverified: 40 },
   { month: 'Jun', Verified: 40, Unverified: 50 },
   { month: 'Jul', Verified: 90, Unverified: 70 },
-  { month: 'Agu', Verified: 15, Unverified: 18 },
+  { month: 'Aug', Verified: 15, Unverified: 18 },
   { month: 'Sep', Verified: 90, Unverified: 37 },
   { month: 'Oct', Verified: 65, Unverified: 24 },
   { month: 'Nov', Verified: 47, Unverified: 14 },
@@ -64,7 +65,7 @@ const matchBarData =  [
   { month: 'May', total: 35, success: 28 },
   { month: 'Jun', total: 93, success: 39 },
   { month: 'Jul', total: 32, success: 44 },
-  { month: 'Agu', total: 90, success: 66 },
+  { month: 'Aug', total: 90, success: 66 },
   { month: 'Sep', total: 14, success: 20 },
   { month: 'Oct', total: 94, success: 36 },
   { month: 'Nov', total: 31, success: 14 },
@@ -97,9 +98,21 @@ const Chart = () => {
     </div>
 
     {/* Dropdown */}
-    <select className="text-sm border border-[#E5E7EB] px-2 py-1 rounded-md focus:outline-none">
-      <option value="yearly">Yearly</option>
-    </select>
+      <div className="relative inline-block">
+  {/* Custom Select with hidden native arrow */}
+  <select className="appearance-none text-sm border border-[#E5E7EB] px-3 py-2 pr-10 rounded-md focus:outline-none">
+    <option value="yearly">Yearly</option>
+  </select>
+
+  {/* Custom Dropdown Icon */}
+  <Image
+    src="/assets/dropdown.svg"
+    alt="Dropdown Icon"
+    width={16}
+    height={16}
+    className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none"
+  />
+</div>
   </div>
 </div>
 
@@ -153,9 +166,21 @@ const Chart = () => {
       </div>
 
       {/* Yearly Dropdown */}
-      <select className="text-sm border border-[#E5E7EB] px-2 py-1 rounded-md focus:outline-none">
-        <option value="yearly">Yearly</option>
-      </select>
+     <div className="relative inline-block">
+  {/* Custom Select with hidden native arrow */}
+  <select className="appearance-none text-sm border border-[#E5E7EB] px-3 py-2 pr-10 rounded-md focus:outline-none">
+    <option value="yearly">Yearly</option>
+  </select>
+
+  {/* Custom Dropdown Icon */}
+  <Image
+    src="/assets/dropdown.svg"
+    alt="Dropdown Icon"
+    width={16}
+    height={16}
+    className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none"
+  />
+</div>
     </div>
   </div>
 
@@ -172,14 +197,14 @@ const Chart = () => {
         <YAxis domain={[0, 100]} tickCount={6} tick={{ fontSize: 12, fill: '#000' }} />
         <ReTooltip />
         
-       <ReBar
+       <Bar
   dataKey="total"
   fill="#00C6FF"
   name="Total User"
   barSize={6} // 👈 Set to 6px
   radius={[4, 4, 0, 0]}
 />
-<ReBar
+< Bar
   dataKey="success"
   fill="#8B5CF6"
   name="Successful Matches"

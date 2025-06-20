@@ -56,7 +56,7 @@ const Overview = () => {
             <h4 className="font-medium">Total Revenue</h4>
             <button className="px-3 py-1 bg-white border border-gray-400 text-black rounded-md text-sm flex items-center gap-1">
               Yearly
-              <Image src="/assets/arrowdown.png" alt="Arrow" width={12} height={12} />
+              <Image src="/assets/dropdown.svg" alt="Arrow" width={16} height={16} />
             </button>
           </div>
           <ResponsiveContainer width="100%" height={240}>
@@ -105,8 +105,9 @@ const Overview = () => {
                 </div>
               </div>
             </div>
-            <button className="flex items-center bg-white border border-gray-300 rounded-md px-3 py-1 text-sm text-black shadow-sm">
-              Yearly <ChevronDown size={16} className="ml-1" />
+            <button className="px-3 py-1 bg-white border border-gray-400 text-black rounded-md text-sm flex items-center gap-1">
+              Yearly
+              <Image src="/assets/dropdown.svg" alt="Arrow" width={16} height={16} />
             </button>
           </div>
 

@@ -78,7 +78,7 @@ const BlockedDetails = () => {
 
 </div>
 <div className="flex items-center gap-2 mt-2">
-  <Image src="/assets/verified.png" alt="Unverified" width={16} height={16} />
+  <Image src="/assets/verified.svg" alt="Unverified" width={16} height={16} />
   <span className="text-md text-gray-700">Unverified</span>
 </div>
 
@@ -117,7 +117,7 @@ const BlockedDetails = () => {
             {/* ✅ Reported Issues Section */}
 <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-10">
   <div className="flex items-center gap-2 mb-4">
-    <Image src="/assets/reportuser.png" alt="icon" width={20} height={20} />
+    <Image src="/assets/reportuser.svg" alt="icon" width={20} height={20} />
     <h2 className="text-lg font-bold">Reported Summary</h2>
   </div>
 

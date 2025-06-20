@@ -7,8 +7,6 @@ import Topbar from '../../components/layout/TopBar';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MoreVertical } from 'lucide-react';
-
 const reportedProfiles = [
   { id: '1234', name: 'Ahmed Raza', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Fatima Noor', status: 'Active' },
   { id: '1356', name: 'Rabia Siddiqui', reason: 'Inappropriate behavior', date: '12 Jan 2024', reportedBy: 'Hassan Shah', status: 'Active' },
@@ -34,28 +32,28 @@ const handleMenuToggle = (id) => {
       count: '40,689',
       bg: '#669AFF99',
       trend: '3.48%',
-      icon: '/assets/darkblueicon.png',
+      icon: '/assets/darkblue.svg',
     },
     {
       title: 'Pending Reviews',
       count: '40,689',
       bg: '#DD83FF99',
       trend: '3.48%',
-      icon: '/assets/purpleicon.png',
+      icon: '/assets/pink.svg',
     },
     {
       title: 'Banned Profiles',
       count: '40,689',
       bg: '#6ED39799',
       trend: '3.48%',
-      icon: '/assets/greenicon.png',
+      icon: '/assets/green.svg',
     },
     {
       title: 'Resolved Reports',
       count: '40,689',
       bg: '#33B8C599',
       trend: '3.48%',
-      icon: '/assets/blueicon.png',
+      icon: '/assets/navyblue.svg',
     },
    
   ];
@@ -100,10 +98,10 @@ const handleMenuToggle = (id) => {
   {/* Border box with icon + percentage */}
   <div className="flex items-center gap-1 bg-white/40 border border-black/10 rounded-full px-2 py-1 w-fit">
     <Image
-      src="/assets/trend.png"
+      src="/assets/trendup.svg"
       alt="trend"
-      width={12}
-      height={12}
+      width={15}
+      height={15}
     />
     <span className="text-black text-sm font-semibold">3.48%</span>
   </div>
@@ -124,7 +122,7 @@ const handleMenuToggle = (id) => {
            <button className="flex items-center gap-2 px-4 py-1 border border-gray-300 rounded-lg text-sm">
   Yearly
   <Image
-    src="/assets/year.png"
+    src="/assets/dropdown.svg"
     alt="year icon"
     width={16}
     height={16}
@@ -169,38 +167,43 @@ const handleMenuToggle = (id) => {
                       {profile.status}
                     </span>
                   </td>
-               <td className="px-4 py-2 relative">
+            <td className="px-4 py-2 relative">
   <div className="relative inline-block">
-    <MoreVertical
-      className="w-4 h-4 text-gray-600 cursor-pointer"
+    <Image
+      src="/assets/dots.svg"
+      alt="Actions"
+      width={20}
+      height={20}
+      className="cursor-pointer"
       onClick={() => handleMenuToggle(profile.id)}
     />
-    
+
     {openMenuId === profile.id && (
       <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-10">
         <Link
           href="/management/userdetails"
           className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
         >
-          <Image src="/assets/view-file.png" alt="view" width={16} height={16} />
+          <Image src="/assets/view-file.svg" alt="view" width={16} height={16} />
           View Details
         </Link>
         <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-          <Image src="/assets/approve.png" alt="approve" width={16} height={16} />
+          <Image src="/assets/approve.svg" alt="approve" width={16} height={16} />
           Approve
         </button>
         <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-          <Image src="/assets/warning.png" alt="warn" width={16} height={16} />
+          <Image src="/assets/warning.svg" alt="warn" width={16} height={16} />
           Issue Warning
         </button>
         <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-          <Image src="/assets/delete.png" alt="delete" width={16} height={16} />
+          <Image src="/assets/delete.svg" alt="delete" width={16} height={16} />
           Delete User
         </button>
       </div>
     )}
   </div>
 </td>
+
 
                 </tr>
               ))}

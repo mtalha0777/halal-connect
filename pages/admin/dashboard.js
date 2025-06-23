@@ -5,7 +5,7 @@ import Image from "next/image";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Chart from "../../components/charts/Chart";
-import AllUsers from "../../components/users/AllUsers";
+import AllUsers from "../users/AllUsers";
 const Dashboard = () => {
   return (
     <div className="flex min-h-screen font-sans">
@@ -144,9 +144,7 @@ const Dashboard = () => {
 
         {/* Charts */}
         <Chart />
-
-        {/* User Table */}
-        <AllUsers />
+        <AllUsers/>
       </main>
     </div>
   );

@@ -13,107 +13,98 @@ const ReportedUser = () => {
 
   // User data
   const userData = [
-    {
-      id: 1234,
-      name: "Ahmed Raza",
-      gender: "Male",
-      email: "john@email.com",
+  {
+    reportId: 1234,
+    name: "Ahmed Raza",
+    gender: "Male",
+    email: "john@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Free",
+  },
+  {
+    reportId: 1356,
+    name: "Rabia Siddiqui",
+    gender: "Female",
+    email: "emily@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Gold",
+  },
+  {
+    reportId: 5688,
+    name: "Hamza Farooq",
+    gender: "Male",
+    email: "clava@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Premium",
+  },
+  {
+    reportId: 8765,
+    name: "Mahmoor Javed",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Free",
+  },
+  {
+    reportId: 8766,
+    name: "Fahad Iqbal",
+    gender: "Male",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Premium",
+  },
+  {
+    reportId: 8767,
+    name: "Fatima Noor",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Free",
+  },
+  {
+    reportId: 8768,
+    name: "Hassan Shah",
+    gender: "Male",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Premium",
+  },
+  {
+    reportId: 8769,
+    name: "Ayesha Khan",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Free",
+  },
+  {
+    reportId: 8770,
+    name: "Zahi Ul Abideen",
+    gender: "Male",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Free",
+  },
+  {
+    reportId: 8771,
+    name: "Hina Tariq",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    reportDate: "12 Jan 2024",
+    plan: "Premium",
+  },
+];
 
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Verified",
-    },
-    {
-      id: 1356,
-      name: "Rabia Siddiqui",
-      gender: "Female",
-      email: "emily@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Gold",
-      status: "Verified",
-    },
-    {
-      id: 5688,
-      name: "Hamza Farooq",
-      gender: "Male",
-      email: "clava@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Unverified",
-    },
-    {
-      id: 8765,
-      name: "Mahmoor Javed",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Verified",
-    },
-    {
-      id: 8765,
-      name: "Fahad Iqbal",
-      gender: "Male",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Verified",
-    },
-    {
-      id: 8765,
-      name: "Fatima Noor",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Unverified",
-    },
-    {
-      id: 8765,
-      name: "Hassan Shah",
-      gender: "Male",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Verified",
-    },
-    {
-      id: 8765,
-      name: "Ayesha Khan",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Verified",
-    },
-    {
-      id: 8765,
-      name: "Zahi Ul Abideen",
-      gender: "Male",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Unverified",
-    },
-    {
-      id: 8765,
-      name: "Hina Tariq",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Verified",
-    },
-  ];
 
   return (
     <div className="flex min-h-screen font-sans">
@@ -255,13 +246,14 @@ const ReportedUser = () => {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b text-[#000000B3] font-normal">
-                <th className="py-2">User ID</th>
+                <th className="py-2">Report ID</th>
                 <th>Name</th>
                 <th>Gender</th>
                 <th>Email</th>
-                <th>Join Date</th>
                 <th>Plan</th>
-                <th className="w-[120px]">Status</th>
+                <th>Join Date</th>
+                <th>Report Date</th>
+                
                 <th className="w-[80px] text-center">Action</th>{" "}
                 {/* narrower and centered */}
               </tr>
@@ -269,25 +261,14 @@ const ReportedUser = () => {
             <tbody>
               {userData.map((user, i) => (
                 <tr key={i} className="border-b text-[#0000006B]">
-                  <td className="py-2">{user.id}</td>
+                  <td className="py-2">{user.reportId}</td>
                   <td>{user.name}</td>
                   <td>{user.gender}</td>
                   <td>{user.email}</td>
-
-                  <td>{user.joinDate}</td>
                   <td>{user.plan}</td>
-                  <td>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        user.status === "Verified" ||
-                        user.status === "D. View Details"
-                          ? "bg-green-100 text-green-500"
-                          : "bg-red-100 text-red-500"
-                      }`}
-                    >
-                      {user.status}
-                    </span>
-                  </td>
+                  <td>{user.joinDate}</td>
+                   <td>{user.reportDate}</td>
+                  
                   <td className="text-center relative whitespace-nowrap">
                     {" "}
                     {/* Fixed spacing */}

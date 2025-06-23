@@ -38,7 +38,7 @@ const ReportsAndAnalytics = () => {
     <div className="flex min-h-screen font-sans">
       <Sidebar />
 
-      <main className="flex-1 bg-white p-6 pt-28">
+      <main className="flex-1 bg-white p-6 pt-22">
         <Topbar />
 
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Reports & Analytics</h2>

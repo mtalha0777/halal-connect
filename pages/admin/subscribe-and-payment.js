@@ -12,13 +12,13 @@ import SubscriptionUserList from "../../components/subscribe/SubscriptionUserLis
 
 export default function SubscribeAndPaymentPage() {
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex-1 bg-[#f5f5f5] min-h-screen">
-        <Topbar />
-        {/* <main className="p-6"> */}
+   <div className="flex flex-col md:flex-row min-h-screen">
+  <Sidebar />
+   <div className="flex-1 bg-white p-6 pt-17 ">
+    <Topbar />
         {/* Page Title */}
-        <main className="p-6 pt-20">
+      <main className="p-4 md:p-6 pt-[90px]">
+
           <div className="mb-6">
             <h1 className="text-xl font-bold text-black">
               Subscription & Payments
@@ -27,7 +27,7 @@ export default function SubscribeAndPaymentPage() {
 
           {/* Subcription and Payments Cards */}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6 place-items-center">
             {[
               {
                 title: "Total Revenue",
@@ -67,10 +67,11 @@ export default function SubscribeAndPaymentPage() {
             ))}
           </div>
 
-          {/* Overview */}
-          <div>
-            <Overview />
-          </div>
+       {/* Overview */}
+<div >
+  <Overview />
+</div>
+
 
           {/* Subscription Plans Section */}
           <div>

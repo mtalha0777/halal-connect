@@ -5,7 +5,6 @@ import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Image from "next/image";
 import Link from "next/link";
-
 const usermanagement = () => {
   // State for filter dropdown
   const [isFilterOpen, setIsFilterOpen] = React.useState(false);
@@ -325,3 +324,4 @@ const usermanagement = () => {
 };
 
 export default usermanagement;
+

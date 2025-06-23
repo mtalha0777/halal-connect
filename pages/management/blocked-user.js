@@ -13,108 +13,109 @@ const BlockedUser = () => {
   const [openMenu, setOpenMenu] = useState(null);
 
   // User data
-  const userData = [
-    {
-      id: 1234,
-      name: "Ahmed Raza",
-      gender: "Male",
-      email: "john@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Block",
-    },
-    {
-      id: 1356,
-      name: "Rabia Siddiqui",
-      gender: "Female",
-      email: "emily@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Gold",
-      status: "Block",
-    },
-    {
-      id: 5688,
-      name: "Hamza Farooq",
-      gender: "Male",
-      email: "clava@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Block",
-    },
-    {
-      id: 8765,
-      name: "Mahmoor Javed",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Block",
-    },
-    {
-      id: 8765,
-      name: "Fahad Iqbal",
-      gender: "Male",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Block",
-    },
-    {
-      id: 8765,
-      name: "Fatima Noor",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Block",
-    },
-    {
-      id: 8765,
-      name: "Hassan Shah",
-      gender: "Male",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Block",
-    },
-    {
-      id: 8765,
-      name: "Ayesha Khan",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Block",
-    },
-    {
-      id: 8765,
-      name: "Zahi Ul Abideen",
-      gender: "Male",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Free",
-      status: "Block",
-    },
-    {
-      id: 8765,
-      name: "Hina Tariq",
-      gender: "Female",
-      email: "soroh@email.com",
-
-      joinDate: "12 Jan 2024",
-      plan: "Premium",
-      status: "Block",
-    },
-  ];
+const userData = [
+  {
+    banId: 1234,
+    name: "Ahmed Raza",
+    gender: "Male",
+    email: "john@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Fake Profile",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 1356,
+    name: "Rabia Siddiqui",
+    gender: "Female",
+    email: "emily@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Harassment",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 5688,
+    name: "Hamza Farooq",
+    gender: "Male",
+    email: "clava@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Scamming",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 8765,
+    name: "Mahmoor Javed",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Fake Profile",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 8766,
+    name: "Fahad Iqbal",
+    gender: "Male",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Harassment",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 8767,
+    name: "Fatima Noor",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Fake Profile",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 8768,
+    name: "Hassan Shah",
+    gender: "Male",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Scamming",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 8769,
+    name: "Ayesha Khan",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Fake Profile",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 8770,
+    name: "Zahi Ul Abideen",
+    gender: "Male",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Fake Profile",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+  {
+    banId: 8771,
+    name: "Hina Tariq",
+    gender: "Female",
+    email: "soroh@email.com",
+    joinDate: "12 Jan 2024",
+    banReason: "Fake Profile",
+    banDate: "12 Jan 2024",
+    status: "Block",
+  },
+];
+ 
 
   return (
     <div className="flex min-h-screen font-sans">
@@ -122,7 +123,6 @@ const BlockedUser = () => {
       <main className="flex-1 bg-white p-6 pt-24">
         {/* Topbar */}
         <Topbar />
-
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           {[
@@ -257,12 +257,13 @@ const BlockedUser = () => {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b text-[#000000B3] font-normal">
-                <th className="py-2">User ID</th>
+                <th className="py-2">Ban ID</th>
                 <th>Name</th>
                 <th>Gender</th>
                 <th>Email</th>
                 <th>Join Date</th>
-                <th>Plan</th>
+                 <th>Ban Reason</th>
+                <th>Ban Date</th>
                 <th className="w-[120px]">Status</th>
                 <th className="w-[80px] text-center">Action</th>{" "}
                 {/* narrower and centered */}
@@ -271,13 +272,13 @@ const BlockedUser = () => {
             <tbody>
               {userData.map((user, i) => (
                 <tr key={i} className="border-b text-[#0000006B]">
-                  <td className="py-2">{user.id}</td>
+                  <td className="py-2">{user.banId}</td>
                   <td>{user.name}</td>
                   <td>{user.gender}</td>
                   <td>{user.email}</td>
-
                   <td>{user.joinDate}</td>
-                  <td>{user.plan}</td>
+                  <td>{user.banReason}</td>
+                  <td>{user.banDate}</td>
                   <td>
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${

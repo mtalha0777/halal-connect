@@ -15,15 +15,13 @@ export default function SubscribeCard({
 }) {
   return (
     <div
-      className="relative overflow-hidden w-full min-h-[148px] rounded-xl p-4 flex flex-col justify-between"
-      style={{
-        backgroundColor: bg,
-        width: 364,
-        height: 148,
-        borderRadius: 12,
-        padding: 16,
-      }}
-    >
+  className="relative overflow-hidden w-full max-w-sm min-h-[148px] rounded-xl p-4 flex flex-col justify-between"
+  style={{
+    backgroundColor: bg,
+    borderRadius: 12,
+  }}
+>
+
       {/* Icon Top Left */}
       {icon && (
         <Image

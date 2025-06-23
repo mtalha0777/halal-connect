@@ -45,7 +45,8 @@ const Overview = () => {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mb-6">
+    <div className="bg-[#f5f5f5] p-4 rounded-xl mb-2 mt-2">
+      
       <h3 className="text-lg font-semibold mb-4">Overview</h3>
 
       <div className="flex flex-wrap md:flex-nowrap gap-4">

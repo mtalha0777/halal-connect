@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(true); // For responsive toggle
+  const [isOpen, setIsOpen] = useState(true);
 
   const menuItems = [
     {
@@ -44,82 +44,79 @@ const Sidebar = () => {
   return (
     <>
       {/* Toggle Button for Mobile */}
-      {/* Toggle Button for Mobile */} 
-<button
-  className="md:hidden fixed top-4 left-4 z-50 bg-[#1D225F] p-2 rounded-md shadow-lg flex items-center justify-center"
-  onClick={() => setIsOpen(!isOpen)}
->
-  <div className="space-y-1">
-    <span className="block w-5 h-0.5 bg-white"></span>
-    <span className="block w-5 h-0.5 bg-white"></span>
-    <span className="block w-5 h-0.5 bg-white"></span>
-  </div>
-</button>
-
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 bg-[#1D225F] p-2 rounded-md shadow-lg flex items-center justify-center"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="space-y-1">
+          <span className="block w-5 h-0.5 bg-white"></span>
+          <span className="block w-5 h-0.5 bg-white"></span>
+          <span className="block w-5 h-0.5 bg-white"></span>
+        </div>
+      </button>
 
       <aside
-        className={`bg-[#1D225F] text-white p-6 flex flex-col justify-between
-        min-h-screen w-64 transition-transform duration-300 
+        className={`bg-[#1D225F] text-white flex flex-col justify-between transition-transform duration-300 z-40
         ${isOpen ? "translate-x-0" : "-translate-x-full"} 
-        md:translate-x-0 fixed md:static z-40`}
+        md:translate-x-0 fixed md:static border-r w-[260px] h-[900px] pt-6 pr-3 pb-4 pl-3`}
       >
         {/* Logo Section */}
         <div>
           <div className="flex items-center gap-2 mb-10">
-            <Image src="/assets/logo1.svg" alt="logo" width={40} height={40} />
-            <span className="text-base font-semibold">Halal Connect</span>
+            <Image src="/assets/logo1.svg" alt="logo" width={45} height={45} />
+           <span className="text-lg font-semibold ml-2">Halal Connect</span>
+
           </div>
 
           {/* Menu Items */}
           <nav className="w-[236px] h-[252px] flex flex-col gap-2">
-       {menuItems.map((item, i) => {
-  const isActive =
-    item.label === "User Management"
-      ? pathname.startsWith("/admin/user-management") ||
-        pathname.startsWith("/management/reported-user") ||
-        pathname.startsWith("/management/blocked-user")
-      : pathname === item.path;
+            {menuItems.map((item, i) => {
+              const isActive =
+                item.label === "User Management"
+                  ? pathname.startsWith("/admin/user-management") ||
+                    pathname.startsWith("/management/reported-user") ||
+                    pathname.startsWith("/management/blocked-user")
+                  : pathname === item.path;
 
-  return (
-    <Link href={item.path} key={i}>
-      <div className="flex justify-start">
-        <div
-          className={`flex items-center justify-between px-3 py-2 rounded-lg w-full max-w-[220px] transition-all
-          ${
-            isActive
-              ? "bg-white text-black font-semibold"
-              : "text-white hover:bg-white/10"
-          }`}
-        >
-          <div className="flex items-center gap-2 flex-1">
-            <Image
-              src={item.icon}
-              alt={item.label}
-              width={20}
-              height={20}
-              className={`w-5 h-5 object-contain ${
-                isActive ? "brightness-0" : "invert brightness-0"
-              }`}
-            />
-            <span className="whitespace-nowrap text-sm">
-              {item.label}
-            </span>
-          </div>
-          <Image
-            src="/assets/arrowright.svg"
-            alt="arrow"
-            width={18}
-            height={18}
-            className={`object-contain ${
-              isActive ? "brightness-0" : "invert brightness-0"
-            }`}
-          />
-        </div>
-      </div>
-    </Link>
-  );
-})}
-
+              return (
+                <Link href={item.path} key={i}>
+                  <div className="flex justify-start">
+                    <div
+                      className={`flex items-center justify-between px-3 py-2 rounded-[12px] w-[236px] h-[44px] transition-all
+                      ${
+                        isActive
+                          ? "bg-white text-black font-semibold"
+                          : "text-white hover:bg-white/10"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 flex-1">
+                        <Image
+                          src={item.icon}
+                          alt={item.label}
+                          width={20}
+                          height={20}
+                          className={`w-5 h-5 object-contain ${
+                            isActive ? "brightness-0" : "invert brightness-0"
+                          }`}
+                        />
+                        <span className="whitespace-nowrap text-sm">
+                          {item.label}
+                        </span>
+                      </div>
+                      <Image
+                        src="/assets/arrowright.svg"
+                        alt="arrow"
+                        width={18}
+                        height={18}
+                        className={`object-contain ${
+                          isActive ? "brightness-0" : "invert brightness-0"
+                        }`}
+                      />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
@@ -150,5 +147,4 @@ const Sidebar = () => {
     </>
   );
 };
-
 export default Sidebar;

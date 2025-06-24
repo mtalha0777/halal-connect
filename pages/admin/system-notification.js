@@ -144,12 +144,13 @@ export default function SystemNotification() {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">System Notification</h2>
           <Link href="/notification/create">
-            <button className="flex items-center gap-2 bg-[#5D5FEF] hover:bg-[#3d3fea] text-white text-sm rounded px-4 py-2">
+            <button className="flex items-center gap-2 bg-[#5D5FEF] hover:bg-[#3d3fea] text-white text-sm rounded px-4 py-2 cursor-pointer">
               <Image
                 src="/assets/plus.svg"
                 alt="plus icon"
                 width={20}
                 height={20}
+                className=""
               />
               Create Notification
             </button>
@@ -157,111 +158,114 @@ export default function SystemNotification() {
         </div>
 
         <section className="mb-6">
-  <div className="rounded-lg overflow-hidden border border-gray-200">
-    {/* Title Bar */}
-    <div className="bg-white px-6 py-4 border-b border-gray-200">
-      <h3 className="text-lg font-semibold">Notification Campaigns</h3>
-    </div>
+          <div className="rounded-lg overflow-hidden border border-gray-200">
+            {/* Title Bar */}
+            <div className="bg-white px-6 py-4 border-b border-gray-200">
+              <h3 className="text-lg font-semibold">Notification Campaigns</h3>
+            </div>
 
-    {/* Table Section */}
-    <div className="bg-[#f9f9f9] overflow-auto">
-      <table className="min-w-full text-sm text-left">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="px-4 py-2">Date</th>
-            <th className="px-4 py-2">Type</th>
-            <th className="px-4 py-2">Notification Name</th>
-            <th className="px-4 py-2">Description</th>
-            <th className="px-4 py-2">Status</th>
-            <th className="px-4 py-2">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {notificationData.map((item, idx) => (
-            <tr key={idx} className="border-t bg-white">
-              <td className="px-4 py-3 text-base text-gray-400 font-normal">
-                {item.date}
-              </td>
-              <td className="px-4 py-3 text-base text-gray-400 font-normal">
-                {item.type}
-              </td>
-              <td className="px-4 py-3 text-base text-gray-400 font-normal">
-                {item.title}
-              </td>
-              <td className="px-4 py-3 text-base text-gray-400 font-normal max-w-md">
-                <TruncatedText text={item.description} />
-              </td>
-              <td className="px-4 py-3">
-                <span
-                  className={`px-3 py-1 text-xs rounded-full font-medium ${
-                    item.status === "Active"
-                      ? "bg-green-100 text-green-500"
-                      : "bg-red-100 text-red-500"
-                  }`}
-                >
-                  {item.status}
-                </span>
-              </td>
-              <td className="px-4 py-3 relative">
-                <div className="relative inline-block text-left">
-                  <button
-                    onClick={() =>
-                      setOpenDropdownIndex(
-                        openDropdownIndex === idx ? null : idx
-                      )
-                    }
-                    className="flex items-center"
-                  >
-                    <img
-                      src="/assets/dots.svg"
-                      alt="Menu"
-                      className="w-5 h-5 cursor-pointer"
-                    />
-                  </button>
+            {/* Table Section */}
+            <div className="bg-[#f9f9f9] overflow-auto">
+              <table className="min-w-full text-sm text-left">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="px-4 py-2">Date</th>
+                    <th className="px-4 py-2">Type</th>
+                    <th className="px-4 py-2">Notification Name</th>
+                    <th className="px-4 py-2">Description</th>
+                    <th className="px-4 py-2">Status</th>
+                    <th className="px-4 py-2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {notificationData.map((item, idx) => (
+                    <tr key={idx} className="border-t bg-white">
+                      <td className="px-4 py-3 text-base text-gray-400 font-normal">
+                        {item.date}
+                      </td>
+                      <td className="px-4 py-3 text-base text-gray-400 font-normal">
+                        {item.type}
+                      </td>
+                      <td className="px-4 py-3 text-base text-gray-400 font-normal">
+                        {item.title}
+                      </td>
+                      <td className="px-4 py-3 text-base text-gray-400 font-normal max-w-md">
+                        <TruncatedText text={item.description} />
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`px-3 py-1 text-xs rounded-full font-medium ${
+                            item.status === "Active"
+                              ? "bg-green-100 text-green-500"
+                              : "bg-red-100 text-red-500"
+                          }`}
+                        >
+                          {item.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 relative">
+                        <div className="relative inline-block text-left">
+                          <button
+                            onClick={() =>
+                              setOpenDropdownIndex(
+                                openDropdownIndex === idx ? null : idx
+                              )
+                            }
+                            className="flex items-center"
+                          >
+                            <img
+                              src="/assets/dots.svg"
+                              alt="Menu"
+                              className="w-5 h-5 cursor-pointer"
+                            />
+                          </button>
 
-                  {openDropdownIndex === idx && (
-                    <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                      <button
-                        onClick={() => {
-                          if (item.status === "Inactive") {
-                            setPopup({ visible: true, item, index: idx });
-                          }
-                          setOpenDropdownIndex(null);
-                        }}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                      >
-                        <img
-                          src="/assets/active.svg"
-                          className="w-4 h-4"
-                        />
-                        Active
-                      </button>
-                      <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
-                        <img
-                          src="/assets/preview.svg"
-                          className="w-4 h-4"
-                        />
-                        Preview
-                      </button>
-                      <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
-                        <img
-                          src="/assets/delete.svg"
-                          className="w-4 h-4"
-                        />
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
+                          {openDropdownIndex === idx && (
+                            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                              <button
+                                onClick={() => {
+                                  if (item.status === "Inactive") {
+                                    setPopup({
+                                      visible: true,
+                                      item,
+                                      index: idx,
+                                    });
+                                  }
+                                  setOpenDropdownIndex(null);
+                                }}
+                                className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                              >
+                                <img
+                                  src="/assets/active.svg"
+                                  className="w-4 h-4"
+                                />
+                                Active
+                              </button>
+                              <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
+                                <img
+                                  src="/assets/preview.svg"
+                                  className="w-4 h-4"
+                                />
+                                Preview
+                              </button>
+                              <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
+                                <img
+                                  src="/assets/delete.svg"
+                                  className="w-4 h-4"
+                                />
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
       </main>
 
       {popup.visible && (

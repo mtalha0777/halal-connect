@@ -108,8 +108,11 @@ const usermanagement = () => {
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar />
-      <main className="flex-1 bg-white p-6 pt-28">
+      <main className="flex-1 bg-white p-6 pt-24">
         {/* Topbar */}
+        <Topbar />
+          {/* Title */}
+  <h1 className="text-xl font-semibold text-black mb-4">User Management</h1>
         <Topbar />
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
@@ -324,4 +327,3 @@ const usermanagement = () => {
 };
 
 export default usermanagement;
-

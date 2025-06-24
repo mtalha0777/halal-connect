@@ -96,36 +96,66 @@ export default function ContentModeration() {
   const handleMenuToggle = (id) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
-  const cards = [
-    {
-      title: "Total Reported Profiles",
-      count: "40,689",
-      bg: "#669AFF99",
-      trend: "3.48%",
-      icon: "/assets/darkblue.svg",
-    },
-    {
-      title: "Pending Reviews",
-      count: "40,689",
-      bg: "#DD83FF99",
-      trend: "3.48%",
-      icon: "/assets/pink.svg",
-    },
-    {
-      title: "Banned Profiles",
-      count: "40,689",
-      bg: "#6ED39799",
-      trend: "3.48%",
-      icon: "/assets/green.svg",
-    },
-    {
-      title: "Resolved Reports",
-      count: "40,689",
-      bg: "#33B8C599",
-      trend: "3.48%",
-      icon: "/assets/navyblue.svg",
-    },
-  ];
+  // const cards = [
+  //   {
+  //     title: "Total Reported Profiles",
+  //     count: "40,689",
+  //     bg: "#669AFF99",
+  //     trend: "3.48%",
+  //     icon: "/assets/darkblue.svg",
+  //   },
+  //   {
+  //     title: "Pending Reviews",
+  //     count: "40,689",
+  //     bg: "#DD83FF99",
+  //     trend: "3.48%",
+  //     icon: "/assets/pink.svg",
+  //   },
+  //   {
+  //     title: "Banned Profiles",
+  //     count: "40,689",
+  //     bg: "#6ED39799",
+  //     trend: "3.48%",
+  //     icon: "/assets/green.svg",
+  //   },
+  //   {
+  //     title: "Resolved Reports",
+  //     count: "40,689",
+  //     bg: "#33B8C599",
+  //     trend: "3.48%",
+  //     icon: "/assets/navyblue.svg",
+  //   },
+  // ];
+const cards = [
+  {
+    title: "Total Reported Profiles",
+    count: "40,689",
+    bg: "#669AFF99",
+    trendBg: "#669AFF1F", // 👈 light version
+    icon: "/assets/darkblue.svg",
+  },
+  {
+    title: "Pending Reviews",
+    count: "40,689",
+    bg: "#DD83FF99",
+    trendBg: "#DD83FF1F",
+    icon: "/assets/pink.svg",
+  },
+  {
+    title: "Banned Profiles",
+    count: "40,689",
+    bg: "#6ED39799",
+    trendBg: "#6ED3971F",
+    icon: "/assets/green.svg",
+  },
+  {
+    title: "Resolved Reports",
+    count: "40,689",
+    bg: "#33B8C599",
+    trendBg: "#33B8C51F",
+    icon: "/assets/navyblue.svg",
+  },
+];
 
   return (
     <div className="flex min-h-screen font-sans">

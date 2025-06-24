@@ -11,7 +11,7 @@ export default function SubscribeCard({
   bg = '#D3F0F8',
   borderColor = '#1CDACD', // Default border color
   cloudRightImage,
-   backgroundRGBA,
+    borderbackgroundBg,
 }) {
   return (
     <div
@@ -52,7 +52,7 @@ export default function SubscribeCard({
     padding: '2px 8px',
     borderRadius: '100px',
     border: `1px solid ${borderColor}`,
-    backgroundColor: backgroundRGBA || borderColor, // ✅ Use transparent only if provided
+    backgroundColor:   borderbackgroundBg || borderColor, // ✅ Use transparent only if provided
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

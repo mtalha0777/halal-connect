@@ -10,8 +10,10 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar />
-      <main className="flex-1 bg-white p-6 pt-28 ">
+      <main className="flex-1 bg-white p-6 pt-24 ">
         {/* Topbar */}
+          {/* Dashboard Title */}
+  <h1 className="text-xl font-semibold text-black mb-4">Dashboard</h1>
         <Topbar />
         {/* Stat Cards */}
         <div className="grid grid-cols-4 gap-4 mb-6">
@@ -144,7 +146,7 @@ const Dashboard = () => {
 
         {/* Charts */}
         <Chart />
-        <AllUsers/>
+        <AllUsers />
       </main>
     </div>
   );

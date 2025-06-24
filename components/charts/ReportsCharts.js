@@ -12,10 +12,8 @@ import {
 } from "chart.js";
 import { Bar as ReBar } from "recharts";
 import {
-  LineChart,
   AreaChart,
   Area,
-  Line,
   XAxis,
   YAxis,
   Tooltip as ReTooltip,
@@ -259,22 +257,23 @@ const ReportsCharts = () => {
             />
           </div>
 
+      
           {/* Male/Female Legends */}
-          <div
-            className="flex flex-col justify-center ml-4"
-            style={{ width: "81px", height: "60px", gap: "20px" }}
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-3.5 h-3.5 rounded-full bg-[#67D89C]" />
+<div
+  className="flex flex-col justify-center ml-[60px] relative top-[-8px]"
+  style={{ width: "81px", height: "60px", gap: "20px" }}
+>
 
-              <span className="text-sm font-medium">Male</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-3.5 h-3.5 rounded-full bg-[#7487F4]" />
+  <div className="flex items-center gap-3">
+    <div className="w-3.5 h-3.5 rounded-full bg-[#67D89C]" />
+    <span className="text-sm font-medium">Male</span>
+  </div>
+  <div className="flex items-center gap-3">
+    <div className="w-3.5 h-3.5 rounded-full bg-[#7487F4]" />
+    <span className="text-sm font-medium">Female</span>
+  </div>
+</div>
 
-              <span className="text-sm font-medium">Female</span>
-            </div>
-          </div>
         </div>
       </div>
 

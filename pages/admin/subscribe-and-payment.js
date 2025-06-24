@@ -12,13 +12,12 @@ import SubscriptionUserList from "../../components/subscribe/SubscriptionUserLis
 
 export default function SubscribeAndPaymentPage() {
   return (
-   <div className="flex flex-col md:flex-row min-h-screen">
-  <Sidebar />
-   <div className="flex-1 bg-white p-6 pt-17 ">
-    <Topbar />
+    <div className="flex flex-col md:flex-row min-h-screen">
+      <Sidebar />
+      <div className="flex-1 bg-white p-6 pt-17 ">
+        <Topbar />
         {/* Page Title */}
-      <main className="p-4 md:p-6 pt-[90px]">
-
+        <main className="p-4 md:p-6 pt-[90px]">
           <div className="mb-6">
             <h1 className="text-xl font-bold text-black">
               Subscription & Payments
@@ -37,7 +36,7 @@ export default function SubscribeAndPaymentPage() {
                 arrow: "/assets/trendup.svg",
                 bg: "#7DE4DD",
                 borderColor: "#1CDACD",
-                backgroundRGBA: "rgba(28, 218, 205, 0.12)",
+                borderbackgroundBg: "#7DE4DD33",
                 cloudRightImage: "/assets/cloudblue.svg",
               },
               {
@@ -48,7 +47,7 @@ export default function SubscribeAndPaymentPage() {
                 arrow: "/assets/trendup.svg",
                 bg: "#948DC4",
                 borderColor: "#786BD3",
-                backgroundRGBA: "rgba(120, 107, 211, 1)",
+                borderbackgroundBg: "#948DC433",
                 cloudRightImage: "/assets/cloudpurple.svg",
               },
               {
@@ -59,7 +58,7 @@ export default function SubscribeAndPaymentPage() {
                 arrow: "/assets/trendup.svg",
                 bg: "#CB7B8D",
                 borderColor: "#CA5C74",
-                backgroundRGBA: "rgba(202, 92, 116, 1)",
+               borderbackgroundBg: "#CB7B8D33",
                 cloudRightImage: "/assets/cloudnouser.svg",
               },
             ].map((card, i) => (
@@ -67,11 +66,10 @@ export default function SubscribeAndPaymentPage() {
             ))}
           </div>
 
-       {/* Overview */}
-<div >
-  <Overview />
-</div>
-
+          {/* Overview */}
+          <div>
+            <Overview />
+          </div>
 
           {/* Subscription Plans Section */}
           <div>

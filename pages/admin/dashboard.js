@@ -1,23 +1,37 @@
 "use client";
-
-import React from "react";
 import Image from "next/image";
+import { useState } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Chart from "../../components/charts/Chart";
 import AllUsers from "../users/AllUsers";
+
 const Dashboard = () => {
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+
   return (
     <div className="flex min-h-screen font-sans">
-      <Sidebar />
-      <main className="flex-1 bg-white p-6 pt-24 ">
-        {/* Topbar */}
-          {/* Dashboard Title */}
-  <h1 className="text-xl font-semibold text-black mb-4">Dashboard</h1>
-        <Topbar />
-        {/* Stat Cards */}
-        <div className="grid grid-cols-4 gap-4 mb-6">
-          {(() => {
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+      />
+      <main className="flex-1 bg-white p-6 md:ml-[260px] transition-all duration-300">
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+       
+        {/* Page Title */}
+        <section className="pt-20">          {/* <- changed from pt-4 to pt-20 */}
+    {/* Page Title */}
+    <h1 className="text-xl font-bold text-black mb-6">Dashboard</h1>
+
+       {/* Stat Cards */}
+         {/* <div className="grid grid-cols-4 gap-4 mb-6"> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+
+           {(() => {
             const cards = [
               {
                 title: "Total User",
@@ -67,7 +81,8 @@ const Dashboard = () => {
             return cards.map((card, i) => (
               <div
                 key={i}
-                className="relative p-4 rounded-xl overflow-hidden"
+                // className="relative p-4 rounded-xl overflow-hidden"
+                className="relative p-4 rounded-xl overflow-hidden w-full"
                 style={{ backgroundColor: card.bg }}
               >
                 <Image
@@ -143,10 +158,13 @@ const Dashboard = () => {
             ));
           })()}
         </div>
+{/* Charts & Table Section - responsive vertical stacking */}
+<div className="flex flex-col gap-6 w-full min-w-0">
+  <Chart />
+  <AllUsers />
+</div>
 
-        {/* Charts */}
-        <Chart />
-        <AllUsers />
+        </section>
       </main>
     </div>
   );

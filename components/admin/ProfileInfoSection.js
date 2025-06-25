@@ -27,47 +27,18 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
 
       {/* Info Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-4">
-        {/* {data.map((item, index) => (
-  title === 'Location' ? (
-    <div
-      key={index}
-      className="flex items-center gap-2 text-sm text-gray-800 whitespace-nowrap"
-      style={{ minWidth: 0 }}>
-      <p className="text-sm text-gray-500">{item.label}</p>
-      <span className="text-gray-500">{item.value}</span>
-    </div>
-  ) : (
-    <div key={index}>
-      <p className="text-sm text-gray-500">{item.label}</p>
-      <p className="text-sm text-gray-800 mt-1">{item.value}</p>
-    </div>
-  )
-))} */}
-
-        {data.map((item, index) =>
-          title === "Location" ? (
-            <div key={index}>
-              <p className="text-sm text-gray-500">{item.label}</p>{" "}
-              {/* Label upar */}
-              <p
-                className="text-sm text-gray-800 mt-1"
-                style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  minWidth: 0,
-                }}
-              >
-                {item.value}
-              </p>
-            </div>
-          ) : (
-            <div key={index}>
-              <p className="text-sm text-gray-500">{item.label}</p>
-              <p className="text-sm text-gray-800 mt-1">{item.value}</p>
-            </div>
-          )
-        )}
+        {data.map((item, index) => (
+          <div key={index} className={title === "Location" ? "md:col-span-3" : ""}>
+            <p className="text-sm text-gray-500">{item.label}</p>
+            <p 
+              className={`text-sm text-gray-800 mt-1 ${
+                title === "Location" ? "break-words whitespace-normal" : ""
+              }`}
+            >
+              {item.value}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

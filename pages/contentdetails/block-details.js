@@ -6,6 +6,12 @@ import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 
 const BlockedDetails = () => {
+    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState({
     id: 36666,
@@ -36,26 +42,36 @@ const BlockedDetails = () => {
   };
 
   return (
+    // <div className="flex min-h-screen font-sans">
+    //   <Sidebar />
+    //   <main className="flex-1">
+    //     <Topbar />
     <div className="flex min-h-screen font-sans">
-      <Sidebar />
-      <div className="flex-1">
-        <Topbar />
-        {/* <main className="pt-24 min-h-screen bg-white"> */}
-        <main className="pt-24 min-h-screen bg-white px-6 md:px-10">
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+      />
+      <main className="flex-1 bg-white p-6 pt-20 md:ml-[260px] transition-all duration-300">
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+      
           {/* Breadcrumb */}
-          <p className="text-sm text-gray-500 mb-4">
-            <Link
-              href="/admin/user-management"
-              className="hover:underline text-gray-600"
-            >
-              User Management
-            </Link>
-            <span className="mx-1">{">"}</span>
-            <span className="font-semibold text-black">Details</span>
-          </p>
+        <div className="w-full bg-[#F5F5F5]  px-4 py-3 mt-4  mb-2">
+    <p className="text-sm text-gray-700">
+      <Link href="/admin/user-management" className="hover:underline">
+         User Management
+      </Link>
+      <span className="mx-1">{">"}</span>
+      <span className="font-semibold text-black">Details</span>
+    </p>
+  </div>
+            
+        
+     {/* <section className="bg-white px-4 md:px-9 pt-4 pb-12 space-y-8"> */}
+     <section className="bg-gray-50 border border-gray-200 rounded-lg px-4 md:px-9 pt-4 pb-12 space-y-8">
 
           {/* User Details Card */}
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+        
+           <div className="w-full px-0 md:px-0">
             {/* Profile Section */}
             <div className="flex items-start gap-6 mb-8">
               <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-purple-200">
@@ -89,7 +105,7 @@ const BlockedDetails = () => {
               </div>
             </div>
 
-            <hr className="my-6 border-gray-200" />
+            
 
             {/* Details Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -163,7 +179,7 @@ const BlockedDetails = () => {
                 />
                 <h2 className="text-lg font-bold">Reported Summary</h2>
               </div>
-
+<hr className="my-6 border-gray-200" />
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
                 <div>
                   <p className="text-sm text-gray-500">Report ID:</p>
@@ -192,8 +208,8 @@ const BlockedDetails = () => {
               </div>
             </div>
           </div>
-        </main>
-      </div>
+        </section>
+      </main>
     </div>
   );
 };

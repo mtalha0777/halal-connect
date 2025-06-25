@@ -91,47 +91,23 @@ const reportedProfiles = [
 ];
 
 export default function ContentModeration() {
+
+   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+    
+      const toggleMobileSidebar = () => {
+        setIsMobileSidebarOpen(!isMobileSidebarOpen);
+      };
   const [openMenuId, setOpenMenuId] = useState(null);
 
   const handleMenuToggle = (id) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
-  // const cards = [
-  //   {
-  //     title: "Total Reported Profiles",
-  //     count: "40,689",
-  //     bg: "#669AFF99",
-  //     trend: "3.48%",
-  //     icon: "/assets/darkblue.svg",
-  //   },
-  //   {
-  //     title: "Pending Reviews",
-  //     count: "40,689",
-  //     bg: "#DD83FF99",
-  //     trend: "3.48%",
-  //     icon: "/assets/pink.svg",
-  //   },
-  //   {
-  //     title: "Banned Profiles",
-  //     count: "40,689",
-  //     bg: "#6ED39799",
-  //     trend: "3.48%",
-  //     icon: "/assets/green.svg",
-  //   },
-  //   {
-  //     title: "Resolved Reports",
-  //     count: "40,689",
-  //     bg: "#33B8C599",
-  //     trend: "3.48%",
-  //     icon: "/assets/navyblue.svg",
-  //   },
-  // ];
 const cards = [
   {
     title: "Total Reported Profiles",
     count: "40,689",
     bg: "#669AFF99",
-    trendBg: "#669AFF1F", // 👈 light version
+    trendBg: "#669AFF1F", 
     icon: "/assets/darkblue.svg",
   },
   {
@@ -158,12 +134,20 @@ const cards = [
 ];
 
   return (
-    <div className="flex min-h-screen font-sans">
-      <Sidebar />
-      <main className="flex-1 bg-white p-6 pt-24">
-        <Topbar />
-
-        <h2 className="text-2xl font-semibold mb-6">Content Moderation</h2>
+    // <div className="flex min-h-screen font-sans">
+    //   <Sidebar />
+    //   <main className="flex-1 bg-white p-6 pt-24">
+    //     <Topbar />
+<div className="flex min-h-screen font-sans">
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+      />
+      {/* <main className="flex-1 bg-white p-6 pt-24">
+        <Topbar /> */}
+         <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+        <h2 className="text-xl font-bold text-black mb-6">Content Moderation</h2>
 
         {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

@@ -20,7 +20,8 @@ const AllUsers = () => {
           </button>
         </div>
 
-        <table className="w-full text-left text-sm">
+       <div className="overflow-x-auto">
+  <table className="min-w-[600px] w-full text-left text-sm">
           <thead>
             <tr className="border-b text-[#000000B3] font-normal">
               <th className="py-2">User ID</th>
@@ -63,7 +64,9 @@ const AllUsers = () => {
               </tr>
             ))}
           </tbody>
+         
         </table>
+         </div>
       </div>
     </section>
   );

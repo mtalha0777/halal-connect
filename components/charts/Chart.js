@@ -80,13 +80,15 @@ const lineChartLegend = [
 const Chart = () => {
   return (
     // <div className="bg-white rounded-[12px] p-3 gap-4 flex flex-col w-[1140px] h-[364px] shadow border border-gray-200">
-<div className="bg-white rounded-[12px] p-3 gap-4 flex flex-col w-full h-[364px] shadow border border-gray-200">
+<div className="bg-white rounded-[12px] p-3 gap-4 flex flex-col w-full shadow border border-gray-200">
+
 
     {/* Overview Title */}
       <h2 className="text-xl font-semibold text-black">Overview</h2>
 
       {/* Charts Row */}
-      <div className="flex gap-4 flex-1">
+    <div className="flex flex-col lg:flex-row gap-4 flex-1">
+
         {/* Line Chart Card */}
         <div className="bg-white rounded-xl p-4 border border-[#E5E7EB] w-1/2">
           <div className="flex justify-between items-center mb-3">
@@ -106,7 +108,8 @@ const Chart = () => {
                   </div>
                 ))}
               </div>
-              <div className="relative inline-block">
+         <div className="relative inline-block min-w-[100px]">
+
                 <select className="appearance-none text-sm border border-[#E5E7EB] px-3 py-2 pr-10 rounded-md focus:outline-none">
                   <option value="yearly">Yearly</option>
                 </select>
@@ -172,7 +175,8 @@ const Chart = () => {
                   </span>
                 </div>
               </div>
-              <div className="relative inline-block">
+             <div className="relative inline-block min-w-[100px]">
+
                 <select className="appearance-none text-sm border border-[#E5E7EB] px-3 py-2 pr-10 rounded-md focus:outline-none">
                   <option value="yearly">Yearly</option>
                 </select>

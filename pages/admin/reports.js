@@ -2,11 +2,18 @@
 
 import React from "react";
 import Image from "next/image";
+import  { useState } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import ReportsCharts from "@/components/charts/ReportsCharts";
 
 const ReportsAndAnalytics = () => {
+
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  
+    const toggleMobileSidebar = () => {
+      setIsMobileSidebarOpen(!isMobileSidebarOpen);
+    };
   const cards = [
     {
       title: "Total Registered Users",
@@ -35,13 +42,18 @@ const ReportsAndAnalytics = () => {
   ];
 
   return (
+    // <div className="flex min-h-screen font-sans">
+    //   <Sidebar />
     <div className="flex min-h-screen font-sans">
-      <Sidebar />
-
-      <main className="flex-1 bg-white p-6 pt-22">
-        <Topbar />
-
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+      />
+      {/* <main className="flex-1 bg-white p-6 pt-22">
+        <Topbar /> */}
+ <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+        <h2 className="text-xl font-bold text-black mb-6">
           Reports & Analytics
         </h2>
 

@@ -117,6 +117,12 @@ function TruncatedText({ text = "", maxLength = 40 }) {
 }
 
 export default function SystemNotification() {
+
+   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  
+    const toggleMobileSidebar = () => {
+      setIsMobileSidebarOpen(!isMobileSidebarOpen);
+    };
   const [notificationData, setNotificationData] = useState(
     notificationDataInitial
   );
@@ -137,12 +143,19 @@ export default function SystemNotification() {
   };
 
   return (
+    // <div className="flex min-h-screen font-sans">
+    //   <Sidebar />
     <div className="flex min-h-screen font-sans">
-      <Sidebar />
-      <main className="flex-1 bg-white p-6 pt-24">
-        <Topbar />
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+      />
+      {/* <main className="flex-1 bg-white p-6 pt-24">
+        <Topbar /> */}
+         <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">System Notification</h2>
+          <h2 className="text-xl font-bold text-black">System Notification</h2>
           <Link href="/notification/create">
             <button className="flex items-center gap-2 bg-[#5D5FEF] hover:bg-[#3d3fea] text-white text-sm rounded px-4 py-2 cursor-pointer">
               <Image
@@ -166,7 +179,8 @@ export default function SystemNotification() {
 
             {/* Table Section */}
             <div className="bg-[#f9f9f9] overflow-auto">
-              <table className="min-w-full text-sm text-left">
+              {/* <table className="min-w-full text-sm text-left"> */}
+              <table className="min-w-[640px] w-full text-sm text-left whitespace-nowrap">
                 <thead className="bg-gray-100">
                   <tr>
                     <th className="px-4 py-2">Date</th>
@@ -221,7 +235,7 @@ export default function SystemNotification() {
                           </button>
 
                           {openDropdownIndex === idx && (
-                            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                            <div className="absolute right-0 mt-2 w-40 bg-white  origin-top-right sm:translate-x-0 translate-x-[-20%] border border-gray-200 rounded-md shadow-lg z-10">
                               <button
                                 onClick={() => {
                                   if (item.status === "Inactive") {
@@ -270,7 +284,8 @@ export default function SystemNotification() {
 
       {popup.visible && (
         <div className="fixed inset-0 bg-[#00000099] flex items-center justify-center z-50">
-          <div className="bg-white rounded-[12px] w-[660px] h-[484px] p-[32px] flex flex-col gap-[40px]">
+          {/* <div className="bg-white rounded-[12px] w-[660px] h-[484px] p-[32px] flex flex-col gap-[40px]"> */}
+          <div className="bg-white rounded-[12px] w-full max-w-[660px] h-auto sm:h-[484px] p-6 sm:p-8 flex flex-col gap-6">
             <h3 className="text-xl font-semibold text-left">
               Push Notification
             </h3>
@@ -316,3 +331,9 @@ export default function SystemNotification() {
     </div>
   );
 }
+
+
+
+
+
+

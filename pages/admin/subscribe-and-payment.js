@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
+import  { useState } from "react";
 import SubscribeCard from "../../components/subscribe/SubscribeCard";
 const Overview = dynamic(() => import("../../components/overview/OverView"), {
   ssr: false,
@@ -11,11 +12,24 @@ import FeatureSubscriptionPlans from "../../components/subscribe/FeatureSubscrip
 import SubscriptionUserList from "../../components/subscribe/SubscriptionUserList";
 
 export default function SubscribeAndPaymentPage() {
+
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  
+    const toggleMobileSidebar = () => {
+      setIsMobileSidebarOpen(!isMobileSidebarOpen);
+    };
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
-      <Sidebar />
-      <div className="flex-1 bg-white p-6 pt-17 ">
-        <Topbar />
+    // <div className="flex flex-col md:flex-row min-h-screen">
+    //   <Sidebar />
+    <div className="flex min-h-screen font-sans">
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+      />
+      {/* <main className="flex-1 bg-white p-6 pt-17 ">
+        <Topbar /> */}
+        <main className="flex-1 bg-white p-2 pt-20 md:ml-[260px] transition-all duration-300">
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
         {/* Page Title */}
         <main className="p-4 md:p-6 pt-[90px]">
           <div className="mb-6">
@@ -86,7 +100,7 @@ export default function SubscribeAndPaymentPage() {
             <SubscriptionUserList />
           </div>
         </main>
-      </div>
+      </main>
     </div>
   );
 }

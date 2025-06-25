@@ -1,46 +1,24 @@
 "use client";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar as ReBar } from "recharts";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip as ReTooltip,
-  Legend as ReLegend,
-  ResponsiveContainer,
-  CartesianGrid,
-  BarChart,
+import { 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  Tooltip, 
+  CartesianGrid, 
+  BarChart, 
+  Bar,
+  ResponsiveContainer 
 } from "recharts";
 
-import { Pie } from "react-chartjs-2";
-import ChartDataLabels from "chartjs-plugin-datalabels";
+import { Pie } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart as ChartJS, ArcElement } from 'chart.js';
+ChartJS.register(ArcElement, ChartDataLabels);
+
 import Image from "next/image";
-import React from "react";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  ArcElement,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
-
 const ReportsCharts = () => {
+
   const months = [
     "Jan",
     "Feb",
@@ -113,63 +91,66 @@ const ReportsCharts = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-      <div
-        className="bg-white rounded-xl shadow p-4 h-[300px]"
-        style={{ border: "1px solid #0000001F" }}
-      >
-        <div className="flex justify-between items-center mb-2">
-          {/* Left: Title */}
-          <h3 className="text-lg font-semibold">Matches Details</h3>
+   <section className="bg-white rounded-xl p-2 shadow-sm border border-gray-200 mb-4">
+  <h2 className="text-xl font-bold text-gray-800 mb-6">Overview</h2>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {/* Matches Chart - Final Version */}
+<div className="bg-white rounded-xl p-4 border border-gray-300 h-[350px]">
+  {/* Header Section */}
+<div className="flex justify-between items-center mb-4 flex-wrap gap-4">
+        <h3 className="text-lg font-semibold">Matches Details</h3>
 
-          {/* Right: Legends + Button */}
-          <div className="flex items-center gap-6">
-            {/* ✅ Legends */}
-            <div className="flex gap-4 text-xs">
-              <div className="flex items-center gap-1">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#FFB0F5]"></span>
-                Registered User
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#81E9FF]"></span>
-                Active User
-              </div>
+        <div className="flex items-center gap-4">
+          {/* legends */}
+          <div className="flex gap-3 text-xs">
+            <div className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-[#FFB0F5]" />
+              <span>Registered User</span>
             </div>
-
-            {/* ✅ Button */}
-            <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
-              Yearly
-              <Image
-                src="/assets/dropdown.svg"
-                alt="Arrow Down"
-                width={16}
-                height={16}
-              />
-            </button>
+            <div className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-[#81E9FF]" />
+              <span>Active User</span>
+            </div>
           </div>
-        </div>
 
-        {/* ✅ Area Chart */}
-        <ResponsiveContainer width="100%" height={250}>
+          {/* dropdown */}
+          <button className="flex items-center gap-2 px-3 py-1 border border-gray-200 rounded-md text-sm">
+            Yearly
+            <Image
+              src="/assets/dropdown.svg"
+              alt="Dropdown"
+              width={16}
+              height={16}
+            />
+          </button>
+        </div>
+      </div>
+
+      {/* ── Chart ──────────────────────────────────────────── */}
+      <div className="h-64 w-full">
+        <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={matchesLineData}
-            margin={{ top: 0, right: 30, left: 0, bottom: 0 }}
+            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            {/* grid now shows both horizontal & vertical lines */}
+            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+
             <XAxis
               dataKey="month"
               tick={{ fontSize: 12, fill: "#000" }}
-              tickLine={false}
+              tickLine={false}      
             />
             <YAxis
               domain={[0, 100]}
               ticks={[0, 20, 40, 60, 80, 100]}
               tick={{ fontSize: 12, fill: "#000" }}
+              tickLine={false}
             />
 
             <Tooltip />
 
-            {/* ✅ Active User – Top Line – Blue */}
             <Area
               type="monotone"
               dataKey="active"
@@ -178,8 +159,6 @@ const ReportsCharts = () => {
               fillOpacity={0.2}
               strokeWidth={2}
             />
-
-            {/* ✅ Registered User – Bottom Line – Pink */}
             <Area
               type="monotone"
               dataKey="registered"
@@ -190,93 +169,67 @@ const ReportsCharts = () => {
             />
           </AreaChart>
         </ResponsiveContainer>
-
-        {/* ✅ Legend */}
-        <div className="flex space-x-4 mt-4 text-sm">
-          <div className="flex items-center space-x-1">
-            <span className="w-2 h-2 rounded-full bg-[#FFB0F5]"></span>
-            <span>Registered User</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <span className="w-2 h-2 rounded-full bg-[#81E9FF]"></span>
-            <span>Active User</span>
-          </div>
-        </div>
       </div>
 
-      {/* Pie Chart */}
-      <div
-        className="bg-white rounded-xl shadow p-4 h-[300px]"
-        style={{ border: "1px solid #0000001F" }}
-      >
-        {/* Title + Yearly Button */}
-        <div className="flex justify-between items-center mb-2">
-          <h4 className="text-lg font-semibold">User Details</h4>
-          <button className="flex items-center gap-2 px-3 py-1 border border-[#00000014] rounded-md text-sm text-[#000]">
-            Yearly
-            <Image
-              src="/assets/dropdown.svg"
-              alt="Arrow Down"
-              width={16}
-              height={16}
-            />
-          </button>
-        </div>
-
-        {/* Pie + Legends in Row */}
-        <div className="flex items-center mt-4">
-          {/* Pie Chart */}
-          <div className="relative" style={{ width: "298px", height: "224px" }}>
-            <Pie
-              data={pieData}
-              options={{
-                maintainAspectRatio: false,
-                plugins: {
-                  datalabels: {
-                    color: "#fff",
-                    formatter: (value, context) => {
-                      const total = context.chart.data.datasets[0].data.reduce(
-                        (a, b) => a + b,
-                        0
-                      );
-                      const percentage = ((value / total) * 100).toFixed(0);
-                      return `${percentage}%`;
-                    },
-                    font: {
-                      weight: "bold",
-                      size: 14,
-                    },
-                    anchor: "center",
-                    align: "center",
-                  },
-                  legend: { display: false },
-                  tooltip: { enabled: true },
-                },
-              }}
-              plugins={[ChartDataLabels]}
-            />
-          </div>
-
-      
-          {/* Male/Female Legends */}
-<div
-  className="flex flex-col justify-center ml-[60px] relative top-[-8px]"
-  style={{ width: "81px", height: "60px", gap: "20px" }}
->
-
-  <div className="flex items-center gap-3">
-    <div className="w-3.5 h-3.5 rounded-full bg-[#67D89C]" />
-    <span className="text-sm font-medium">Male</span>
-  </div>
-  <div className="flex items-center gap-3">
-    <div className="w-3.5 h-3.5 rounded-full bg-[#7487F4]" />
-    <span className="text-sm font-medium">Female</span>
-  </div>
 </div>
 
-        </div>
-      </div>
 
+{/* Pie Chart */}
+<div className="bg-white rounded-xl p-4 border border-gray-300 h-[350px]">
+  {/* Title + Yearly Button */}
+  <div className="flex justify-between items-center mb-4">
+    <h4 className="text-lg font-semibold">User Details</h4>
+    <button className="flex items-center gap-2 px-3 py-1 border border-gray-200 rounded-md text-sm">
+      Yearly
+      <Image 
+        src="/assets/dropdown.svg" 
+        alt="Dropdown" 
+        width={16} 
+        height={16}
+      />
+    </button>
+  </div>
+
+  {/* Pie Chart with Legends */}
+  <div className="flex flex-col md:flex-row items-center justify-center h-[calc(100%-52px)]">
+    {/* Pie Chart Container - Now Responsive */}
+    <div className="w-full md:w-[60%] h-[200px] md:h-full">
+      <Pie
+        data={pieData}
+        options={{
+          maintainAspectRatio: false,
+          plugins: {
+            datalabels: {
+              color: "#fff",
+              formatter: (value) => {
+                const total = pieData.datasets[0].data.reduce((a, b) => a + b, 0);
+                return `${Math.round((value / total) * 100)}%`;
+              },
+              font: { weight: "bold", size: 12 },
+              anchor: "center",
+              align: "center",
+            },
+            legend: { display: false },
+            tooltip: { enabled: true },
+          },
+        }}
+        plugins={[ChartDataLabels]}
+      />
+    </div>
+
+    {/* Legends - Better Positioning */}
+    <div className="flex flex-col justify-center gap-4 mt-4 md:mt-0 md:ml-8">
+      <div className="flex items-center gap-3">
+        <div className="w-3.5 h-3.5 rounded-full bg-[#67D89C]" />
+        <span className="text-sm font-medium">Male </span>
+      </div>
+      <div className="flex items-center gap-3">
+        <div className="w-3.5 h-3.5 rounded-full bg-[#7487F4]" />
+        <span className="text-sm font-medium">Female </span>
+      </div>
+    </div>
+  </div>
+</div>
       {/* Bar Chart Card */}
 
       <div className="bg-white rounded-xl shadow p-4 h-[300px] w-full border border-[#0000001F]">
@@ -319,23 +272,27 @@ const ReportsCharts = () => {
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
               barCategoryGap={20}
             >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#000" }} />
+             
+               <CartesianGrid strokeDasharray="3 3"  />
+              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#000"
+ }}
+              />
               <YAxis
                 domain={[0, 100]}
                 tickCount={6}
                 tick={{ fontSize: 12, fill: "#000" }}
+              
               />
-              <ReTooltip />
+              <Tooltip />
 
-              <ReBar
+              <Bar
                 dataKey="total"
                 fill="#00C6FF"
                 name="Total User"
                 barSize={6} // 👈 Set to 6px
                 radius={[4, 4, 0, 0]}
               />
-              <ReBar
+              <Bar
                 dataKey="success"
                 fill="#8B5CF6"
                 name="Successful Matches"
@@ -409,7 +366,23 @@ const ReportsCharts = () => {
           </ResponsiveContainer>
         </div>
       </div>
-    </div>
+      </div>
+    </section>
   );
 };
+
+const ChartLegend = ({ items }) => (
+  <div className="flex gap-4 mt-2 text-sm">
+    {items.map((item) => (
+      <div key={item.label} className="flex items-center gap-2">
+        <span 
+          className="w-3 h-3 rounded-full" 
+          style={{ backgroundColor: item.color }}
+        />
+        <span>{item.label}</span>
+      </div>
+    ))}
+  </div>
+);
+
 export default ReportsCharts;

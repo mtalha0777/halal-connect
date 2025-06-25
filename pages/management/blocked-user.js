@@ -7,6 +7,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const BlockedUser = () => {
+
+
+   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+    const toggleMobileSidebar = () => {
+      setIsMobileSidebarOpen(!isMobileSidebarOpen);
+    };
   // State for filter dropdown
   const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const [selectedFilter, setSelectedFilter] = React.useState("Yearly");
@@ -118,11 +124,20 @@ const userData = [
  
 
   return (
-    <div className="flex min-h-screen font-sans">
-      <Sidebar />
-      <main className="flex-1 bg-white p-6 pt-24">
-        {/* Topbar */}
-        <Topbar />
+    // <div className="flex min-h-screen font-sans">
+    //   <Sidebar />
+    //   <main className="flex-1 bg-white p-6 pt-24">
+    //     {/* Topbar */}
+    //     <Topbar />
+
+<div className="flex min-h-screen font-sans">
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+      />
+      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           {[

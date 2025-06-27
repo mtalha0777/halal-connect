@@ -1,18 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";   
+import { useRouter } from "next/navigation";
 
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import ProfileInfoSection from "../../components/admin/ProfileInfoSection";
 import Image from "next/image";
 const Settings = () => {
-  
-    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-    const toggleMobileSidebar = () => {
-      setIsMobileSidebarOpen(!isMobileSidebarOpen);
-    };
-    const router = useRouter();                   
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+  const router = useRouter();
 
   const [activeModal, setActiveModal] = useState(null);
   const [showUploadModal, setShowUploadModal] = useState(false);
@@ -34,23 +33,19 @@ const Settings = () => {
   };
 
   return (
-
-
     // <div className="flex min-h-screen font-sans">
     //   <Sidebar />
 
-<div className="flex min-h-screen font-sans">
-      <Sidebar 
+    <div className="flex min-h-screen font-sans">
+      <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
       />
-{/* 
+      {/* 
       <main className="flex-1">
         <Topbar /> */}
-<main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
         <Topbar toggleMobileSidebar={toggleMobileSidebar} />
-
-
 
         <main className="pt-3 px-6 bg-[#f8f8f8] min-h-screen">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -96,13 +91,18 @@ const Settings = () => {
                   <span>Logout</span>
                 </button> */}
                 <button
-  className="w-full flex items-center justify-start gap-2 px-4 py-2 text-sm bg-transparent hover:bg-gray-100 text-[#000000] rounded"
-  onClick={() => router.push("/Login/login")}        
->
-  <Image src="/assets/logout.svg" alt="Logout" width={18} height={18} className="brightness-0" />
-  <span>Logout</span>
-</button>
-
+                  className="w-full flex items-center justify-start gap-2 px-4 py-2 text-sm bg-transparent hover:bg-gray-100 text-[#000000] rounded"
+                  onClick={() => router.push("/Login/login")}
+                >
+                  <Image
+                    src="/assets/logout.svg"
+                    alt="Logout"
+                    width={18}
+                    height={18}
+                    className="brightness-0"
+                  />
+                  <span>Logout</span>
+                </button>
               </div>
             </div>
 

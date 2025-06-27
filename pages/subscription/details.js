@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link"; 
+import Link from "next/link";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 
 const DetailsPage = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-          const toggleMobileSidebar = () => {
-            setIsMobileSidebarOpen(!isMobileSidebarOpen);
-          };
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState({
     id: 36666,
@@ -39,23 +39,17 @@ const DetailsPage = () => {
   };
 
   return (
-    // <div className="flex min-h-screen font-sans">
-    //   <Sidebar />
-    //   <main className="flex-1">
-    //     <Topbar />
     <div className="flex min-h-screen font-sans">
-      <Sidebar 
+      <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
       />
-      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+      <main className="flex-1 bg-white p-6 pt-6 md:ml-[260px] transition-all duration-300">
         <Topbar toggleMobileSidebar={toggleMobileSidebar} />
 
-
-        {/* <main className="pt-24 min-h-screen bg-white"> */}
-        <main className="pt-24 min-h-screen bg-white px-6 md:px-10">
+        <main className="pt-19 min-h-screen bg-white px-3 md:px-5">
           {/* Breadcrumb */}
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-gray-500 mb-4 ">
             <Link
               href="/admin/subscribe-and-payment"
               className="hover:underline text-gray-600"

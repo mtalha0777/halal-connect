@@ -5,25 +5,18 @@ import Topbar from "../../components/layout/TopBar";
 import Link from "next/link";
 
 export default function CreateNotificationPage() {
-    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-        const toggleMobileSidebar = () => {
-          setIsMobileSidebarOpen(!isMobileSidebarOpen);
-        };
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
   return (
-    // <div className="flex min-h-screen font-sans">
-    //   <Sidebar />
-    //   <main className="flex-1 bg-white p-6 pt-24">
-    //     <Topbar />
-
-    
-<div className="flex min-h-screen font-sans">
-      <Sidebar 
+    <div className="flex min-h-screen font-sans">
+      <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
       />
       <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
         <Topbar toggleMobileSidebar={toggleMobileSidebar} />
-
 
         {/* ✅ Wrapper aligned with sidebar and below topbar */}
         <div className="pl-6 pr-6">

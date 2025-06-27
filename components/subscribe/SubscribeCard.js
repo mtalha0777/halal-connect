@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function SubscribeCard({
   title,
@@ -8,20 +8,19 @@ export default function SubscribeCard({
   percentage,
   icon,
   arrow,
-  bg = '#D3F0F8',
-  borderColor = '#1CDACD', // Default border color
+  bg = "#D3F0F8",
+  borderColor = "#1CDACD", // Default border color
   cloudRightImage,
-    borderbackgroundBg,
+  borderbackgroundBg,
 }) {
   return (
     <div
-  className="relative overflow-hidden w-full max-w-sm min-h-[148px] rounded-xl p-4 flex flex-col justify-between"
-  style={{
-    backgroundColor: bg,
-    borderRadius: 12,
-  }}
->
-
+      className="relative overflow-hidden w-full max-w-sm min-h-[148px] rounded-xl p-4 flex flex-col justify-between"
+      style={{
+        backgroundColor: bg,
+        borderRadius: 12,
+      }}
+    >
       {/* Icon Top Left */}
       {icon && (
         <Image
@@ -35,40 +34,32 @@ export default function SubscribeCard({
 
       {/* Title and Count */}
       <div className="absolute bottom-4 left-4 z-10 space-y-2">
-        <h4 className="text-base font-medium" style={{ color: '#FFFFFF99' }}>
+        <h4 className="text-base font-medium" style={{ color: "#FFFFFF99" }}>
           {title}
         </h4>
-        <p className="text-3xl font-bold" style={{ color: '#FFFFFF' }}>
+        <p className="text-3xl font-medium" style={{ color: "#FFFFFF" }}>
           {count}
         </p>
       </div>
 
       {/* Percentage Circle */}
       <div
-  className="absolute bottom-4 right-4 flex items-center gap-2 z-10"
-  style={{
-    width: '101px',
-    height: '32px',
-    padding: '2px 8px',
-    borderRadius: '100px',
-    border: `1px solid ${borderColor}`,
-    backgroundColor:   borderbackgroundBg || borderColor, // ✅ Use transparent only if provided
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-  }}
->
-
-        <span className="text-sm font-semibold">{percentage}</span>
-        {arrow && (
-          <Image
-            src={arrow}
-            alt="Arrow"
-            width={16}
-            height={16}
-          />
-        )}
+        className="absolute bottom-4 right-4 flex items-center gap-2 z-10"
+        style={{
+          width: "101px",
+          height: "32px",
+          padding: "2px 8px",
+          borderRadius: "100px",
+          border: `1px solid ${borderColor}`,
+          backgroundColor: borderbackgroundBg || borderColor, // ✅ Use transparent only if provided
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "black",
+        }}
+      >
+        <span className="text-md font-semibold">{percentage}</span>
+        {arrow && <Image src={arrow} alt="Arrow" width={16} height={16} />}
       </div>
 
       {/* Cloud Image */}
@@ -81,7 +72,7 @@ export default function SubscribeCard({
             height={96}
             className="object-contain opacity-80"
             style={{
-              position: 'absolute',
+              position: "absolute",
               right: 0,
               top: 0,
             }}

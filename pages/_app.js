@@ -5,20 +5,18 @@ import BackgroundWrapper from "@/function/BackgroundWrapper";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
- const showBackgroundPages = [
-  "/Login/login",
-  "/Login/signup",
-  "/Login/forgotpassword",
-  "/Login/resetpassword",
-  "/Login/otpverification",
-  "/Login/confirmation",
-];
+  const showBackgroundPages = [
+    "/Login/login",
+    "/Login/signup",
+    "/Login/forgotpassword",
+    "/Login/resetpassword",
+    "/Login/otpverification",
+    "/Login/confirmation",
+  ];
 
-
-const showBackground = showBackgroundPages
-  .map(path => path.toLowerCase())
-  .includes(router.pathname.toLowerCase());
-
+  const showBackground = showBackgroundPages
+    .map((path) => path.toLowerCase())
+    .includes(router.pathname.toLowerCase());
 
   if (showBackground) {
     return (

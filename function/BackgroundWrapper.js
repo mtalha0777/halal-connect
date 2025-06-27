@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 
 const backgrounds = [
-  "/assets/a1.jpg",
-  "/assets/a2.png",
-  "/assets/b1.jpg",
-  "/assets/b2.jpg",
-  "/assets/c1.jpg",
-  "/assets/c2.jpg",
-  "/assets/c3.jpg",
-  "/assets/d1.jpg",
-  "/assets/d2.jpg",
-  "/assets/e1.png",
+  "/assets/a1.webp",
+  "/assets/a2.webp",
+  "/assets/b1.webp",
+  "/assets/b2.webp",
+  "/assets/c1.webp",
+  "/assets/c2.webp",
+  "/assets/c3.webp",
+  "/assets/d1.webp",
+  "/assets/d2.webp",
+  "/assets/e1.webp",
 ];
 
 export default function BackgroundWrapper({ children }) {
@@ -46,3 +46,6 @@ export default function BackgroundWrapper({ children }) {
     </div>
   );
 }
+
+
+

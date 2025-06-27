@@ -101,14 +101,14 @@ const ReportsCharts = () => {
 <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
         <h3 className="text-lg font-semibold">Matches Details</h3>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-15">
           {/* legends */}
-          <div className="flex gap-3 text-xs">
-            <div className="flex items-center gap-1">
+          <div className="flex gap-5 text-xs">
+            <div className="flex items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-[#FFB0F5]" />
               <span>Registered User</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-[#81E9FF]" />
               <span>Active User</span>
             </div>
@@ -238,12 +238,12 @@ const ReportsCharts = () => {
             Users Overview
           </h3>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-12">
             {/* Custom Legend on same line */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-5">
               <div className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-[#00C6FF]"></span>
-                <span className="text-xs text-[#000]">Total User</span>
+                <span className="text-xs text-[#000]">Total Matches Created</span>
               </div>
               <div className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-[#8B5CF6]"></span>

@@ -117,12 +117,11 @@ function TruncatedText({ text = "", maxLength = 40 }) {
 }
 
 export default function SystemNotification() {
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  
-    const toggleMobileSidebar = () => {
-      setIsMobileSidebarOpen(!isMobileSidebarOpen);
-    };
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
   const [notificationData, setNotificationData] = useState(
     notificationDataInitial
   );
@@ -143,17 +142,15 @@ export default function SystemNotification() {
   };
 
   return (
-    // <div className="flex min-h-screen font-sans">
-    //   <Sidebar />
     <div className="flex min-h-screen font-sans">
-      <Sidebar 
+      <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
       />
-      {/* <main className="flex-1 bg-white p-6 pt-24">
-        <Topbar /> */}
-         <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+
+      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
         <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-black">System Notification</h2>
           <Link href="/notification/create">
@@ -331,9 +328,3 @@ export default function SystemNotification() {
     </div>
   );
 }
-
-
-
-
-
-

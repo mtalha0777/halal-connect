@@ -7,137 +7,128 @@ import Image from "next/image";
 import Link from "next/link";
 
 const BlockedUser = () => {
-
-
-   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-    const toggleMobileSidebar = () => {
-      setIsMobileSidebarOpen(!isMobileSidebarOpen);
-    };
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
   // State for filter dropdown
   const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const [selectedFilter, setSelectedFilter] = React.useState("Yearly");
   const [openMenu, setOpenMenu] = useState(null);
 
   // User data
-const userData = [
-  {
-    banId: 1234,
-    name: "Ahmed Raza",
-    gender: "Male",
-    email: "john@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Fake Profile",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 1356,
-    name: "Rabia Siddiqui",
-    gender: "Female",
-    email: "emily@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Harassment",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 5688,
-    name: "Hamza Farooq",
-    gender: "Male",
-    email: "clava@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Scamming",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 8765,
-    name: "Mahmoor Javed",
-    gender: "Female",
-    email: "soroh@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Fake Profile",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 8766,
-    name: "Fahad Iqbal",
-    gender: "Male",
-    email: "soroh@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Harassment",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 8767,
-    name: "Fatima Noor",
-    gender: "Female",
-    email: "soroh@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Fake Profile",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 8768,
-    name: "Hassan Shah",
-    gender: "Male",
-    email: "soroh@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Scamming",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 8769,
-    name: "Ayesha Khan",
-    gender: "Female",
-    email: "soroh@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Fake Profile",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 8770,
-    name: "Zahi Ul Abideen",
-    gender: "Male",
-    email: "soroh@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Fake Profile",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-  {
-    banId: 8771,
-    name: "Hina Tariq",
-    gender: "Female",
-    email: "soroh@email.com",
-    joinDate: "12 Jan 2024",
-    banReason: "Fake Profile",
-    banDate: "12 Jan 2024",
-    status: "Block",
-  },
-];
- 
+  const userData = [
+    {
+      banId: 1234,
+      name: "Ahmed Raza",
+      gender: "Male",
+      email: "john@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Fake Profile",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 1356,
+      name: "Rabia Siddiqui",
+      gender: "Female",
+      email: "emily@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Harassment",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 5688,
+      name: "Hamza Farooq",
+      gender: "Male",
+      email: "clava@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Scamming",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 8765,
+      name: "Mahmoor Javed",
+      gender: "Female",
+      email: "soroh@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Fake Profile",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 8766,
+      name: "Fahad Iqbal",
+      gender: "Male",
+      email: "soroh@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Harassment",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 8767,
+      name: "Fatima Noor",
+      gender: "Female",
+      email: "soroh@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Fake Profile",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 8768,
+      name: "Hassan Shah",
+      gender: "Male",
+      email: "soroh@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Scamming",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 8769,
+      name: "Ayesha Khan",
+      gender: "Female",
+      email: "soroh@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Fake Profile",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 8770,
+      name: "Zahi Ul Abideen",
+      gender: "Male",
+      email: "soroh@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Fake Profile",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+    {
+      banId: 8771,
+      name: "Hina Tariq",
+      gender: "Female",
+      email: "soroh@email.com",
+      joinDate: "12 Jan 2024",
+      banReason: "Fake Profile",
+      banDate: "12 Jan 2024",
+      status: "Block",
+    },
+  ];
 
   return (
-    // <div className="flex min-h-screen font-sans">
-    //   <Sidebar />
-    //   <main className="flex-1 bg-white p-6 pt-24">
-    //     {/* Topbar */}
-    //     <Topbar />
-
-<div className="flex min-h-screen font-sans">
-      <Sidebar 
+    <div className="flex min-h-screen font-sans">
+      <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
       />
       <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
         <Topbar toggleMobileSidebar={toggleMobileSidebar} />
-
+        <h1 className="text-xl font-bold text-black mb-6">User Management</h1>
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           {[
@@ -208,29 +199,27 @@ const userData = [
         </div>
 
         {/* User Table */}
-        <div className="bg-white rounded-xl p-6 mt-8 shadow-sm">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex gap-10 z-20 relative">
+        <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm overflow-x-auto">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
               <Link href="/admin/user-management">
-                <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
+                <h3 className="text-base md:text-lg font-semibold cursor-pointer hover:text-purple-700">
                   All Users
                 </h3>
               </Link>
-
               <Link href="/management/reported-user">
-                <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
+                <h3 className="text-base md:text-lg font-semibold cursor-pointer hover:text-purple-700">
                   Reported Users
                 </h3>
               </Link>
-
               <Link href="/management/blocked-user">
-                <h3 className="text-lg font-semibold text-purple-700 border-b-2 border-purple-700 pb-1 cursor-pointer">
+                <h3 className="text-base md:text-lg font-semibold text-purple-700 border-b-2 border-purple-700 pb-1 cursor-pointer">
                   Blocked Users
                 </h3>
               </Link>
             </div>
 
-            <div className="relative inline-block text-left">
+            <div className="relative inline-block text-left mt-0 sm:mt-0">
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                 className="text-black border border-gray-300 px-3 py-1 rounded-md bg-[#F9F9F9] text-sm flex items-center gap-2"
@@ -269,32 +258,31 @@ const userData = [
             </div>
           </div>
 
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm min-w-[800px]">
             <thead>
               <tr className="border-b text-[#000000B3] font-normal">
-                <th className="py-2">Ban ID</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Email</th>
-                <th>Join Date</th>
-                 <th>Ban Reason</th>
-                <th>Ban Date</th>
-                <th className="w-[120px]">Status</th>
-                <th className="w-[80px] text-center">Action</th>{" "}
-                {/* narrower and centered */}
+                <th className="py-2 px-1 md:px-3">Ban ID</th>
+                <th className="px-1 md:px-3">Name</th>
+                <th className="px-1 md:px-3">Gender</th>
+                <th className="px-1 md:px-3">Email</th>
+                <th className="px-1 md:px-3">Join Date</th>
+                <th className="px-1 md:px-3">Ban Reason</th>
+                <th className="px-1 md:px-3">Ban Date</th>
+                <th className="px-1 md:px-3 w-[120px]">Status</th>
+                <th className="px-1 md:px-3 w-[80px] text-center">Action</th>
               </tr>
             </thead>
             <tbody>
               {userData.map((user, i) => (
                 <tr key={i} className="border-b text-[#0000006B]">
-                  <td className="py-2">{user.banId}</td>
-                  <td>{user.name}</td>
-                  <td>{user.gender}</td>
-                  <td>{user.email}</td>
-                  <td>{user.joinDate}</td>
-                  <td>{user.banReason}</td>
-                  <td>{user.banDate}</td>
-                  <td>
+                  <td className="py-2 px-1 md:px-3">{user.banId}</td>
+                  <td className="px-1 md:px-3">{user.name}</td>
+                  <td className="px-1 md:px-3">{user.gender}</td>
+                  <td className="px-1 md:px-3">{user.email}</td>
+                  <td className="px-1 md:px-3">{user.joinDate}</td>
+                  <td className="px-1 md:px-3">{user.banReason}</td>
+                  <td className="px-1 md:px-3">{user.banDate}</td>
+                  <td className="px-1 md:px-3">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${
                         user.status === "Block"
@@ -305,49 +293,58 @@ const userData = [
                       {user.status}
                     </span>
                   </td>
-                  <td className="text-center relative whitespace-nowrap">
-                    {" "}
-                    {/* Fixed spacing */}
-                    <button
-                      onClick={() => setOpenMenu(openMenu === i ? null : i)}
-                      className="text-lg text-gray-600"
-                    >
-                      <Image
-                        src="/assets/dots.svg"
-                        alt="Actions"
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                      />
-                    </button>
-                    {openMenu === i && (
-                      <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md z-10">
-                        <Link
-                          href="/contentdetails/block-details"
-                          className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
-                        >
-                          <Image
-                            src="/assets/view-file.svg"
-                            alt="view"
-                            width={18}
-                            height={18}
-                          />
-                          <span className="whitespace-nowrap">
-                            View Details
-                          </span>
-                        </Link>
+                  <td className="px-1 md:px-3 text-center relative">
+                    <div className="flex justify-center">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent event bubbling
+                          setOpenMenu(openMenu === i ? null : i);
+                        }}
+                        className="text-lg text-gray-600 focus:outline-none"
+                      >
+                        <Image
+                          src="/assets/dots.svg"
+                          alt="Actions"
+                          width={20}
+                          height={20}
+                          className="object-contain"
+                        />
+                      </button>
 
-                        <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-                          <Image
-                            src="/assets/unblock.svg"
-                            alt="delete"
-                            width={16}
-                            height={16}
-                          />
-                          <span className="whitespace-nowrap">Unblock</span>
-                        </button>
-                      </div>
-                    )}
+                      {openMenu === i && (
+                        <div className="absolute right-0 z-50 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
+                          <Link
+                            href="/contentdetails/block-details"
+                            className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Image
+                              src="/assets/view-file.svg"
+                              alt="view"
+                              width={18}
+                              height={18}
+                            />
+                            <span>View Details</span>
+                          </Link>
+                          <button
+                            className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
+                            onClick={(e) => {
+                              e.stopPropagation();
+
+                              setOpenMenu(null);
+                            }}
+                          >
+                            <Image
+                              src="/assets/unblock.svg"
+                              alt="delete"
+                              width={16}
+                              height={16}
+                            />
+                            <span>Unblock</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}

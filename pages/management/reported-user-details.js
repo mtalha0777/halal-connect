@@ -5,9 +5,9 @@ import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 const ReportedUserDetails = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-      const toggleMobileSidebar = () => {
-        setIsMobileSidebarOpen(!isMobileSidebarOpen);
-      };
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
   // User data
   const user = {
     id: 36666,
@@ -36,19 +36,14 @@ const ReportedUserDetails = () => {
   };
 
   return (
-    // <div className="flex min-h-screen font-sans">
-    //   <Sidebar />
-    //   <main className="flex-1 bg-white p-6">
-    //     {/* Topbar */}
-  //  <Topbar />
-   <div className="flex min-h-screen font-sans">
-      <Sidebar 
+    <div className="flex min-h-screen font-sans">
+      <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
       />
       <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
         <Topbar toggleMobileSidebar={toggleMobileSidebar} />
-        
+
         {/* User Card */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 mb-6">
           {/* Profile Section */}

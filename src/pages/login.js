@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import Image from 'next/image';
-import Logo from '@components/Logo';
-import Button from '@components/Button';
-import Input from '@components/Input';
+import { useState } from "react";
+import Image from "next/image";
+import Logo from "@components/Logo";
+import Button from "@components/Button";
+import Input from "@components/Input";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,17 +22,17 @@ export default function Login() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <Input 
-            label="Email" 
-            type="email" 
+          <Input
+            label="Email"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          
-          <Input 
-            label="Password" 
-            type="password" 
+
+          <Input
+            label="Password"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -45,18 +45,18 @@ export default function Login() {
 
         <div className="mt-6 flex justify-center gap-4">
           <button className="p-2 border rounded-full">
-            <Image 
-              src="/images/google-logo.png" 
-              alt="Google" 
-              width={24} 
+            <Image
+              src="/images/google-logo.svg"
+              alt="Google"
+              width={24}
               height={24}
             />
           </button>
           <button className="p-2 border rounded-full">
-            <Image 
-              src="/images/fb-logo.png" 
-              alt="Facebook" 
-              width={24} 
+            <Image
+              src="/images/fb-logo.svg"
+              alt="Facebook"
+              width={24}
               height={24}
             />
           </button>

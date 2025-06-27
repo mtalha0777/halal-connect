@@ -1,22 +1,31 @@
 "use client";
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Image from "next/image";
 import Link from "next/link";
-const usermanagement = () => {
 
-   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-    const toggleMobileSidebar = () => {
-      setIsMobileSidebarOpen(!isMobileSidebarOpen);
-    };
-  // State for filter dropdown
-  const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-  const [selectedFilter, setSelectedFilter] = React.useState("Year");
+const UserManagement = () => {
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("Year");
   const [openMenu, setOpenMenu] = useState(null);
 
-  // User data
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (openMenu !== null && !e.target.closest(".action-menu-container")) {
+        setOpenMenu(null);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [openMenu]);
+
+  // User data with unique IDs
   const userData = [
     {
       id: 1234,
@@ -111,22 +120,17 @@ const usermanagement = () => {
   ];
 
   return (
-
     <div className="flex min-h-screen font-sans">
-      <Sidebar 
+      <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
       />
-      {/* <main className="flex-1 bg-white p-6 pt-24">
-        <Topbar /> */}
-         <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
+      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
         <Topbar toggleMobileSidebar={toggleMobileSidebar} />
-         
-         
-          {/* Title */}
-  <h1 className="text-xl font-bold text-black mb-6">User Management</h1>
-      
-        {/* Stat Cards */}
+
+        <h1 className="text-xl font-bold text-black mb-6">User Management</h1>
+
+        {/* Stat Cards (keep your existing implementation) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           {[
             {
@@ -196,25 +200,25 @@ const usermanagement = () => {
         </div>
 
         {/* User Table */}
-        <div className="bg-white rounded-xl p-6 mt-8 shadow-sm">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex gap-10">
-              <h3 className="text-lg font-semibold text-purple-700 border-b-2 border-purple-700 pb-1">
+        <div className="bg-white rounded-xl p-4 md:p-6 mt-8 shadow-sm overflow-x-auto">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
+              <h3 className="text-base md:text-lg font-semibold text-purple-700 border-b-2 border-purple-700 pb-1">
                 All Users
               </h3>
               <Link href="/management/reported-user">
-                <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
+                <h3 className="text-base md:text-lg font-semibold cursor-pointer hover:text-purple-700">
                   Reported Users
                 </h3>
               </Link>
               <Link href="/management/blocked-user">
-                <h3 className="text-lg font-semibold cursor-pointer hover:text-purple-700">
+                <h3 className="text-base md:text-lg font-semibold cursor-pointer hover:text-purple-700">
                   Blocked Users
                 </h3>
               </Link>
             </div>
 
-            <div className="relative inline-block text-left">
+            <div className="relative inline-block text-left mt-4 sm:mt-0">
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                 className="text-black border border-gray-300 px-3 py-1 rounded-md bg-[#F9F9F9] text-sm flex items-center gap-2"
@@ -253,34 +257,32 @@ const usermanagement = () => {
             </div>
           </div>
 
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm min-w-[900px]">
             <thead>
               <tr className="border-b text-[#000000B3] font-normal">
-                <th className="py-2">User ID</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Email</th>
-                <th>Join Date</th>
-                <th>Plan</th>
-                <th className="w-[120px]">Status</th>
-                <th className="w-[80px] text-center">Action</th>{" "}
-                {/* narrower and centered */}
+                <th className="py-2 px-1 md:px-3">User ID</th>
+                <th className="px-1 md:px-3">Name</th>
+                <th className="px-1 md:px-3">Gender</th>
+                <th className="px-1 md:px-3">Email</th>
+                <th className="px-1 md:px-3">Join Date</th>
+                <th className="px-1 md:px-3">Plan</th>
+                <th className="px-1 md:px-3 w-[120px]">Status</th>
+                <th className="px-1 md:px-3 w-[80px] text-center">Action</th>
               </tr>
             </thead>
             <tbody>
               {userData.map((user, i) => (
                 <tr key={i} className="border-b text-[#0000006B]">
-                  <td className="py-2">{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.gender}</td>
-                  <td>{user.email}</td>
-                  <td>{user.joinDate}</td>
-                  <td>{user.plan}</td>
-                  <td>
+                  <td className="py-2 px-1 md:px-3">{user.id}</td>
+                  <td className="px-1 md:px-3">{user.name}</td>
+                  <td className="px-1 md:px-3">{user.gender}</td>
+                  <td className="px-1 md:px-3">{user.email}</td>
+                  <td className="px-1 md:px-3">{user.joinDate}</td>
+                  <td className="px-1 md:px-3">{user.plan}</td>
+                  <td className="px-1 md:px-3">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        user.status === "Verified" ||
-                        user.status === "D. View Details"
+                        user.status === "Verified"
                           ? "bg-green-100 text-green-500"
                           : "bg-red-100 text-red-500"
                       }`}
@@ -288,45 +290,59 @@ const usermanagement = () => {
                       {user.status}
                     </span>
                   </td>
-                  <td className="text-center relative whitespace-nowrap">
-                    {" "}
-                    {/* Fixed spacing */}
-                    <button
-                      onClick={() => setOpenMenu(openMenu === i ? null : i)}
-                      className="text-lg text-gray-600"
-                    >
-                      <Image
-                        src="/assets/dots.svg"
-                        alt="Actions"
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                      />
-                    </button>
-                    {openMenu === i && (
-                      <div className="absolute right-0 mt-2 w-32 bg-white border rounded-md shadow-md z-10">
-                        <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-                          <Image
-                            src="/assets/view-file.svg"
-                            alt="view"
-                            width={16}
-                            height={16}
-                            className="object-contain"
-                          />
-                          View Details
-                        </button>
-
-                        <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-                          <Image
-                            src="/assets/delete.svg"
-                            alt="delete"
-                            width={16}
-                            height={16}
-                          />
-                          Delete User
-                        </button>
-                      </div>
-                    )}
+                  <td className="px-1 md:px-3 text-center relative">
+                    <div className="flex justify-center action-menu-container">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setOpenMenu(openMenu === i ? null : i);
+                        }}
+                        className="text-lg text-gray-600 focus:outline-none"
+                      >
+                        <Image
+                          src="/assets/dots.svg"
+                          alt="Actions"
+                          width={20}
+                          height={20}
+                          className="object-contain"
+                        />
+                      </button>
+                      {openMenu === i && (
+                        <div className="absolute right-0 z-50 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
+                          {user.status === "Verified" && (
+                            <Link
+                              href="/contentdetails/view-details"
+                              className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Image
+                                src="/assets/view-file.svg"
+                                alt="view"
+                                width={16}
+                                height={16}
+                              />
+                              <span>View Details</span>
+                            </Link>
+                          )}
+                          <button
+                            className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              // Add delete logic here
+                              setOpenMenu(null);
+                            }}
+                          >
+                            <Image
+                              src="/assets/delete.svg"
+                              alt="delete"
+                              width={16}
+                              height={16}
+                            />
+                            <span>Delete User</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -338,4 +354,4 @@ const usermanagement = () => {
   );
 };
 
-export default usermanagement;
+export default UserManagement;

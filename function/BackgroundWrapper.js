@@ -26,13 +26,13 @@ export default function BackgroundWrapper({ children }) {
   return (
     <div className="relative min-h-screen w-full bg-gray-100 flex items-center justify-center overflow-hidden">
       {/* Rotating Background Image */}
-<div className="absolute inset-0 z-0 overflow-hidden">
-  <img
-    src={backgrounds[index]}
-    alt="Background"
-    className="w-full h-full object-cover object-center blur-sm brightness-75"
-  />
-</div>
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src={backgrounds[index]}
+          alt="Background"
+          className="w-full h-full object-cover object-center blur-sm brightness-75"
+        />
+      </div>
 
       {/* Foreground content */}
       <div className="relative z-10 w-full flex justify-center items-center px-4">
@@ -46,6 +46,3 @@ export default function BackgroundWrapper({ children }) {
     </div>
   );
 }
-
-
-

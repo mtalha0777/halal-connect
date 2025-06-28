@@ -28,9 +28,12 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
       {/* Info Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-4">
         {data.map((item, index) => (
-          <div key={index} className={title === "Location" ? "md:col-span-3" : ""}>
+          <div
+            key={index}
+            className={title === "Location" ? "md:col-span-3" : ""}
+          >
             <p className="text-sm text-gray-500">{item.label}</p>
-            <p 
+            <p
               className={`text-sm text-gray-800 mt-1 ${
                 title === "Location" ? "break-words whitespace-normal" : ""
               }`}

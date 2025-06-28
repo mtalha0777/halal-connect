@@ -1,5 +1,5 @@
-'use client';
-import React from 'react';
+"use client";
+import React from "react";
 
 const EditModal = ({ visible, title, fields, onSave, onClose }) => {
   const [formData, setFormData] = React.useState({});
@@ -7,13 +7,13 @@ const EditModal = ({ visible, title, fields, onSave, onClose }) => {
   React.useEffect(() => {
     if (visible) {
       const initialData = {};
-      fields.forEach(f => (initialData[f.name] = f.value));
+      fields.forEach((f) => (initialData[f.name] = f.value));
       setFormData(initialData);
     }
   }, [visible, fields]);
 
   const handleChange = (name, value) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = () => {
@@ -33,7 +33,7 @@ const EditModal = ({ visible, title, fields, onSave, onClose }) => {
               <label className="text-sm text-gray-600">{field.label}</label>
               <input
                 type="text"
-                value={formData[field.name] || ''}
+                value={formData[field.name] || ""}
                 onChange={(e) => handleChange(field.name, e.target.value)}
                 placeholder={field.label}
                 className="w-full h-[44px] border border-[#00000066] rounded-[8px] px-4 text-sm text-gray-700"

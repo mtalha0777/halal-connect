@@ -8,8 +8,8 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
         <div className="flex items-center gap-2">
           {icon && (
             <Image
-              src={icon}
-              alt="section icon"
+              src={icon} 
+              alt={`${title} icon`}
               width={20}
               height={20}
               className="object-contain"
@@ -19,9 +19,16 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
         </div>
         <button
           onClick={onEdit}
-          className="text-[#5D5FEF] text-sm hover:underline"
+          className="flex items-center gap-1 text-[#5D5FEF] text-sm hover:underline"
         >
-          Edit
+          <span>Edit</span>
+          <Image 
+            src="/assets/edit.svg" 
+            alt="Edit" 
+            width={16} 
+            height={16}
+          />
+          
         </button>
       </div>
 

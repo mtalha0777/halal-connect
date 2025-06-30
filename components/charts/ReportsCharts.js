@@ -375,22 +375,3 @@ const ReportsCharts = () => {
 
 
 export default ReportsCharts;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

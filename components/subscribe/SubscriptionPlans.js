@@ -39,15 +39,21 @@ const SubscriptionPlans = () => {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mb-6">
+    <div
+      className="bg-white w-full rounded-lg overflow-x-auto"
+      style={{ height: "364px" }}
+    >
       {/* Title and Toggle Buttons */}
-      <div className="flex justify-between items-center mb-4">
+
+      <div className="flex justify-between items-center mb-3">
+        {" "}
+        {/* Reduced margin-bottom */}
         <h3 className="text-lg font-semibold">Subscription Plans</h3>
         <div className="flex gap-8">
           {["Diamond", "Gold", "Silver"].map((plan, idx) => (
             <button
               key={idx}
-              className={`relative text-sm font-medium ${
+              className={`relative text-md font-medium ${
                 plan === "Diamond" ? "text-[#5D5FEF]" : "text-gray-500"
               }`}
             >
@@ -59,128 +65,133 @@ const SubscriptionPlans = () => {
           ))}
         </div>
       </div>
+      {/* //abhi new div lgay ha*/}
+      <div className="border border-[#E5E7EB] rounded-t-md p-3">
+        {/* Add Button */}
+        <div className="flex justify-end mb-3">
+          <button
+            onClick={() => {
+              setPopupMode("add");
+              setShowEditModal(true);
+            }}
+            className="flex items-center gap-1 text-[#0066FF] font-medium hover:underline hover:text-blue-700 cursor-pointer text-md"
+          >
+            Add
+            <Image
+              src="/assets/blueplus.svg"
+              alt="Plus"
+              width={20}
+              height={20}
+            />
+          </button>
+        </div>
 
-      {/* Add Button */}
-      <div className="flex justify-end mb-4">
-        <button
-          onClick={() => {
-            setPopupMode("add");
-            setShowEditModal(true);
-          }}
-          className="flex items-center gap-2 text-[#0066FF] font-medium hover:underline hover:text-blue-700 cursor-pointer"
-        >
-          Add
-          <Image src="/assets/blueplus.svg" alt="Plus" width={20} height={20} />
-        </button>
-      </div>
-
-      {/* Table Section */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr className="bg-gray-100 rounded-md">
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Plan ID
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Duration
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Benefits
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Price ($)
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {plans.map((plan, index) => (
-              <tr key={index}>
-                <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                  {plan.id}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {plan.duration}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {plan.benefits}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {plan.price}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-3 py-1 inline-flex text-sm leading-5 font-normal rounded-full ${
-                      plan.status === "Active"
-                        ? "bg-green-100 text-green-500"
-                        : "bg-red-100 text-red-500"
-                    }`}
-                  >
-                    {plan.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 relative">
-                  <div className="relative">
-                    {/* Custom Dots Icon instead of MoreVertical */}
-                    <Image
-                      src="/assets/dots.svg"
-                      alt="More Options"
-                      width={20}
-                      height={20}
-                      className="cursor-pointer"
-                      onClick={() => {
-                        setOpenMenu(openMenu === index ? null : index); // ✅ Toggle logic
-                      }}
-                    />
-
-                    {openMenu === index && (
-                      <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-                        {/* Edit Click */}
-                        <div
-                          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                          onClick={() => {
-                            setPopupMode("edit");
-                            setShowEditModal(true);
-                            setOpenMenu(null);
-                          }}
-                        >
-                          <Image
-                            src="/assets/editblack.svg"
-                            alt="Edit"
-                            width={16}
-                            height={16}
-                            className="mr-2"
-                          />
-                          <span>Edit</span>
-                        </div>
-
-                        {/* Delete */}
-                        <div className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer">
-                          <Image
-                            src="/assets/delete.svg"
-                            alt="Delete"
-                            width={16}
-                            height={16}
-                            className="mr-2"
-                          />
-                          <span>Delete</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </td>
+        {/* Table Section */}
+        {/* Table Section with border and reduced padding */}
+        <div className="border border-[#E5E7EB] rounded-md overflow-hidden">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr className="bg-gray-100">
+                <th className="px-4 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[10%]">
+                  Plan ID
+                </th>
+                <th className="px-4 md:px-12 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
+                  Duration
+                </th>
+                <th className="px-4 md:px-8 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
+                  Benefits
+                </th>
+                <th className="px-4 md:px-8 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
+                  Price ($)
+                </th>
+                <th className="px-4 md:px-10 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
+                  Status
+                </th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[10%]">
+                  Action
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {plans.map((plan, index) => (
+                <tr key={index}>
+                  <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
+                    {plan.id}
+                  </td>
+                  <td className="px-12 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
+                    {plan.duration}
+                  </td>
+                  <td className="px-13 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
+                    {plan.benefits}
+                  </td>
+                  <td className="px-12 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
+                    {plan.price}
+                  </td>
+                  <td className="px-10 py-3 whitespace-nowrap text-sm text-left">
+                    <span
+                      className={`px-2 py-1 inline-flex text-sm leading-5 font-normal rounded-full ${
+                        plan.status === "Active"
+                          ? "bg-green-100 text-green-500"
+                          : "bg-red-100 text-red-500"
+                      }`}
+                    >
+                      {plan.status}
+                    </span>
+                  </td>
+                  <td className="px-7 py-3 whitespace-nowrap text-md text-gray-500 text-right">
+                    <div className="flex justify-end">
+                      <div className="relative">
+                        <Image
+                          src="/assets/dots.svg"
+                          alt="More Options"
+                          width={19}
+                          height={19}
+                          className="cursor-pointer"
+                          onClick={() => {
+                            setOpenMenu(openMenu === index ? null : index);
+                          }}
+                        />
+                        {openMenu === index && (
+                          <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
+                            <div
+                              className="flex items-center px-3 py-1 hover:bg-gray-100 cursor-pointer text-sm"
+                              onClick={() => {
+                                setPopupMode("edit");
+                                setShowEditModal(true);
+                                setOpenMenu(null);
+                              }}
+                            >
+                              <Image
+                                src="/assets/editblack.svg"
+                                alt="Edit"
+                                width={16}
+                                height={16}
+                                className="mr-1"
+                              />
+                              <span>Edit</span>
+                            </div>
+                            <div className="flex items-center px-3 py-1 hover:bg-gray-100 cursor-pointer">
+                              <Image
+                                src="/assets/delete.svg"
+                                alt="Delete"
+                                width={16}
+                                height={16}
+                                className="mr-1"
+                              />
+                              <span>Delete</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-
+      {/* Edit Modal (remains same) */}
       {showEditModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div
@@ -295,7 +306,7 @@ const SubscriptionPlans = () => {
               </div>
             </div>
             {/* Title Row: Benefits + Add Field */}
-            {/* Title Row: Benefits + Add Field (Now shown in both modes) */}
+
             <div className="flex justify-between items-center mb-5">
               <h3 className="font-semibold text-base md:text-xl text-black">
                 Benefits

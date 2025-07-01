@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState ,useCallback,useEffect} from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Image from "next/image";
@@ -117,11 +117,25 @@ function TruncatedText({ text = "", maxLength = 40 }) {
 }
 
 export default function SystemNotification() {
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 const [searchQuery, setSearchQuery] = useState('');
-  const toggleMobileSidebar = () => {
-    setIsMobileSidebarOpen(!isMobileSidebarOpen);
-  };
+   const toggleMobileSidebar = useCallback(
+    () => setIsMobileSidebarOpen(prev => !prev),
+    []
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setIsMobileSidebarOpen(desktop);     // auto‑open on desktop
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [notificationData, setNotificationData] = useState(
     notificationDataInitial
   );
@@ -151,10 +165,13 @@ const [searchQuery, setSearchQuery] = useState('');
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
+        isDesktop={isDesktop}
       />
 
-       <main className="flex-1 bg-white p-4 md:p-6 pt-20 md:pt-24 md:ml-[260px] w-full max-w-[1400px] mx-auto overflow-x-hidden">
-        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+       <main className={`flex-1 bg-white p-4 md:p-6 pt-20 md:pt-24 md:ml-[260px] w-full max-w-[1400px] mx-auto overflow-x-hidden ${isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""}`}>
+        <Topbar toggleMobileSidebar={toggleMobileSidebar} 
+        isMobileSidebarOpen={isMobileSidebarOpen}
+  isDesktop={isDesktop}/>
 
         {/* Header Section */}
 

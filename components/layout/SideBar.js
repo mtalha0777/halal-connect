@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import {  useState } from "react";
 
 const Sidebar = ({   isMobileSidebarOpen, 
   toggleMobileSidebar,
@@ -54,9 +53,15 @@ const Sidebar = ({   isMobileSidebarOpen,
 <aside
   className={`bg-[#1D225F] text-white flex flex-col justify-between z-50
     fixed w-[260px] h-screen pt-6 pr-3 pb-4 pl-3
-    transition-transform duration-500 ease-in-out
-    ${(isMobileSidebarOpen || isDesktop) ? "translate-x-0" : "-translate-x-full"}
-    md:translate-x-0`}
+    transition-transform duration-300 ease-in-out
+    ${
+      isDesktop
+        ? "translate-x-0" // Desktop: always open
+        : isMobileSidebarOpen
+        ? "translate-x-0"  // Mobile & open
+        : "-translate-x-full" // Mobile & closed
+    }
+  `}
 >
         {/* Logo Section */}
          <div>
@@ -74,8 +79,8 @@ const Sidebar = ({   isMobileSidebarOpen,
                   ? pathname.startsWith("/admin/user-management") ||
                     pathname.startsWith("/management/reported-user") ||
                     pathname.startsWith("/management/blocked-user") ||
-                    pathname.startsWith("/contentdetails/view-details") ||
-                    pathname.startsWith("/contentdetails/block-details")
+                    pathname.startsWith("/contentdetails/viewDetails") ||
+                    pathname.startsWith("/contentdetails/blockDetails")
                   : item.label === "Content Moderation"
                   ? pathname.startsWith("/admin/content-moderation") ||
                     pathname.startsWith("/management/user-details")

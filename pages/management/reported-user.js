@@ -1,15 +1,29 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useCallback} from "react";
 import Image from "next/image";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Link from "next/link";
 
 const ReportedUser = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const toggleMobileSidebar = () => {
-    setIsMobileSidebarOpen(!isMobileSidebarOpen);
-  };
+
+  const toggleMobileSidebar = useCallback(
+    () => setIsMobileSidebarOpen(prev => !prev),
+    []
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setIsMobileSidebarOpen(desktop);     // auto‑open on desktop
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("Yearly");
@@ -109,24 +123,29 @@ const ReportedUser = () => {
     },
   ];
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (openMenu !== null && !e.target.closest(".action-menu-container")) {
-        setOpenMenu(null);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [openMenu]);
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     if (openMenu !== null && !e.target.closest(".action-menu-container")) {
+  //       setOpenMenu(null);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => document.removeEventListener("click", handleClickOutside);
+  // }, [openMenu]);
 
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
+         isDesktop={isDesktop}
       />
-      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
-        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+      <main className={`flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300   ${isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""}`}>
+        <Topbar
+  toggleMobileSidebar={toggleMobileSidebar}
+  isMobileSidebarOpen={isMobileSidebarOpen}
+  isDesktop={isDesktop}
+/>
         <h1 className="text-xl font-bold text-black mb-6">User Management</h1>
         {/* Stat Cards (keep your existing cards implementation) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">

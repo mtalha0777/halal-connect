@@ -2,17 +2,29 @@
 
 import React from "react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState,useCallback,useEffect } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import ReportsCharts from "@/components/charts/ReportsCharts";
 
 const ReportsAndAnalytics = () => {
+const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-  const toggleMobileSidebar = () => {
-    setIsMobileSidebarOpen(!isMobileSidebarOpen);
-  };
+  const toggleMobileSidebar = useCallback(
+    () => setIsMobileSidebarOpen(prev => !prev),
+    []
+  );
+   useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setIsMobileSidebarOpen(desktop);     // auto‑open on desktop
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const cards = [
     {
       title: "Total Registered Users",
@@ -45,11 +57,16 @@ const ReportsAndAnalytics = () => {
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
+        isDesktop={isDesktop}
       />
 
-      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] ">
+      <main className={`flex-1 bg-white p-6 pt-24 md:ml-[260px] ${isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""}`}>
           
-        <Topbar toggleMobileSidebar={toggleMobileSidebar } />
+      <Topbar
+  toggleMobileSidebar={toggleMobileSidebar}
+  isMobileSidebarOpen={isMobileSidebarOpen}
+  isDesktop={isDesktop}
+/>
 
         <h2 className="text-xl font-bold text-black mb-6">
           Reports & Analytics

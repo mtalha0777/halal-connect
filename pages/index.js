@@ -5,7 +5,6 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    // router.replace("/admin/dashboard");
     router.replace("/Login/login");
   }, [router]);
 

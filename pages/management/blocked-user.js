@@ -1,16 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useEffect,useCallback } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Image from "next/image";
 import Link from "next/link";
 
 const BlockedUser = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const toggleMobileSidebar = () => {
-    setIsMobileSidebarOpen(!isMobileSidebarOpen);
-  };
+
+  const toggleMobileSidebar = useCallback(
+    () => setIsMobileSidebarOpen(prev => !prev),
+    []
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setIsMobileSidebarOpen(desktop);     // auto‑open on desktop
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   // State for filter dropdown
   const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const [selectedFilter, setSelectedFilter] = React.useState("Yearly");
@@ -100,7 +114,7 @@ const BlockedUser = () => {
     },
     {
       banId: 8770,
-      name: "Zahi Ul Abideen",
+      name: "Zain Ul Abideen",
       gender: "Male",
       email: "soroh@email.com",
       joinDate: "12 Jan 2024",
@@ -125,9 +139,14 @@ const BlockedUser = () => {
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
+        isDesktop={isDesktop}
       />
-      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
-        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+      <main className={`flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300  ${isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""}`}>
+        <Topbar
+  toggleMobileSidebar={toggleMobileSidebar}
+  isMobileSidebarOpen={isMobileSidebarOpen}
+  isDesktop={isDesktop}
+/>
         <h1 className="text-xl font-bold text-black mb-6">User Management</h1>
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
@@ -313,11 +332,11 @@ const BlockedUser = () => {
 
                       {openMenu === i && (
                         <div className="absolute right-0 z-50 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
-                          <Link
-                            href="/contentdetails/block-details"
-                            className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
-                            onClick={(e) => e.stopPropagation()}
-                          >
+                         <Link
+  href={`/contentdetails/blockDetails/${user.banId}`}
+  className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
+  onClick={(e) => e.stopPropagation()}
+>
                             <Image
                               src="/assets/view-file.svg"
                               alt="view"

@@ -1,3 +1,4 @@
+
 "use client";
 import Image from "next/image";
 import Link from "next/link";
@@ -137,7 +138,7 @@ const Topbar = ({   isMobileSidebarOpen,
           </div>
 
           {/* Search - Desktop */}
-          <div className="hidden md:block relative w-64">
+          <div className="hidden md:block relative w-85">
             <input
               type="text"
               placeholder="Search"
@@ -157,29 +158,29 @@ const Topbar = ({   isMobileSidebarOpen,
           </div>
 
           {/* Icons */}
-          <div className="flex items-center gap-4">
-            {/* Notification Bell */}
-            <div className="relative">
-              <Image
-                src="/assets/bellicon.svg"
-                alt="Notifications"
-                width={30}
-                height={30}
-                className="cursor-pointer"
-                onClick={() => setShowPopup(!showPopup)}
-              />
-              {showPopup && (
-                <>
-                  <div
-                    className="fixed inset-0 bg-[#00000099] z-40"
-                    onClick={() => setShowPopup(false)}
-                  ></div>
-                  <div className="absolute top-10 right-0 z-50">
-                    <NotificationPopup onClose={() => setShowPopup(false)} />
-                  </div>
-                </>
-              )}
-            </div>
+          {/* <div className="flex items-center gap-4"> */}
+         {/* Topbar Notification Bell */}
+<div className="relative">
+  <Image
+    src="/assets/bellicon.svg"
+    alt="Notifications"
+    width={30}
+    height={30}
+    className="cursor-pointer"
+    onClick={() => setShowPopup(!showPopup)}
+  />
+  {showPopup && (
+    <>
+      <div
+        className="fixed inset-0 bg-[#00000099] z-40"
+        onClick={() => setShowPopup(false)}
+      ></div>
+      <div className="absolute top-full right-0 mt-2 z-50">
+        <NotificationPopup onClose={() => setShowPopup(false)} />
+      </div>
+    </>
+  )}
+</div>
 
             {/* Settings Gear */}
             <Link href="/admin/settings">
@@ -193,7 +194,7 @@ const Topbar = ({   isMobileSidebarOpen,
             </Link>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </header>
   );
 };

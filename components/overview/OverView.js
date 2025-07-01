@@ -15,18 +15,18 @@ import Image from "next/image";
 
 const Overview = () => {
   const revenueData = [
-    { month: "Jan", revenue: 30 },
-    { month: "Feb", revenue: 50 },
-    { month: "Mar", revenue: 80 },
-    { month: "Apr", revenue: 20 },
-    { month: "May", revenue: 60 },
-    { month: "Jun", revenue: 90 },
-    { month: "Jul", revenue: 70 },
-    { month: "Aug", revenue: 40 },
+    { month: "Jan", revenue: 40 },
+    { month: "Feb", revenue: 15 },
+    { month: "Mar", revenue: 60 },
+    { month: "Apr", revenue: 16 },
+    { month: "May", revenue: 32 },
+    { month: "Jun", revenue: 38 },
+    { month: "Jul", revenue: 94 },
+    { month: "Aug", revenue: 18 },
     { month: "Sep", revenue: 90 },
     { month: "Oct", revenue: 80 },
-    { month: "Nov", revenue: 60 },
-    { month: "Dec", revenue: 90 },
+    { month: "Nov", revenue: 54 },
+    { month: "Dec", revenue: 84 },
   ];
 
   const data = [
@@ -45,50 +45,45 @@ const Overview = () => {
   ];
 
   return (
-    <div className="bg-[#f5f5f5] p-4 rounded-xl mb-2 mt-2">
-      <h3 className="text-lg font-semibold mb-4">Overview</h3>
+<div className="bg-[#f5f5f5] p-3 sm:p-4 rounded-xl mb-2 mt-2">
+  <h3 className="text-lg font-semibold mb-4">Overview</h3>
 
-      <div className="flex flex-col lg:flex-row gap-4">
-        {/* Total Revenue Chart - Now fully responsive */}
-        <div className="w-full bg-white rounded-xl shadow p-4 border border-gray-200">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
-            <h4 className="font-medium">Total Revenue</h4>
-            <button className="px-3 py-1 bg-white border border-gray-400 text-black rounded-md text-sm flex items-center gap-1">
-              Yearly
-              <Image
-                src="/assets/dropdown.svg"
-                alt="Arrow"
-                width={16}
-                height={16}
-              />
-            </button>
-          </div>
-          <div className="w-full h-[240px] min-h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={revenueData}
-                margin={{ top: 10, right: 20, bottom: 10, left: 0 }}
-              >
-                <defs>
-                  <linearGradient
-                    id="revenueGradient"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop offset="0%" stopColor="#5D5FEF" stopOpacity={0.4} />
-                    <stop offset="100%" stopColor="#5D5FEF" stopOpacity={0.1} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
+  <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
+    {/* Total Revenue Chart */}
+    <div className="w-full bg-white rounded-xl shadow p-3 sm:p-4 border border-gray-200">
+      <div className="flex justify-between items-center mb-4">
+        <h4 className="font-medium text-base">Total Revenue</h4>
+        <button className="px-3 py-1 bg-white border border-gray-300 text-black rounded-md text-sm flex items-center gap-1 hover:bg-gray-50 transition-colors">
+          Yearly
+          <Image
+            src="/assets/dropdown.svg"
+            alt="Arrow"
+            width={16}
+            height={16}
+            className="w-4 h-4"
+          />
+        </button>
+      </div>
+      <div className="w-full h-[220px] sm:h-[260px] md:h-[270px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={revenueData}
+            margin={{ top: 10, right: 15, bottom: 5, left: 0 }}
+          >
+            <defs>
+              <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#5D5FEF" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="#5D5FEF" stopOpacity={0.1} />
+              </linearGradient>
+            </defs>
+             <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
                 <XAxis
                   dataKey="month"
-                  tick={{ fontSize: 12, fill: "#000" }}
+                  tick={{ fontSize: 10, fill: "#000" }}
                   tickLine={false}
                 />
                 <YAxis
-                  tick={{ fontSize: 12, fill: "#000" }}
+                  tick={{ fontSize: 10, fill: "#000" }}
                   domain={[0, 100]}
                   ticks={[0, 20, 40, 60, 80, 100]}
                   allowDecimals={false}
@@ -103,84 +98,94 @@ const Overview = () => {
                   dot={false}
                 />
               </AreaChart>
-            </ResponsiveContainer>
+        </ResponsiveContainer>
           </div>
         </div>
 
         {/* Subscription Buy Chart - Now fully responsive */}
-        <div className="w-full bg-white rounded-xl shadow p-4 border border-gray-200">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
-              <h2 className="font-medium">Subscription Buy</h2>
-              <div className="flex flex-wrap sm:gap-10">
-                <div className="flex items-center gap-1 text-xs">
-                  <span className="inline-block w-2 h-2 rounded-full bg-[#FFB74D]"></span>
-                  Premium
-                </div>
-                <div className="flex items-center gap-1 text-xs">
-                  <span className="inline-block w-2 h-2 rounded-full bg-[#86EFAC]"></span>
-                  Gold
-                </div>
-                <div className="flex items-center gap-1 text-xs">
-                  <span className="inline-block w-2 h-2 rounded-full bg-[#A5B4FC]"></span>
-                  Diamond
-                </div>
-              </div>
-            </div>
-            <button className="px-3 py-1 bg-white border border-gray-400 text-black rounded-md text-sm flex items-center gap-1">
-              Yearly
-              <Image
-                src="/assets/dropdown.svg"
-                alt="Arrow"
-                width={16}
-                height={16}
-              />
-            </button>
-          </div>
+      <div className="w-full bg-white rounded-xl shadow p-3 sm:p-4 border border-gray-200">
+  {/* Header section remains same as your working version */}
+  <div className="flex flex-wrap justify-between items-center mb-3 gap-2">
+    <div className="flex items-center gap-2 sm:gap-10">
+      <h2 className="font-medium text-sm sm:text-base whitespace-nowrap">Subscription Buy</h2>
+      <div className="flex flex-wrap gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs whitespace-nowrap">
+          <span className="inline-block w-2 h-2 rounded-full bg-[#FFB74D]"></span>
+          Premium
+        </div>
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs whitespace-nowrap">
+          <span className="inline-block w-2 h-2 rounded-full bg-[#86EFAC]"></span>
+          Gold
+        </div>
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs whitespace-nowrap">
+          <span className="inline-block w-2 h-2 rounded-full bg-[#A5B4FC]"></span>
+          Diamond
+        </div>
+      </div>
+    </div>
+    <button className="ml-auto px-2 py-1 sm:px-3 sm:py-1 bg-white border border-gray-400 text-black rounded-md text-xs sm:text-sm flex items-center gap-1 whitespace-nowrap">
+      Yearly
+      <Image
+        src="/assets/dropdown.svg"
+        alt="Arrow"
+        width={14}
+        height={14}
+        className="w-3 h-3 sm:w-4 sm:h-4"
+      />
+    </button>
+  </div>
+ 
 
-          <div className="w-full h-[240px] min-h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={data}
-                margin={{ top: 10, right: 20, left: 0, bottom: 5 }}
-                barGap={4}
-                barSize={13}
-              >
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis
-                  dataKey="month"
-                  tick={{ fontSize: 10 }}
-                  tickLine={false}
-                  minTickGap={-5}
-                  padding={{ left: 5, right: 5 }}
-                />
-                <YAxis
-                  domain={[0, 100]}
-                  ticks={[0, 40, 80, 120, 160, 200]}
-                  tick={{ fontSize: 12, fill: "#000" }}
-                  allowDecimals={false}
-                />
-                <Tooltip cursor={{ fill: "transparent" }} />
-                <Bar
-                  dataKey="Diamond"
-                  stackId="a"
-                  fill="#A5B4FC"
-                  radius={[4, 4, 0, 0]}
-                />
-                <Bar
-                  dataKey="Gold"
-                  stackId="a"
-                  fill="#86EFAC"
-                  radius={[4, 4, 0, 0]}
-                />
-                <Bar
-                  dataKey="Premium"
-                  stackId="a"
-                  fill="#FFB74D"
-                  radius={[4, 4, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+      <div className="w-full h-[200px] sm:h-[250px] md:h-[260px]">
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart
+        data={data}
+        margin={{ top: 15, right: 15, left: 0, bottom: 5 }}
+        barGap={4}
+        barSize={12}
+      >
+        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+        <XAxis
+          dataKey="month"
+          tick={{ fontSize: 11 }}
+          tickLine={false}
+          axisLine={{ stroke: '#E5E7EB' }}
+        />
+        <YAxis
+          domain={[0, 100]}
+          ticks={[0, 40, 80, 120, 160, 200]}
+          tick={{ fontSize: 11 }}
+          axisLine={{ stroke: '#E5E7EB' }}
+          tickLine={false}
+        />
+        <Tooltip 
+          contentStyle={{
+            background: '#fff',
+            border: '1px solid #E5E7EB',
+            borderRadius: '6px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
+        />
+        <Bar
+          dataKey="Diamond"
+          stackId="a"
+          fill="#A5B4FC"
+          radius={[4, 4, 0, 0]}
+        />
+        <Bar
+          dataKey="Gold"
+          stackId="a"
+          fill="#86EFAC"
+          radius={[4, 4, 0, 0]}
+        />
+        <Bar
+          dataKey="Premium"
+          stackId="a"
+          fill="#FFB74D"
+          radius={[4, 4, 0, 0]}
+        />
+      </BarChart>
+    </ResponsiveContainer>
           </div>
         </div>
       </div>

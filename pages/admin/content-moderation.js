@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect,useCallback } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Image from "next/image";
@@ -91,16 +91,28 @@ const reportedProfiles = [
 ];
 
 export default function ContentModeration() {
+ const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-  const toggleMobileSidebar = () => {
-    setIsMobileSidebarOpen(!isMobileSidebarOpen);
-  };
+  const toggleMobileSidebar = useCallback(
+    () => setIsMobileSidebarOpen(prev => !prev),
+    []
+  );
   const [openMenuId, setOpenMenuId] = useState(null);
 
   const handleMenuToggle = (id) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
+   useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setIsMobileSidebarOpen(desktop);     // auto‑open on desktop
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const cards = [
     {
       title: "Total Reported Profiles",
@@ -137,11 +149,17 @@ export default function ContentModeration() {
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
+        isDesktop={isDesktop}
       />
       {/* <main className="flex-1 bg-white p-6 pt-24">
         <Topbar /> */}
-      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
-        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+      <main className={`flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300 ${isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""}`}>
+        <Topbar toggleMobileSidebar={toggleMobileSidebar}
+         isMobileSidebarOpen={isMobileSidebarOpen}
+  isDesktop={isDesktop} />
+
+
+
         <h2 className="text-xl font-bold text-black mb-6">
           Content Moderation
         </h2>

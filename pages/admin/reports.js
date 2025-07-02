@@ -47,8 +47,10 @@ const ReportsAndAnalytics = () => {
         toggleMobileSidebar={toggleMobileSidebar}
       />
 
-      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300">
-        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+      <main className="flex-1 bg-white p-6 pt-24 md:ml-[260px] ">
+          
+        <Topbar toggleMobileSidebar={toggleMobileSidebar } />
+
         <h2 className="text-xl font-bold text-black mb-6">
           Reports & Analytics
         </h2>

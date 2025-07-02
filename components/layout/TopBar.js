@@ -5,21 +5,26 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import NotificationPopup from "../modals/NotificationPopup";
 
-const Topbar = ({ toggleMobileSidebar }) => {
-  const router = useRouter();
+
+const Topbar = ({   isMobileSidebarOpen, 
+  toggleMobileSidebar,
+ }) => {
+    const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
+    useEffect(() => {
     const handleResize = () => {
+      // More reliable mobile detection
       setIsMobile(window.innerWidth < 768);
     };
 
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    // Run immediately and add listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const performSearch = () => {
@@ -38,25 +43,44 @@ const Topbar = ({ toggleMobileSidebar }) => {
     <header className="fixed top-0 left-0 md:left-[260px] right-0 z-40 bg-white shadow-sm">
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 py-4 gap-4">
         {/* Hamburger menu (mobile only) */}
+       {/* Updated hamburger menu button */}
         {isMobile && (
           <button
             onClick={toggleMobileSidebar}
             className="p-2 text-gray-600 rounded-md focus:outline-none"
+            aria-label="Toggle sidebar"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            {isMobileSidebarOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
           </button>
         )}
 
@@ -104,8 +128,8 @@ const Topbar = ({ toggleMobileSidebar }) => {
               <Image
                 src="/assets/search.svg"
                 alt="Search"
-                width={24}
-                height={24}
+                width={20}
+                height={20}
                 className="cursor-pointer"
                 onClick={() => setShowMobileSearch(true)}
               />

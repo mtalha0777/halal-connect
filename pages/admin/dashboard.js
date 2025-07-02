@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState,useCallback,useEffect } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Chart from "../../components/charts/Chart";
@@ -8,19 +8,36 @@ import AllUsers from "../users/AllUsers";
 
 const Dashboard = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+const [isDesktop, setIsDesktop] = useState(false); 
+  const toggleMobileSidebar = useCallback(() => {
+    setIsMobileSidebarOpen(prev => !prev);
+  }, []);
 
-  const toggleMobileSidebar = () => {
-    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+useEffect(() => {
+  const handleResize = () => {
+    const desktop = window.innerWidth >= 768;
+    setIsDesktop(desktop);
+    setIsMobileSidebarOpen(desktop); // Auto-open on desktop
   };
-
+  
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
+         isDesktop={isDesktop}
       />
-      <main className="flex-1 bg-white p-6 md:ml-[260px] transition-all duration-300">
-        <Topbar toggleMobileSidebar={toggleMobileSidebar} />
+      <main className={`flex-1 bg-white p-6 transition-all duration-300 ${
+        isMobileSidebarOpen ? 'md:ml-[260px]' : 'md:ml-0'}`}>
+        <Topbar 
+          toggleMobileSidebar={toggleMobileSidebar}
+          isMobileSidebarOpen={isMobileSidebarOpen}  
+            isDesktop={isDesktop} 
+        />
 
         {/* Page Title */}
         <section className="pt-20">

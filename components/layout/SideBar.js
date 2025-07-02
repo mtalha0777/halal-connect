@@ -2,27 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+// import {  useState } from "react";
 
-const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
+const Sidebar = ({   isMobileSidebarOpen, 
+  toggleMobileSidebar,
+  isDesktop }) => {
   const pathname = usePathname();
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {  // Updated
-      const desktop = window.innerWidth >= 768;
-      setIsDesktop(desktop);
-      
-      // Close mobile sidebar when resizing to desktop
-      if (desktop && isMobileSidebarOpen) {
-        toggleMobileSidebar();
-      }
-    };
-
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isMobileSidebarOpen, toggleMobileSidebar]);
 
   const menuItems = [  {
       label: "Dashboard",
@@ -66,12 +51,13 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
         />
       )}
 
-      <aside
-        className={`bg-[#1D225F] text-white flex flex-col justify-between z-50
-          fixed w-[260px] h-screen pt-6 pr-3 pb-4 pl-3
-          ${isMobileSidebarOpen || isDesktop ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0`} // Always visible on desktop
-      >
+<aside
+  className={`bg-[#1D225F] text-white flex flex-col justify-between z-50
+    fixed w-[260px] h-screen pt-6 pr-3 pb-4 pl-3
+    transition-transform duration-500 ease-in-out
+    ${(isMobileSidebarOpen || isDesktop) ? "translate-x-0" : "-translate-x-full"}
+    md:translate-x-0`}
+>
         {/* Logo Section */}
          <div>
            <div className="flex items-center gap-2 mb-10">

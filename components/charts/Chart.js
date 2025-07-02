@@ -79,7 +79,6 @@ const lineChartLegend = [
 
 const Chart = () => {
   return (
-
     <div className="bg-white rounded-xl p-4 gap-4 flex flex-col w-full shadow border border-gray-200">
       {/* Overview Title */}
       <h2 className="text-xl font-semibold text-black">Overview</h2>
@@ -94,75 +93,71 @@ const Chart = () => {
             </h3>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-20 w-full sm:w-auto">
-           {/* Legend items */}
-  <div className="flex items-center gap-3 flex-wrap">
-    {lineChartLegend.map((item) => (
-      <div key={item.label} className="flex items-center gap-1">
-        <span 
-          className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: item.color }}
-        />
-        <span className="text-xs text-black">{item.label}</span>
-      </div>
-    ))}
-  </div>
-              
+              {/* Legend items */}
+              <div className="flex items-center gap-3 flex-wrap">
+                {lineChartLegend.map((item) => (
+                  <div key={item.label} className="flex items-center gap-1">
+                    <span
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: item.color }}
+                    />
+                    <span className="text-xs text-black">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+
               {/* Dropdown - stays aligned to right */}
-  <div className="relative w-full sm:w-[100px]">
-    <select className="appearance-none text-sm border border-gray-200 px-3 py-2 pr-8 rounded-md focus:outline-none w-full">
-      <option value="yearly">Yearly</option>
-    </select>
-    <Image
-      src="/assets/dropdown.svg"
-      alt="Dropdown Icon"
-      width={16}
-      height={16}
-      className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none"
-    />
-  </div>
-</div>
+              <div className="relative w-full sm:w-[100px]">
+                <select className="appearance-none text-sm border border-gray-200 px-3 py-2 pr-8 rounded-md focus:outline-none w-full">
+                  <option value="yearly">Yearly</option>
+                </select>
+                <Image
+                  src="/assets/dropdown.svg"
+                  alt="Dropdown Icon"
+                  width={16}
+                  height={16}
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="w-full h-[210px] min-h-[200px]">
             <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={lineData}
-              margin={{ top: 10, right: 20, bottom: 10, left: 0 }}
-            >
-              <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
-              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#000" }} />
-              <YAxis
-                domain={[0, 100]}
-                tickCount={6}
-                tick={{ fontSize: 12, fill: "#000" }}
-              />
-              <ReTooltip />
-              <Line
-                type="monotone"
-                dataKey="Verified"
-                stroke="#7086FD"
-                strokeWidth={1}
-                dot={false}
-              />
-              <Line
-                type="monotone"
-                dataKey="Unverified"
-                stroke="#F5365C"
-                strokeWidth={1}
-                dot={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+              <LineChart
+                data={lineData}
+                margin={{ top: 10, right: 20, bottom: 10, left: 0 }}
+              >
+                <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
+                <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#000" }} />
+                <YAxis
+                  domain={[0, 100]}
+                  tickCount={6}
+                  tick={{ fontSize: 12, fill: "#000" }}
+                />
+                <ReTooltip />
+                <Line
+                  type="monotone"
+                  dataKey="Verified"
+                  stroke="#7086FD"
+                  strokeWidth={1}
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="Unverified"
+                  stroke="#F5365C"
+                  strokeWidth={1}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
-
-
-
-
         {/* Bar Chart Card */}
-   
-            <div className="bg-white rounded-xl p-4 border border-gray-200 w-full xl:w-1/2">
+
+        <div className="bg-white rounded-xl p-4 border border-gray-200 w-full xl:w-1/2">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
             <h3 className="font-semibold text-sm text-gray-800">
               Users Overview
@@ -179,7 +174,7 @@ const Chart = () => {
                   <span className="text-xs text-black">Successful Matches</span>
                 </div>
               </div>
-              
+
               <div className="relative w-full sm:w-[100px]">
                 <select className="appearance-none text-sm border border-gray-200 px-3 py-2 pr-8 rounded-md focus:outline-none w-full">
                   <option value="yearly">Yearly</option>
@@ -232,6 +227,5 @@ const Chart = () => {
     </div>
   );
 };
-
 
 export default Chart;

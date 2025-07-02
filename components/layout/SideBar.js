@@ -9,17 +9,22 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 768);
+    const handleResize = () => {  // Updated
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      
+      // Close mobile sidebar when resizing to desktop
+      if (desktop && isMobileSidebarOpen) {
+        toggleMobileSidebar();
+      }
     };
 
     handleResize(); // Initial check
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isMobileSidebarOpen, toggleMobileSidebar]);
 
-  const menuItems = [
-    {
+  const menuItems = [  {
       label: "Dashboard",
       icon: "/assets/dashboard.svg",
       path: "/admin/dashboard",
@@ -49,7 +54,7 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
       icon: "/assets/systemnotification.svg",
       path: "/admin/system-notification",
     },
-  ];
+ ];
 
   return (
     <>
@@ -62,26 +67,21 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
       )}
 
       <aside
-        className={`bg-[#1D225F] text-white flex flex-col justify-between
-          transition-transform duration-300 z-50
-          ${
-            isMobileSidebarOpen || isDesktop
-              ? "translate-x-0"
-              : "-translate-x-full"
-          }
-          fixed
-          w-[260px] h-screen pt-6 pr-3 pb-4 pl-3`}
+        className={`bg-[#1D225F] text-white flex flex-col justify-between z-50
+          fixed w-[260px] h-screen pt-6 pr-3 pb-4 pl-3
+          ${isMobileSidebarOpen || isDesktop ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0`} // Always visible on desktop
       >
         {/* Logo Section */}
-        <div>
-          <div className="flex items-center gap-2 mb-10">
-            <Image src="/assets/logo1.svg" alt="logo" width={45} height={45} />
-            <span className="text-lg font-semibold ml-2">Halal Connect</span>
-          </div>
+         <div>
+           <div className="flex items-center gap-2 mb-10">
+             <Image src="/assets/logo1.svg" alt="logo" width={45} height={45} />
+             <span className="text-lg font-semibold ml-2">Halal Connect</span>
+           </div>
 
-          {/* Menu Items */}
+           {/* Menu Items */}
           {/* <nav className="w-[236px] h-[252px] flex flex-col gap-2"> */}
-          <nav className="flex flex-col gap-2">
+         <nav className="flex flex-col gap-2">
             {menuItems.map((item, i) => {
               const isActive =
                 item.label === "User Management"
@@ -166,6 +166,7 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
             />
           </div>
         </Link>
+
       </aside>
     </>
   );

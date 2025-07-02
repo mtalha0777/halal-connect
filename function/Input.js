@@ -1,4 +1,10 @@
-export default function Input({ label, type = 'text', value, onChange, required = false }) {
+export default function Input({
+  label,
+  type = "text",
+  value,
+  onChange,
+  required = false,
+}) {
   return (
     <div className="mb-4">
       <label className="block text-gray-700 mb-2">

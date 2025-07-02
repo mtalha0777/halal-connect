@@ -2,10 +2,10 @@
 import { useRouter } from "next/router";
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
-import Link  from "next/link";
+import Link from "next/link";
 
 import Sidebar from "@/components/layout/SideBar";
-import Topbar  from "@/components/layout/TopBar";
+import Topbar from "@/components/layout/TopBar";
 
 const blockedUsers = [
   {
@@ -224,7 +224,7 @@ const blockedUsers = [
       "Profile was repeatedly created with fake photos and misleading information.",
     avatar: "/assets/blockuser.png",
   },
-    {
+  {
     banId: 8770,
     name: "Zain UlAbideen",
     gender: "Male",
@@ -251,7 +251,7 @@ const blockedUsers = [
       "Profile was repeatedly created with fake photos and misleading information.",
     avatar: "/assets/blockuser.png",
   },
-    {
+  {
     banId: 8771,
     name: "Hina Tariq",
     gender: "Male",
@@ -281,10 +281,9 @@ const blockedUsers = [
 ];
 
 export default function BlockDetails() {
-  
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileSidebarOpen, setOpen] = useState(false);
-  const toggleMobileSidebar = useCallback(() => setOpen(p => !p), []);
+  const toggleMobileSidebar = useCallback(() => setOpen((p) => !p), []);
 
   useEffect(() => {
     const onResize = () => {
@@ -301,7 +300,7 @@ export default function BlockDetails() {
   if (!router.isReady) return null;
   const { id } = router.query;
 
-  const matched = blockedUsers.find(u => u.banId === Number(id));
+  const matched = blockedUsers.find((u) => u.banId === Number(id));
   const [user, setUser] = useState(matched || null);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -309,7 +308,7 @@ export default function BlockDetails() {
   if (!user) return <p className="p-10">User not found.</p>;
 
   const handleChange = (field, val) =>
-    setUser(prev => ({ ...prev, [field]: val }));
+    setUser((prev) => ({ ...prev, [field]: val }));
 
   return (
     <div className="flex min-h-screen font-sans">
@@ -360,12 +359,12 @@ export default function BlockDetails() {
                       <input
                         className="text-xl font-bold mb-1"
                         value={user.name}
-                        onChange={e => handleChange("name", e.target.value)}
+                        onChange={(e) => handleChange("name", e.target.value)}
                       />
                       <input
                         className="text-sm text-gray-600"
                         value={user.email}
-                        onChange={e => handleChange("email", e.target.value)}
+                        onChange={(e) => handleChange("email", e.target.value)}
                       />
                     </>
                   ) : (
@@ -375,30 +374,44 @@ export default function BlockDetails() {
                     </>
                   )}
                 </div>
-<div className="ml-auto px-3 py-1 rounded-full border
+                <div
+                  className="ml-auto px-3 py-1 rounded-full border
                                 border-[#FF47471F] bg-[#FF47471F]
-                                text-[#FF4747] text-xs font-semibold">
+                                text-[#FF4747] text-xs font-semibold"
+                >
                   Block
-               
+                </div>
               </div>
-</div>
               <div className="flex items-center gap-2 mt-2">
-               <Image src="/assets/verified.svg" alt="verified" width={16} height={16} />
-<span className="text-sm text-gray-700">
-  {user.verified ? "Verified" : "Unverified"}
-</span>
-
-
-                
-                
+                <Image
+                  src="/assets/verified.svg"
+                  alt="verified"
+                  width={16}
+                  height={16}
+                />
+                <span className="text-sm text-gray-700">
+                  {user.verified ? "Verified" : "Unverified"}
+                </span>
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <ColumnOne   user={user} editable={isEditing} onChange={handleChange} />
-            <ColumnTwo   user={user} editable={isEditing} onChange={handleChange} />
-            <ColumnThree user={user} editable={isEditing} onChange={handleChange} />
+            <ColumnOne
+              user={user}
+              editable={isEditing}
+              onChange={handleChange}
+            />
+            <ColumnTwo
+              user={user}
+              editable={isEditing}
+              onChange={handleChange}
+            />
+            <ColumnThree
+              user={user}
+              editable={isEditing}
+              onChange={handleChange}
+            />
           </div>
 
           <ReportSummary user={user} />
@@ -410,26 +423,61 @@ export default function BlockDetails() {
 
 const ColumnOne = ({ user, editable, onChange }) => (
   <div className="space-y-4">
-    <DetailItem label="User ID" value={user.banId}/>
-    <DetailItem label="City" value={user.city} editable={editable} onChange={v => onChange("city", v)}/>
-    <DetailItem label="Marital Status" value={user.maritalStatus} editable={editable} onChange={v => onChange("maritalStatus", v)}/>
-    <DetailItem label="Last Login Date" value={user.lastLogin}/>
+    <DetailItem label="User ID" value={user.banId} />
+    <DetailItem
+      label="City"
+      value={user.city}
+      editable={editable}
+      onChange={(v) => onChange("city", v)}
+    />
+    <DetailItem
+      label="Marital Status"
+      value={user.maritalStatus}
+      editable={editable}
+      onChange={(v) => onChange("maritalStatus", v)}
+    />
+    <DetailItem label="Last Login Date" value={user.lastLogin} />
   </div>
 );
 const ColumnTwo = ({ user, editable, onChange }) => (
   <div className="space-y-4">
-    <DetailItem label="Phone" value={user.phone} editable={editable} onChange={v => onChange("phone", v)}/>
-    <DetailItem label="Gender" value={user.gender} editable={editable} onChange={v => onChange("gender", v)}/>
-    <DetailItem label="Join Date" value={user.joinDate}/>
-    <DetailItem label="Profile Views" value={user.profileViews}/>
+    <DetailItem
+      label="Phone"
+      value={user.phone}
+      editable={editable}
+      onChange={(v) => onChange("phone", v)}
+    />
+    <DetailItem
+      label="Gender"
+      value={user.gender}
+      editable={editable}
+      onChange={(v) => onChange("gender", v)}
+    />
+    <DetailItem label="Join Date" value={user.joinDate} />
+    <DetailItem label="Profile Views" value={user.profileViews} />
   </div>
 );
 const ColumnThree = ({ user, editable, onChange }) => (
   <div className="space-y-4">
-    <DetailItem label="Country" value={user.country} editable={editable} onChange={v => onChange("country", v)}/>
-    <DetailItem label="Date of Birth" value={user.dob} editable={editable} onChange={v => onChange("dob", v)}/>
-    <DetailItem label="Subscription Plan" value={user.plan} editable={editable} onChange={v => onChange("plan", v)}/>
-    <DetailItem label="Notches Found" value={user.notches}/>
+    <DetailItem
+      label="Country"
+      value={user.country}
+      editable={editable}
+      onChange={(v) => onChange("country", v)}
+    />
+    <DetailItem
+      label="Date of Birth"
+      value={user.dob}
+      editable={editable}
+      onChange={(v) => onChange("dob", v)}
+    />
+    <DetailItem
+      label="Subscription Plan"
+      value={user.plan}
+      editable={editable}
+      onChange={(v) => onChange("plan", v)}
+    />
+    <DetailItem label="Notches Found" value={user.notches} />
   </div>
 );
 
@@ -441,7 +489,7 @@ const DetailItem = ({ label, value, editable, onChange }) => (
       <input
         className="border rounded px-2 py-1 w-full"
         value={value}
-        onChange={e => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
       />
     ) : (
       <p className="font-medium">{value || "N/A"}</p>
@@ -452,16 +500,16 @@ const DetailItem = ({ label, value, editable, onChange }) => (
 const ReportSummary = ({ user }) => (
   <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-10">
     <div className="flex items-center gap-2 mb-4">
-      <Image src="/assets/reportuser.svg" alt="icon" width={20} height={20}/>
+      <Image src="/assets/reportuser.svg" alt="icon" width={20} height={20} />
       <h2 className="text-lg font-bold">Reported Summary</h2>
     </div>
-    <hr className="my-6 border-gray-200"/>
+    <hr className="my-6 border-gray-200" />
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-      <Summary label="Report ID" value={user.reportId}/>
-      <Summary label="Report By" value={user.reportedBy}/>
-      <Summary label="Report Reason" value={user.reportReason}/>
+      <Summary label="Report ID" value={user.reportId} />
+      <Summary label="Report By" value={user.reportedBy} />
+      <Summary label="Report Reason" value={user.reportReason} />
     </div>
-    <Summary label="Report Date" value={user.reportDate}/>
+    <Summary label="Report Date" value={user.reportDate} />
     <div className="mt-4">
       <p className="text-md font-semibold">Report Description:</p>
       <p className="font-small text-gray-700">{user.reportDescription}</p>

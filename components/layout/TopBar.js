@@ -1,4 +1,3 @@
-
 "use client";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,26 +5,20 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import NotificationPopup from "../modals/NotificationPopup";
 
-
-const Topbar = ({   isMobileSidebarOpen, 
-  toggleMobileSidebar,
- }) => {
-    const router = useRouter();
+const Topbar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
-      // More reliable mobile detection
       setIsMobile(window.innerWidth < 768);
     };
-
-    // Run immediately and add listener
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const performSearch = () => {
@@ -43,8 +36,6 @@ const Topbar = ({   isMobileSidebarOpen,
   return (
     <header className="fixed top-0 left-0 md:left-[260px] right-0 z-40 bg-white shadow-sm">
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 py-4 gap-4">
-        {/* Hamburger menu (mobile only) */}
-       {/* Updated hamburger menu button */}
         {isMobile && (
           <button
             onClick={toggleMobileSidebar}
@@ -85,7 +76,6 @@ const Topbar = ({   isMobileSidebarOpen,
           </button>
         )}
 
-        {/* Left Section - Welcome Message (Hidden on mobile when search is active) */}
         {!showMobileSearch && (
           <div className="flex items-center gap-2">
             <h2 className="text-lg md:text-xl font-semibold whitespace-nowrap">
@@ -101,9 +91,7 @@ const Topbar = ({   isMobileSidebarOpen,
           </div>
         )}
 
-        {/* Right Section */}
         <div className="flex items-center gap-4">
-          {/* Search - Mobile (Icon only when collapsed) */}
           <div className="md:hidden">
             {showMobileSearch ? (
               <div className="absolute top-3 left-0 right-0 mx-4 bg-white z-50 flex items-center">
@@ -137,7 +125,6 @@ const Topbar = ({   isMobileSidebarOpen,
             )}
           </div>
 
-          {/* Search - Desktop */}
           <div className="hidden md:block relative w-85">
             <input
               type="text"
@@ -157,45 +144,46 @@ const Topbar = ({   isMobileSidebarOpen,
             />
           </div>
 
-          {/* Icons */}
-          {/* <div className="flex items-center gap-4"> */}
-         {/* Topbar Notification Bell */}
-<div className="relative">
-  <Image
-    src="/assets/bellicon.svg"
-    alt="Notifications"
-    width={30}
-    height={30}
-    className="cursor-pointer"
-    onClick={() => setShowPopup(!showPopup)}
-  />
-  {showPopup && (
-    <>
-      <div
-        className="fixed inset-0 bg-[#00000099] z-40"
-        onClick={() => setShowPopup(false)}
-      ></div>
-      <div className="absolute top-full right-0 mt-2 z-50">
-        <NotificationPopup onClose={() => setShowPopup(false)} />
-      </div>
-    </>
-  )}
-</div>
-
-            {/* Settings Gear */}
-            <Link href="/admin/settings">
-              <Image
-                src="/assets/setting.svg"
-                alt="Settings"
-                width={30}
-                height={30}
-                className="cursor-pointer"
-              />
-            </Link>
+          <div className="relative">
+            <Image
+              src="/assets/bellicon.svg"
+              alt="Notifications"
+              width={30}
+              height={30}
+              className="cursor-pointer"
+              onClick={() => setShowPopup(!showPopup)}
+            />
+            {showPopup && (
+              <>
+                <div
+                  className="fixed inset-0 bg-[#00000099] z-40"
+                  onClick={() => setShowPopup(false)}
+                ></div>
+                <div
+                  className="
+                    fixed top-20 left-1/2 -translate-x-1/2 z-50
+                    md:absolute md:top-full md:left-auto md:right-0 md:translate-x-0 md:mt-2
+                  "
+                >
+                  <NotificationPopup onClose={() => setShowPopup(false)} />
+                </div>
+              </>
+            )}
           </div>
+
+          <Link href="/admin/settings">
+            <Image
+              src="/assets/setting.svg"
+              alt="Settings"
+              width={30}
+              height={30}
+              className="cursor-pointer"
+            />
+          </Link>
         </div>
-      {/* </div> */}
+      </div>
     </header>
   );
 };
+
 export default Topbar;

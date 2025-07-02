@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useState,useEffect,useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Image from "next/image";
@@ -91,11 +91,11 @@ const reportedProfiles = [
 ];
 
 export default function ContentModeration() {
- const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const toggleMobileSidebar = useCallback(
-    () => setIsMobileSidebarOpen(prev => !prev),
+    () => setIsMobileSidebarOpen((prev) => !prev),
     []
   );
   const [openMenuId, setOpenMenuId] = useState(null);
@@ -103,11 +103,11 @@ export default function ContentModeration() {
   const handleMenuToggle = (id) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
-   useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       const desktop = window.innerWidth >= 768;
       setIsDesktop(desktop);
-      setIsMobileSidebarOpen(desktop);     // auto‑open on desktop
+      setIsMobileSidebarOpen(desktop);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -151,14 +151,18 @@ export default function ContentModeration() {
         toggleMobileSidebar={toggleMobileSidebar}
         isDesktop={isDesktop}
       />
-      {/* <main className="flex-1 bg-white p-6 pt-24">
-        <Topbar /> */}
-      <main className={`flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300 ${isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""}`}>
-        <Topbar toggleMobileSidebar={toggleMobileSidebar}
-         isMobileSidebarOpen={isMobileSidebarOpen}
-  isDesktop={isDesktop} />
 
-
+      {/* <Topbar /> */}
+      <main
+        className={`flex-1 bg-white p-6 pt-24 md:ml-[260px] transition-all duration-300 ${
+          isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""
+        }`}
+      >
+        <Topbar
+          toggleMobileSidebar={toggleMobileSidebar}
+          isMobileSidebarOpen={isMobileSidebarOpen}
+          isDesktop={isDesktop}
+        />
 
         <h2 className="text-xl font-bold text-black mb-6">
           Content Moderation
@@ -219,119 +223,127 @@ export default function ContentModeration() {
         </div>
 
         {/* Header Row */}
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">Reported Profiles</h3>
-          <div className="flex items-center space-x-2">
-            <button className="flex items-center gap-2 px-4 py-1 border border-gray-300 rounded-lg text-sm">
-              Yearly
-              <Image
-                src="/assets/dropdown.svg"
-                alt="year icon"
-                width={16}
-                height={16}
-              />
-            </button>
-            <button className="px-4 py-1 bg-[#5D5FEF] hover:bg-[#3d3fea] text-white text-sm rounded">
-              View all
-            </button>
+        <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-4 shadow-sm">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+            <h3 className="text-lg font-semibold">Reported Profiles</h3>
+            <div className="flex items-center space-x-2 w-full sm:w-auto">
+              <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm">
+                Yearly
+                <Image
+                  src="/assets/dropdown.svg"
+                  alt="year icon"
+                  width={16}
+                  height={16}
+                />
+              </button>
+              <button className="flex-1 sm:flex-none px-4 py-2 bg-[#5D5FEF] hover:bg-[#3d3fea] text-white text-sm rounded-lg">
+                View all
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Table Section */}
-        <div className="overflow-auto rounded-lg border border-gray-200">
-          <table className="min-w-full text-sm text-left">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-2">User ID</th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Reason</th>
-                <th className="px-4 py-2">Report Date</th>
-                <th className="px-4 py-2">Reported By</th>
-                <th className="px-4 py-2">Status</th>
-                <th className="px-4 py-2">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reportedProfiles.map((profile, idx) => (
-                <tr key={idx} className="border-t">
-                  <td className="px-4 py-2 text-gray-500">{profile.id}</td>
-                  <td className="px-4 py-2 text-gray-500">{profile.name}</td>
-                  <td className="px-4 py-2 text-gray-500">{profile.reason}</td>
-                  <td className="px-4 py-2 text-gray-500">{profile.date}</td>
-                  <td className="px-4 py-2 text-gray-500">
-                    {profile.reportedBy}
-                  </td>
-                  <td className="px-4 py-2">
-                    <span
-                      className={`px-3 py-1 text-xs rounded-full font-medium ${
-                        profile.status === "Active"
-                          ? "bg-green-100 text-green-500"
-                          : "bg-red-100 text-red-500"
-                      }`}
-                    >
-                      {profile.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-2 relative">
-                    <div className="relative inline-block">
-                      <Image
-                        src="/assets/dots.svg"
-                        alt="Actions"
-                        width={20}
-                        height={20}
-                        className="cursor-pointer"
-                        onClick={() => handleMenuToggle(profile.id)}
-                      />
-
-                      {openMenuId === profile.id && (
-                        <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                          <Link
-                            href="/management/user-details"
-                            className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700"
-                          >
-                            <Image
-                              src="/assets/view-file.svg"
-                              alt="view"
-                              width={16}
-                              height={16}
-                            />
-                            View Details
-                          </Link>
-                          <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-                            <Image
-                              src="/assets/approve.svg"
-                              alt="approve"
-                              width={16}
-                              height={16}
-                            />
-                            Approve
-                          </button>
-                          <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-                            <Image
-                              src="/assets/warning.svg"
-                              alt="warn"
-                              width={16}
-                              height={16}
-                            />
-                            Issue Warning
-                          </button>
-                          <button className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-gray-700">
-                            <Image
-                              src="/assets/delete.svg"
-                              alt="delete"
-                              width={16}
-                              height={16}
-                            />
-                            Delete User
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </td>
+          {/* Table Section */}
+          <div className="overflow-auto rounded-lg border border-gray-200">
+            <table className="min-w-full text-sm text-left">
+              <thead className="bg-gray-50 border-b-2 border-gray-200">
+                <tr>
+                  <th className="px-4 py-2">User ID</th>
+                  <th className="px-4 py-2">Name</th>
+                  <th className="px-4 py-2">Reason</th>
+                  <th className="px-4 py-2">Report Date</th>
+                  <th className="px-4 py-2">Reported By</th>
+                  <th className="px-4 py-2">Status</th>
+                  <th className="px-4 py-2">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {reportedProfiles.map((profile, idx) => (
+                  <tr key={idx}>
+                    <td className="px-4 py-2 text-gray-500">{profile.id}</td>
+                    <td className="px-4 py-2 text-gray-500">{profile.name}</td>
+                    <td className="px-4 py-2 text-gray-500">
+                      {profile.reason}
+                    </td>
+                    <td className="px-4 py-2 text-gray-500">{profile.date}</td>
+                    <td className="px-4 py-2 text-gray-500">
+                      {profile.reportedBy}
+                    </td>
+                    <td className="px-4 py-2">
+                      <span
+                        className={`px-3 py-1 text-xs rounded-full font-medium ${
+                          profile.status === "Active"
+                            ? "bg-green-100 text-green-500"
+                            : "bg-red-100 text-red-500"
+                        }`}
+                      >
+                        {profile.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <div className="relative inline-block">
+                        <button onClick={() => handleMenuToggle(profile.id)}>
+                          <Image
+                            src="/assets/dots.svg"
+                            alt="Actions"
+                            width={20}
+                            height={20}
+                            className="cursor-pointer"
+                          />
+                        </button>
+
+                        {openMenuId === profile.id && (
+                          <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-20 text-left">
+                            {/* ===== CHANGE IS HERE ===== */}
+                            <Link
+                              href={`/management/userDetails/${profile.id}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                            >
+                              <Image
+                                src="/assets/view-file.svg"
+                                alt="view"
+                                width={16}
+                                height={16}
+                              />
+                              View Details
+                            </Link>
+
+                            <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
+                              <Image
+                                src="/assets/approve.svg"
+                                alt="approve"
+                                width={16}
+                                height={16}
+                              />
+                              Approve
+                            </button>
+                            <button className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700">
+                              <Image
+                                src="/assets/warning.svg"
+                                alt="warn"
+                                width={16}
+                                height={16}
+                              />
+                              Issue Warning
+                            </button>
+                            <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                              <Image
+                                src="/assets/delete.svg"
+                                alt="delete"
+                                width={16}
+                                height={16}
+                              />
+                              Delete User
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
     </div>

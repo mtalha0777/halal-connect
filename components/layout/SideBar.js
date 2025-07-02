@@ -3,12 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Sidebar = ({   isMobileSidebarOpen, 
-  toggleMobileSidebar,
-  isDesktop }) => {
+const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
   const pathname = usePathname();
 
-  const menuItems = [  {
+  const menuItems = [
+    {
       label: "Dashboard",
       icon: "/assets/dashboard.svg",
       path: "/admin/dashboard",
@@ -38,11 +37,10 @@ const Sidebar = ({   isMobileSidebarOpen,
       icon: "/assets/systemnotification.svg",
       path: "/admin/system-notification",
     },
- ];
+  ];
 
   return (
     <>
-      {/* Mobile overlay */}
       {!isDesktop && isMobileSidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/40 md:hidden"
@@ -50,29 +48,28 @@ const Sidebar = ({   isMobileSidebarOpen,
         />
       )}
 
-<aside
-  className={`bg-[#1D225F] text-white flex flex-col justify-between z-50
+      <aside
+        className={`bg-[#1D225F] text-white flex flex-col justify-between z-50
     fixed w-[260px] h-screen pt-6 pr-3 pb-4 pl-3
     transition-transform duration-300 ease-in-out
     ${
       isDesktop
-        ? "translate-x-0" // Desktop: always open
+        ? "translate-x-0"
         : isMobileSidebarOpen
-        ? "translate-x-0"  // Mobile & open
-        : "-translate-x-full" // Mobile & closed
+        ? "translate-x-0"
+        : "-translate-x-full"
     }
   `}
->
+      >
         {/* Logo Section */}
-         <div>
-           <div className="flex items-center gap-2 mb-10">
-             <Image src="/assets/logo1.svg" alt="logo" width={45} height={45} />
-             <span className="text-lg font-semibold ml-2">Halal Connect</span>
-           </div>
+        <div>
+          <div className="flex items-center gap-2 mb-10">
+            <Image src="/assets/logo1.svg" alt="logo" width={45} height={45} />
+            <span className="text-lg font-semibold ml-2">Halal Connect</span>
+          </div>
 
-           {/* Menu Items */}
-          {/* <nav className="w-[236px] h-[252px] flex flex-col gap-2"> */}
-         <nav className="flex flex-col gap-2">
+          {/* Menu Items */}
+          <nav className="flex flex-col gap-2">
             {menuItems.map((item, i) => {
               const isActive =
                 item.label === "User Management"
@@ -83,10 +80,10 @@ const Sidebar = ({   isMobileSidebarOpen,
                     pathname.startsWith("/contentdetails/blockDetails")
                   : item.label === "Content Moderation"
                   ? pathname.startsWith("/admin/content-moderation") ||
-                    pathname.startsWith("/management/user-details")
+                    pathname.startsWith("/management/userDetails")
                   : item.label === "Subscription & Payments"
                   ? pathname.startsWith("/admin/subscribe-and-payment") ||
-                    pathname.startsWith("/subscription/details")
+                    pathname.startsWith("/subscription/Details")
                   : item.label === "System Notification"
                   ? pathname.startsWith("/admin/system-notification") ||
                     pathname.startsWith("/notification/create")
@@ -157,7 +154,6 @@ const Sidebar = ({   isMobileSidebarOpen,
             />
           </div>
         </Link>
-
       </aside>
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState,useCallback,useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Chart from "../../components/charts/Chart";
@@ -8,45 +8,44 @@ import AllUsers from "../users/AllUsers";
 
 const Dashboard = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-const [isDesktop, setIsDesktop] = useState(false); 
+  const [isDesktop, setIsDesktop] = useState(false);
   const toggleMobileSidebar = useCallback(() => {
-    setIsMobileSidebarOpen(prev => !prev);
+    setIsMobileSidebarOpen((prev) => !prev);
   }, []);
 
-useEffect(() => {
-  const handleResize = () => {
-    const desktop = window.innerWidth >= 768;
-    setIsDesktop(desktop);
-    setIsMobileSidebarOpen(desktop); // Auto-open on desktop
-  };
-  
-  handleResize();
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
+  useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setIsMobileSidebarOpen(desktop);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
-         isDesktop={isDesktop}
+        isDesktop={isDesktop}
       />
-      <main className={`flex-1 bg-white p-6 transition-all duration-300 ${
-        isMobileSidebarOpen ? 'md:ml-[260px]' : 'md:ml-0'}`}>
-        <Topbar 
+      <main
+        className={`flex-1 bg-white p-6 transition-all duration-300 ${
+          isMobileSidebarOpen ? "md:ml-[260px]" : "md:ml-0"
+        }`}
+      >
+        <Topbar
           toggleMobileSidebar={toggleMobileSidebar}
-          isMobileSidebarOpen={isMobileSidebarOpen}  
-            isDesktop={isDesktop} 
+          isMobileSidebarOpen={isMobileSidebarOpen}
+          isDesktop={isDesktop}
         />
 
         {/* Page Title */}
         <section className="pt-20">
           {" "}
-          {/* <- changed from pt-4 to pt-20 */}
-          {/* Page Title */}
           <h1 className="text-xl font-bold text-black mb-6">Dashboard</h1>
-          {/* Stat Cards */}
-          {/* <div className="grid grid-cols-4 gap-4 mb-6"> */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {(() => {
               const cards = [
@@ -98,7 +97,6 @@ useEffect(() => {
               return cards.map((card, i) => (
                 <div
                   key={i}
-                  // className="relative p-4 rounded-xl overflow-hidden"
                   className="relative p-4 rounded-xl overflow-hidden w-full"
                   style={{ backgroundColor: card.bg }}
                 >

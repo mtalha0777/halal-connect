@@ -12,371 +12,357 @@ const SubscriptionPlans = () => {
       id: "01",
       duration: "1 Month",
       benefits: "5",
-      price: "20 $",
+      price: "20.00",
       status: "Active",
     },
     {
       id: "02",
       duration: "3 Month",
       benefits: "8",
-      price: "50 $",
+      price: "50.00",
       status: "Active",
     },
     {
       id: "03",
       duration: "6 Month",
       benefits: "8",
-      price: "100 $",
+      price: "100.00",
       status: "Active",
     },
     {
       id: "04",
       duration: "1 Year",
       benefits: "12",
-      price: "180 $",
+      price: "180.00",
       status: "Disable",
     },
   ];
 
-  return (
-    <div
-      className="bg-white w-full rounded-lg overflow-x-auto"
-      style={{ height: "364px" }}
-    >
-      {/* Title and Toggle Buttons */}
+  const handleOpenModal = (mode, planData = null) => {
+    setPopupMode(mode);
+    setShowEditModal(true);
+  };
 
-      <div className="flex justify-between items-center mb-3">
-        {" "}
-        {/* Reduced margin-bottom */}
-        <h3 className="text-lg font-semibold">Subscription Plans</h3>
-        <div className="flex gap-8">
-          {["Diamond", "Gold", "Silver"].map((plan, idx) => (
-            <button
-              key={idx}
-              className={`relative text-md font-medium ${
-                plan === "Diamond" ? "text-[#5D5FEF]" : "text-gray-500"
-              }`}
-            >
-              {plan}
-              {plan === "Diamond" && (
-                <span className="absolute bottom-[-4px] left-0 right-0 h-[2px] bg-[#5D5FEF]" />
-              )}
-            </button>
-          ))}
+  const closeModal = () => {
+    setShowEditModal(false);
+  };
+
+  return (
+    <div className="bg-white w-full rounded-lg shadow-sm p-4 sm:p-6 border border-gray-100">
+      {/* Header with Title and Tabs */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+        <h3 className="text-lg font-semibold text-gray-900">
+          Subscription Plans
+        </h3>
+        <div className="w-full md:w-auto overflow-x-auto pb-2">
+          <div className="flex  border-gray-200">
+            {["Diamond", "Gold", "Silver"].map((plan) => (
+              <button
+                key={plan}
+                className={`px-4 py-2 whitespace-nowrap text-sm font-medium transition-colors ${
+                  plan === "Diamond"
+                    ? "text-[#5D5FEF] border-b-2 border-[#5D5FEF]"
+                    : "text-gray-500 hover:text-[#5D5FEF]"
+                }`}
+              >
+                {plan}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      {/* //abhi new div lgay ha*/}
-      <div className="border border-[#E5E7EB] rounded-t-md p-3">
-        {/* Add Button */}
-        <div className="flex justify-end mb-3">
+
+      {/* FIX 1: The outer box for content below tabs */}
+      <div className="border border-gray-200 rounded-lg p-4 mt-4">
+        <div className="flex justify-end mb-4">
           <button
-            onClick={() => {
-              setPopupMode("add");
-              setShowEditModal(true);
-            }}
-            className="flex items-center gap-1 text-[#0066FF] font-medium hover:underline hover:text-blue-700 cursor-pointer text-md"
+            onClick={() => handleOpenModal("add")}
+            className="flex items-center gap-2 text-blue-600 font-medium hover:text-blue-800 text-sm"
           >
             Add
             <Image
               src="/assets/blueplus.svg"
               alt="Plus"
-              width={20}
-              height={20}
+              width={18}
+              height={18}
             />
           </button>
         </div>
 
-        {/* Table Section */}
-        {/* Table Section with border and reduced padding */}
-        <div className="border border-[#E5E7EB] rounded-md overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr className="bg-gray-100">
-                <th className="px-4 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[10%]">
-                  Plan ID
-                </th>
-                <th className="px-4 md:px-12 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
-                  Duration
-                </th>
-                <th className="px-4 md:px-8 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
-                  Benefits
-                </th>
-                <th className="px-4 md:px-8 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
-                  Price ($)
-                </th>
-                <th className="px-4 md:px-10 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[20%]">
-                  Status
-                </th>
-                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase tracking-wider md:w-[10%]">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {plans.map((plan, index) => (
-                <tr key={index}>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
-                    {plan.id}
-                  </td>
-                  <td className="px-12 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
-                    {plan.duration}
-                  </td>
-                  <td className="px-13 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
-                    {plan.benefits}
-                  </td>
-                  <td className="px-12 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
-                    {plan.price}
-                  </td>
-                  <td className="px-10 py-3 whitespace-nowrap text-sm text-left">
-                    <span
-                      className={`px-2 py-1 inline-flex text-sm leading-5 font-normal rounded-full ${
-                        plan.status === "Active"
-                          ? "bg-green-100 text-green-500"
-                          : "bg-red-100 text-red-500"
-                      }`}
-                    >
-                      {plan.status}
-                    </span>
-                  </td>
-                  <td className="px-7 py-3 whitespace-nowrap text-md text-gray-500 text-right">
-                    <div className="flex justify-end">
-                      <div className="relative">
-                        <Image
-                          src="/assets/dots.svg"
-                          alt="More Options"
-                          width={19}
-                          height={19}
-                          className="cursor-pointer"
-                          onClick={() => {
-                            setOpenMenu(openMenu === index ? null : index);
-                          }}
-                        />
+        {/* FIX 2: A dedicated box for the table with NO PADDING */}
+        <div className="border border-gray-200 rounded-lg overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="min-w-full">
+              <thead className="bg-gray-50 border-b-2 border-gray-200">
+                <tr>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                    Plan ID
+                  </th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                    Duration
+                  </th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                    Benefits
+                  </th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                    Price ($)
+                  </th>
+                  <th className="px-6 py-4 text-center text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th className="px-6 py-4 text-right text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              {/* These divide lines will now touch the container's border */}
+              <tbody className="bg-white divide-y divide-gray-200">
+                {plans.map((plan, index) => (
+                  <tr key={plan.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      {plan.id}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      {plan.duration}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      {plan.benefits}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      {plan.price}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <span
+                        className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          plan.status === "Active"
+                            ? "bg-green-100 text-green-500"
+                            : "bg-red-100 text-red-500"
+                        }`}
+                      >
+                        {plan.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <div className="relative inline-block text-left">
+                        <button
+                          onClick={() =>
+                            setOpenMenu(openMenu === index ? null : index)
+                          }
+                          className="p-2 rounded-full hover:bg-gray-100"
+                        >
+                          <Image
+                            src="/assets/dots.svg"
+                            alt="More"
+                            width={20}
+                            height={20}
+                          />
+                        </button>
                         {openMenu === index && (
-                          <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-                            <div
-                              className="flex items-center px-3 py-1 hover:bg-gray-100 cursor-pointer text-sm"
-                              onClick={() => {
-                                setPopupMode("edit");
-                                setShowEditModal(true);
-                                setOpenMenu(null);
-                              }}
-                            >
-                              <Image
-                                src="/assets/editblack.svg"
-                                alt="Edit"
-                                width={16}
-                                height={16}
-                                className="mr-1"
-                              />
-                              <span>Edit</span>
-                            </div>
-                            <div className="flex items-center px-3 py-1 hover:bg-gray-100 cursor-pointer">
-                              <Image
-                                src="/assets/delete.svg"
-                                alt="Delete"
-                                width={16}
-                                height={16}
-                                className="mr-1"
-                              />
-                              <span>Delete</span>
+                          // === FIX IS HERE ===
+                          <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white border border-gray-200 z-10">
+                            <div className="py-1.5">
+                              <button
+                                onClick={() => {
+                                  handleOpenModal("edit", plan);
+                                  setOpenMenu(null);
+                                }}
+                                className="w-full text-left flex items-center gap-2 px-6 py-2 text-sm text-gray-500 hover:bg-gray-100"
+                              >
+                                <Image
+                                  src="/assets/editblack.svg"
+                                  alt="Edit"
+                                  width={16}
+                                  height={16}
+                                />{" "}
+                                Edit
+                              </button>
+                              <button className="w-full text-left flex items-center gap-2 px-6 py-2 text-sm text-gray-500 hover:bg-red-50">
+                                <Image
+                                  src="/assets/delete.svg"
+                                  alt="Delete"
+                                  width={16}
+                                  height={16}
+                                />{" "}
+                                Delete
+                              </button>
                             </div>
                           </div>
                         )}
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      {/* Edit Modal (remains same) */}
-      {showEditModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-            onClick={() => setShowEditModal(false)}
-          />
-          <div className="relative bg-white rounded-[12px] p-8 z-50 shadow-lg w-full max-w-[660px] max-h-[90vh] overflow-y-auto">
-            {/* Header */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold mb-2">
-                <span className="text-black font-semibold">Diamond Plan</span>
-                <span className="text-gray-500 font-normal">/month</span>
-              </h2>
-              <button
-                className="text-[#0066FF] underline text-sm md:text-base font-medium hover:text-[#0044cc] flex items-center gap-1"
-                onClick={() => {}}
-              >
-                Add Field
-                <Image
-                  src="/assets/blueplus.svg"
-                  alt="Plus"
-                  width={20}
-                  height={20}
-                />
-              </button>
-            </div>
-
-            {/* ✅ Show these two fields ONLY in ADD mode */}
-            {popupMode === "add" && (
-              <div className="flex items-center gap-[16px] mt-4">
-                {/* Add Field Title Input */}
-                <div
-                  className="rounded px-3 py-2"
-                  style={{
-                    backgroundColor: "#F6F6F6",
-                    width: "596px",
-                    height: "44px",
-                  }}
-                >
-                  <input
-                    type="text"
-                    placeholder="Add Field Title"
-                    className="w-full h-full bg-[#F6F6F6] text-[#00000099] placeholder-[#00000099] outline-none"
-                  />
-                </div>
-
-                {/* Add Placeholder Text Input */}
-                <div
-                  className="rounded px-3 py-2"
-                  style={{
-                    backgroundColor: "#F6F6F6",
-                    width: "596px",
-                    height: "44px",
-                  }}
-                >
-                  <input
-                    type="text"
-                    placeholder="Add Placeholder Text"
-                    className="w-full h-full bg-[#F6F6F6] text-[#00000099] placeholder-[#00000099] outline-none"
-                  />
-                </div>
-
-                {/* Add Button */}
-                <button
-                  className="text-white text-sm px-4 py-2 rounded bg-[#5D5FEF] hover:bg-[#6567a4]"
-                  style={{ width: "120px", height: "44px" }}
-                >
-                  add
-                </button>
-              </div>
-            )}
-
-            {/* Price + Duration + Status */}
-            <div className="grid grid-cols-2 gap-6 mb-6">
-              <div className="flex flex-col">
-                <label className="font-semibold text-[#000000B8] mb-1">
-                  Price
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                  defaultValue="20.99$"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="font-semibold text-[#000000B8] mb-1">
-                  Duration
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                  defaultValue="30 Days"
-                />
-              </div>
-
-              <div className="col-span-2 flex flex-col relative">
-                <label className="font-semibold text-[#000000B8] mb-1">
-                  Activate / Deactivate
-                </label>
-                <div className="relative">
-                  <select className="appearance-none border border-gray-300 rounded px-3 py-2 pr-10 text-sm text-[#000000B8] w-full">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
-                  <img
-                    src="/assets/arrowdown.svg"
-                    alt="Dropdown"
-                    className="w-6 h-6 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-                  />
-                </div>
-              </div>
-            </div>
-            {/* Title Row: Benefits + Add Field */}
-
-            <div className="flex justify-between items-center mb-5">
-              <h3 className="font-semibold text-base md:text-xl text-black">
-                Benefits
-              </h3>
-
-              <button
-                className="text-[#0066FF] underline text-sm md:text-base font-medium hover:text-[#0044cc] flex items-center gap-1"
-                onClick={() => {}}
-              >
-                Add Field
-                <Image
-                  src="/assets/blueplus.svg"
-                  alt="Plus"
-                  width={20}
-                  height={20}
-                />
-              </button>
-            </div>
-            {/* 8 Default Fields */}
-            <div className="grid grid-cols-2 gap-6 text-sm text-[#000000B8] mb-4">
-              {[
-                { label: "Send Links", value: "100" },
-                { label: "Sporkle", value: "2" },
-                { label: "Message Request", value: "4" },
-                { label: "Boot", value: "2" },
-                { label: "Rewind", value: "Unlimited" },
-                { label: "Who Like You", value: "Unlimited" },
-                { label: "Explore Reset", value: "Unlimited" },
-                { label: "Super Chats", value: "50" },
-              ].map((item, idx) => (
-                <div key={idx}>
-                  <label className="font-semibold mb-1 block">
-                    {item.label}
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full border border-gray-300 rounded px-3 py-2"
-                    defaultValue={item.value}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Footer Buttons */}
-            <div className="flex justify-between items-center mt-6 gap-6">
-              <button
-                className="w-[288px] h-[48px] rounded-[8px] px-[10px] py-[10px] text-sm transition"
-                style={{
-                  color: "#5D5FEF",
-                  backgroundColor: "#00000014",
-                  border: "1px solid #00000014",
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = "#d3d3d3";
-                  e.target.style.color = "#3B49DF";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = "#00000014";
-                  e.target.style.color = "#5D5FEF";
-                }}
-                onClick={() => setShowEditModal(false)}
-              >
-                Close
-              </button>
-              <button className="w-[288px] h-[48px] rounded-[8px] px-[10px] py-[10px] bg-[#5D5FEF] text-white text-sm hover:bg-[#4a4be0] transition">
-                Save Changes
-              </button>
-            </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
+      </div>
+
+      {/* Modal code remains the same */}
+      {showEditModal && (
+        <>
+          {/* Backdrop with blur */}
+          <div
+            onClick={closeModal}
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+          ></div>
+
+          {/* Modal Content */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="relative bg-white rounded-xl p-6 sm:p-8 shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* === FIX 2 & 3: Modal Header Updated === */}
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-gray-900 flex items-baseline">
+                  {popupMode === "edit" ? "Diamond Plan" : "Add New Plan"}
+                  <span className="text-base font-normal text-gray-500 ml-2">
+                    / month
+                  </span>
+                </h2>
+                <button
+                  type="button"
+                  className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800"
+                >
+                  <span>Add Field</span>
+                  <Image
+                    src="/assets/blueplus.svg"
+                    alt="Add Field"
+                    width={18}
+                    height={18}
+                  />
+                </button>
+              </div>
+
+              <form className="space-y-6">
+                {popupMode === "add" && (
+                  <div className="flex flex-col sm:flex-row items-end gap-4">
+                    <div className="w-full">
+                      <input
+                        type="text"
+                        placeholder="Add field title"
+                        className="w-full bg-gray-100 border-gray-200 border rounded-md px-3 py-2"
+                      />
+                    </div>
+                    <div className="w-full">
+                      <input
+                        type="text"
+                        placeholder="Add placeholder text"
+                        className="w-full bg-gray-100 border-gray-200 border rounded-md px-3 py-2"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className="w-full sm:w-auto px-6 py-2 bg-[#5D5FEF] text-white rounded-md hover:bg-[#4a4be0] transition-colors"
+                    >
+                      add
+                    </button>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="font-semibold text-sm text-gray-700 mb-1 block">
+                      Price ($)
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full border-gray-300 border rounded-md px-3 py-2"
+                      defaultValue="20.99"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-semibold text-sm text-gray-700 mb-1 block">
+                      Duration
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full border-gray-300 border rounded-md px-3 py-2"
+                      defaultValue="30 Days"
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="font-semibold text-sm text-gray-700 mb-1 block">
+                      Status
+                    </label>
+                    <select
+                      className="w-full border-gray-300 border rounded-md px-3 py-2 appearance-none bg-no-repeat bg-right"
+                      style={{
+                        backgroundImage: `url('/assets/arrowdown.svg')`,
+                      }}
+                    >
+                      <option>Active</option>
+                      <option>Inactive</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* === FIX 4: Benefits Section Header Updated === */}
+                <div className="pt-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="font-semibold text-lg text-gray-900">
+                      Benefits
+                    </h3>
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800"
+                    >
+                      <span>Add Field</span>
+                      <Image
+                        src="/assets/blueplus.svg"
+                        alt="Add Field"
+                        width={18}
+                        height={18}
+                      />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    {[
+                      { label: "Send Links", value: "100" },
+                      { label: "Sporkle", value: "2" },
+                      { label: "Message Request", value: "4" },
+                      { label: "Boot", value: "2" },
+                      { label: "Rewind", value: "Unlimited" },
+                      { label: "Who Like You", value: "Unlimited" },
+                      { label: "Explore Reset", value: "Unlimited" },
+                      { label: "Super Chats", value: "50" },
+                    ].map((item, idx) => (
+                      <div key={idx}>
+                        <label className="font-semibold text-gray-700 mb-1 block">
+                          {item.label}
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full border-gray-300 border rounded-md px-3 py-2"
+                          defaultValue={item.value}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* === FIX 1: Footer Buttons Layout Updated === */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 mt-8 gap-4">
+                  <button
+                    type="button"
+                    onClick={closeModal}
+                    className="w-full px-6 py-3 rounded-md text-sm font-semibold bg-gray-200 text-gray-800 hover:bg-gray-300"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 rounded-md bg-[#5D5FEF] text-white text-sm font-semibold hover:bg-[#4a4be0] transition-colors"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

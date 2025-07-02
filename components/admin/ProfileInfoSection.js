@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
@@ -8,7 +7,7 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
         <div className="flex items-center gap-2">
           {icon && (
             <Image
-              src={icon} 
+              src={icon}
               alt={`${title} icon`}
               width={20}
               height={20}
@@ -22,13 +21,7 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
           className="flex items-center gap-1 text-[#5D5FEF] text-sm hover:underline"
         >
           <span>Edit</span>
-          <Image 
-            src="/assets/edit.svg" 
-            alt="Edit" 
-            width={16} 
-            height={16}
-          />
-          
+          <Image src="/assets/edit.svg" alt="Edit" width={16} height={16} />
         </button>
       </div>
 

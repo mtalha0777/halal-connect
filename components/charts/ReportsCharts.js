@@ -17,7 +17,7 @@ import { Chart as ChartJS, ArcElement } from "chart.js";
 ChartJS.register(ArcElement, ChartDataLabels);
 
 import Image from "next/image";
-const ReportsCharts = () => {
+const ReportsCharts = ({ isDesktop }) => {
   const months = [
     "Jan",
     "Feb",
@@ -90,18 +90,15 @@ const ReportsCharts = () => {
   ];
 
   return (
-    <section className="bg-white rounded-xl p-2 shadow-sm border border-gray-200 mb-4">
+    <section className=" rounded-xl mb-4">
       <h2 className="text-xl font-bold text-gray-800 mb-6">Overview</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Matches Chart - Final Version */}
         <div className="bg-white rounded-xl p-4 border border-gray-300 h-[350px]">
-          {/* Header Section */}
           <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
             <h3 className="text-lg font-semibold">Matches Details</h3>
 
             <div className="flex items-center gap-15">
-              {/* legends */}
               <div className="flex gap-5 text-xs">
                 <div className="flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full bg-[#FFB0F5]" />
@@ -126,30 +123,39 @@ const ReportsCharts = () => {
             </div>
           </div>
 
-          {/* ── Chart ──────────────────────────────────────────── */}
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={matchesLineData}
-                margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                margin={{
+                  top: 10,
+                  right: 10,
+                  left: 0,
+                  bottom: isDesktop ? 0 : 30,
+                }}
               >
-                {/* grid now shows both horizontal & vertical lines */}
-                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#E5E7EB"
+                  vertical={false}
+                />
 
                 <XAxis
                   dataKey="month"
                   tick={{ fontSize: 12, fill: "#000" }}
                   tickLine={false}
+                  interval={isDesktop ? "auto" : 0}
+                  angle={isDesktop ? 0 : -45}
+                  textAnchor={isDesktop ? "middle" : "end"}
                 />
+
                 <YAxis
                   domain={[0, 100]}
                   ticks={[0, 20, 40, 60, 80, 100]}
                   tick={{ fontSize: 12, fill: "#000" }}
                   tickLine={false}
                 />
-
                 <Tooltip />
-
                 <Area
                   type="monotone"
                   dataKey="active"
@@ -173,7 +179,6 @@ const ReportsCharts = () => {
 
         {/* Pie Chart */}
         <div className="bg-white rounded-xl p-4 border border-gray-300 h-[350px]">
-          {/* Title + Yearly Button */}
           <div className="flex justify-between items-center mb-4">
             <h4 className="text-lg font-semibold">User Details</h4>
             <button className="flex items-center gap-2 px-3 py-1 border border-gray-200 rounded-md text-sm">
@@ -189,7 +194,6 @@ const ReportsCharts = () => {
 
           {/* Pie Chart with Legends */}
           <div className="flex flex-col md:flex-row items-center justify-center h-[calc(100%-52px)]">
-            {/* Pie Chart Container - Now Responsive */}
             <div className="w-full md:w-[60%] h-[200px] md:h-full">
               <Pie
                 data={pieData}
@@ -217,7 +221,6 @@ const ReportsCharts = () => {
               />
             </div>
 
-            {/* Legends - Better Positioning */}
             <div className="flex flex-col justify-center gap-4 mt-4 md:mt-0 md:ml-8">
               <div className="flex items-center gap-3">
                 <div className="w-3.5 h-3.5 rounded-full bg-[#67D89C]" />
@@ -230,8 +233,8 @@ const ReportsCharts = () => {
             </div>
           </div>
         </div>
-        {/* Bar Chart Card */}
 
+        {/* Bar Chart Card */}
         <div className="bg-white rounded-xl shadow p-4 h-[300px] w-full border border-[#0000001F]">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-lg text-gray-800">
@@ -239,7 +242,6 @@ const ReportsCharts = () => {
             </h3>
 
             <div className="flex items-center gap-12">
-              {/* Custom Legend on same line */}
               <div className="flex items-center gap-5">
                 <div className="flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-[#00C6FF]"></span>
@@ -268,16 +270,28 @@ const ReportsCharts = () => {
             </div>
           </div>
 
-          {/* Chart Container */}
+          {/* // Chart Container */}
           <div className="relative h-[240px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={matchBarData}
-                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                margin={{
+                  top: 10,
+                  right: 30,
+                  left: 0,
+                  bottom: isDesktop ? 5 : 30,
+                }}
                 barCategoryGap={20}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#000" }} />
+                <XAxis
+                  dataKey="month"
+                  tick={{ fontSize: 12, fill: "#000" }}
+                  interval={isDesktop ? "auto" : 0}
+                  angle={isDesktop ? 0 : -45}
+                  textAnchor={isDesktop ? "middle" : "end"}
+                />
+
                 <YAxis
                   domain={[0, 100]}
                   tickCount={6}
@@ -289,22 +303,20 @@ const ReportsCharts = () => {
                   dataKey="total"
                   fill="#00C6FF"
                   name="Total User"
-                  barSize={6} // 👈 Set to 6px
+                  barSize={6}
                   radius={[4, 4, 0, 0]}
                 />
                 <Bar
                   dataKey="success"
                   fill="#8B5CF6"
                   name="Successful Matches"
-                  barSize={6} // 👈 Set to 6px
+                  barSize={6}
                   radius={[4, 4, 0, 0]}
                 />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
-
-        {/* Subscription Line Chart */}
 
         <div
           className="bg-white rounded-xl shadow p-4 h-[300px]"
@@ -328,7 +340,12 @@ const ReportsCharts = () => {
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={revenueData}
-                margin={{ top: 10, right: 20, bottom: 10, left: 0 }}
+                margin={{
+                  top: 10,
+                  right: 20,
+                  bottom: isDesktop ? 10 : 30,
+                  left: 0,
+                }}
               >
                 <defs>
                   <linearGradient
@@ -342,13 +359,21 @@ const ReportsCharts = () => {
                     <stop offset="100%" stopColor="#6FD195" stopOpacity={0.1} />
                   </linearGradient>
                 </defs>
+                <CartesianGrid
+                  stroke="#E5E7EB"
+                  strokeDasharray="3 3 "
+                  vertical={false}
+                />
 
-                <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
                 <XAxis
                   dataKey="month"
                   tick={{ fontSize: 12, fill: "#000" }}
                   tickLine={false}
+                  interval={isDesktop ? "auto" : 0}
+                  angle={isDesktop ? 0 : -45}
+                  textAnchor={isDesktop ? "middle" : "end"}
                 />
+
                 <YAxis
                   tick={{ fontSize: 12, fill: "#000" }}
                   domain={[0, 100]}
@@ -359,7 +384,7 @@ const ReportsCharts = () => {
                 <Area
                   type="monotone"
                   dataKey="revenue"
-                  stroke="#6FD195" // ✅ New line color
+                  stroke="#6FD195"
                   fill="url(#revenueGradient)"
                   strokeWidth={2}
                   dot={false}
@@ -372,6 +397,5 @@ const ReportsCharts = () => {
     </section>
   );
 };
-
 
 export default ReportsCharts;

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,useCallback,useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
@@ -7,9 +7,9 @@ import ProfileInfoSection from "../../components/admin/ProfileInfoSection";
 import Image from "next/image";
 const Settings = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-   const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const toggleMobileSidebar = useCallback(
-    () => setIsMobileSidebarOpen(prev => !prev),
+    () => setIsMobileSidebarOpen((prev) => !prev),
     []
   );
   const router = useRouter();
@@ -36,7 +36,7 @@ const Settings = () => {
     const handleResize = () => {
       const desktop = window.innerWidth >= 768;
       setIsDesktop(desktop);
-      setIsMobileSidebarOpen(desktop);     // auto‑open on desktop
+      setIsMobileSidebarOpen(desktop); // auto‑open on desktop
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -47,20 +47,24 @@ const Settings = () => {
     //   <Sidebar />
     <div className="flex min-h-screen font-sans bg-[#f8f8f8]">
       <Sidebar
-  isMobileSidebarOpen={isMobileSidebarOpen}
-  toggleMobileSidebar={toggleMobileSidebar}
-  isDesktop={isDesktop}
-/>
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebar={toggleMobileSidebar}
+        isDesktop={isDesktop}
+      />
       {/* <Topbar /> */}
-      <main className={`flex-1 flex flex-col p-6 pt-24 md:ml-[260px]  ${isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""}`}>
-        <Topbar toggleMobileSidebar={toggleMobileSidebar}
-         isMobileSidebarOpen={isMobileSidebarOpen}
-  isDesktop={isDesktop} />
+      <main
+        className={`flex-1 flex flex-col p-6 pt-24 md:ml-[260px]  ${
+          isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""
+        }`}
+      >
+        <Topbar
+          toggleMobileSidebar={toggleMobileSidebar}
+          isMobileSidebarOpen={isMobileSidebarOpen}
+          isDesktop={isDesktop}
+        />
 
-        {/* <div className="flex-1 p-6 overflow-auto h-[calc(100vh-80px)]"> */}
         <div className="flex justify-center">
           <div className="w-full max-w-[1190px] flex flex-col md:flex-row gap-6">
-            {/* Left Profile Card - Adjusted Width */}
             <div className="w-full md:w-[200px] lg:w-[240px] h-auto md:h-[492px] bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex flex-col items-center text-center gap-4 md:gap-5">
               <div className="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-purple-200 mt-2 md:mt-4">
                 <Image
@@ -177,42 +181,42 @@ const Settings = () => {
         </div>
       </main>
       {/* Upload Modal */}
-{showUploadModal && (
-  <div className="fixed inset-0 z-50 bg-[#00000099] flex items-center justify-center p-4">
-    {/* Main Container - Responsive */}
-    <div className="w-full max-w-[660px] h-auto max-h-[90vh] bg-white rounded-[12px] p-6 md:p-[32px] flex flex-col gap-6 md:gap-[40px] overflow-y-auto">
-      <h2 className="text-xl font-bold text-[#000]">Profile Picture</h2>
+      {showUploadModal && (
+        <div className="fixed inset-0 z-50 bg-[#00000099] flex items-center justify-center p-4">
+          {/* Main Container - Responsive */}
+          <div className="w-full max-w-[660px] h-auto max-h-[90vh] bg-white rounded-[12px] p-6 md:p-[32px] flex flex-col gap-6 md:gap-[40px] overflow-y-auto">
+            <h2 className="text-xl font-bold text-[#000]">Profile Picture</h2>
 
-      {/* Upload Area - Responsive */}
-      <div className="w-full h-[120px] md:h-[151px] border border-[#00000066] rounded-[8px] flex flex-col items-center justify-center p-4">
-        <Image
-          src="/assets/upload.svg"
-          alt="Upload"
-          width={40}
-          height={40}
-          className="w-8 h-8 md:w-10 md:h-10"
-        />
-        <p className="mt-2 text-sm text-gray-600">Upload Profile Pic</p>
-      </div>
+            {/* Upload Area - Responsive */}
+            <div className="w-full h-[120px] md:h-[151px] border border-[#00000066] rounded-[8px] flex flex-col items-center justify-center p-4">
+              <Image
+                src="/assets/upload.svg"
+                alt="Upload"
+                width={40}
+                height={40}
+                className="w-8 h-8 md:w-10 md:h-10"
+              />
+              <p className="mt-2 text-sm text-gray-600">Upload Profile Pic</p>
+            </div>
 
-      {/* Buttons - Responsive */}
-      <div className="flex flex-col md:flex-row justify-between w-full gap-3">
-        <button
-          onClick={() => setShowUploadModal(false)}
-          className="w-full md:w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
-        >
-          Close
-        </button>
-        <button
-          onClick={() => alert("Saved!")}
-          className="w-full md:w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-[#5D5FEF] text-white hover:bg-[#4b4df0] transition"
-        >
-          Save Changes
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+            {/* Buttons - Responsive */}
+            <div className="flex flex-col md:flex-row justify-between w-full gap-3">
+              <button
+                onClick={() => setShowUploadModal(false)}
+                className="w-full md:w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => alert("Saved!")}
+                className="w-full md:w-[288px] h-[48px] px-[10px] py-[10px] rounded-[8px] bg-[#5D5FEF] text-white hover:bg-[#4b4df0] transition"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Personal Information Modal - Responsive */}
       {activeModal === "personal" && (

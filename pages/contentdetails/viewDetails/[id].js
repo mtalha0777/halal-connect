@@ -134,7 +134,7 @@ const USERS = [
     verified: true,
     avatar: "/assets/ayesha.png",
   },
-    {
+  {
     id: 8769,
     name: "Ayesha Khan",
     email: "soroh@email.com",

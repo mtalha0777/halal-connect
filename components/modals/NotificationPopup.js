@@ -36,15 +36,12 @@ const NotificationPopup = ({ onClose }) => {
   ];
 
   return (
-    //  <div className="bg-white w-[90vw] max-w-[550px]  flex flex-col shadow-lg">
-    <div className="bg-white w-[90vw] max-w-[550px] h-[660px] rounded-[12px] p-6 flex flex-col shadow-lg overflow-hidden">
-      {/* Header (Fixed Height) */}
+    <div className="bg-white w-[90vw] max-w-[550px] max-h-[90vh] rounded-[12px] p-4 sm:p-6 flex flex-col shadow-lg overflow-hidden">
       <div className="pb-4">
-        <h2 className="text-2xl font-semibold text-center mb-6">
+        <h2 className="text-2xl font-semibold text-center mb-4 sm:mb-6">
           Notifications
         </h2>
 
-        {/* Filter Tabs */}
         <div className="flex flex-wrap items-center gap-2 md:gap-4 mt-3">
           <button className="bg-[#5D5FEF] text-white px-3 md:px-4 py-1 md:py-1.5 rounded-md text-xs md:text-sm font-medium">
             All
@@ -59,7 +56,6 @@ const NotificationPopup = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Notifications List */}
       <div className="flex-1 space-y-4 overflow-y-auto pr-2">
         {notifications.map((item, index) => (
           <div

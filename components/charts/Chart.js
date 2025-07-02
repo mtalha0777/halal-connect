@@ -40,7 +40,6 @@ ChartJS.register(
   ChartDataLabels
 );
 
-// Line Chart Data
 const lineData = [
   { month: "Jan", Verified: 35, Unverified: 60 },
   { month: "Feb", Verified: 7, Unverified: 10 },
@@ -56,7 +55,6 @@ const lineData = [
   { month: "Dec", Verified: 80, Unverified: 90 },
 ];
 
-// Bar Chart Data
 const matchBarData = [
   { month: "Jan", total: 36, success: 60 },
   { month: "Feb", total: 91, success: 68 },
@@ -80,12 +78,9 @@ const lineChartLegend = [
 const Chart = () => {
   return (
     <div className="bg-white rounded-xl p-4 gap-4 flex flex-col w-full shadow border border-gray-200">
-      {/* Overview Title */}
       <h2 className="text-xl font-semibold text-black">Overview</h2>
 
-      {/* Charts Row - Modified for better responsiveness */}
       <div className="flex flex-col xl:flex-row gap-4 w-full">
-        {/* Line Chart Card - Now fully responsive */}
         <div className="bg-white rounded-xl p-4 border border-gray-200 w-full xl:w-1/2">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
             <h3 className="text-sm font-semibold text-black">

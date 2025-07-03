@@ -104,7 +104,7 @@ const featureSubscriptionUsers = [
     subscriptionExpiryDate: "01 Mar 2024",
   },
   {
-    userId: "8666",
+    userId: "8766",
     name: "Fahad Iqbal",
     gender: "Male",
     email: "soro@email.com",
@@ -338,8 +338,8 @@ export default function FeatureSubscriptionDetails() {
                 <div
                   className={`ml-auto px-3 py-1 rounded-full text-xs font-semibold ${
                     user.status === "Active"
-                      ? "bg-green-100 text-green-800"
-                      : "bg-red-100 text-red-800"
+                      ? "bg-green-100 text-green-500"
+                      : "bg-red-100 text-red-500"
                   }`}
                 >
                   {user.status}

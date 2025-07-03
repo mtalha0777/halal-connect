@@ -215,7 +215,7 @@ const SubscriptionUserList = () => {
                         <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white border border-gray-200 z-10">
                           <div className="py-1">
                             <Link
-                              href={`/subscription/Details/${user.userId}`}
+                              href={`/subscription/details/${user.userId}`}
                               className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-500 hover:bg-gray-100"
                             >
                               <Image

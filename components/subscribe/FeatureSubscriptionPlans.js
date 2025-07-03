@@ -55,7 +55,7 @@ const FeatureSubscriptionPlans = () => {
         </div>
       </div>
 
-      <div className="border border-gray-200 rounded-lg overflow-hidden mt-4">
+      <div className="hidden lg:block border border-gray-200 rounded-lg overflow-hidden mt-4">
         <div className="overflow-x-auto">
           <table className="min-w-full">
             <thead className="bg-gray-50 border-b-2 border-gray-200">
@@ -147,6 +147,81 @@ const FeatureSubscriptionPlans = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* ===== 2. MOBILE VIEW: CARDS (only on small screens) ===== */}
+      <div className="lg:hidden space-y-4 mt-4">
+        {subscriptionPlans.map((plan, index) => (
+          <div
+            key={plan.planId}
+            className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-3"
+          >
+            {/* Top Row: Benefits and Status */}
+            <div className="flex justify-between items-start">
+              <p className="font-semibold text-gray-800 pr-4">
+                {plan.benefits}
+              </p>
+              <span
+                className={`px-2 py-1 text-xs whitespace-nowrap rounded-full font-semibold ${
+                  plan.status === "Active"
+                    ? "bg-green-100 text-green-500"
+                    : "bg-red-100 text-red-500"
+                }`}
+              >
+                {plan.status}
+              </span>
+            </div>
+
+            {/* Middle Row: Details */}
+            <div className="text-sm text-gray-600 space-y-1">
+              <p>
+                <strong>Plan ID:</strong> {plan.planId}
+              </p>
+              <p>
+                <strong>Price:</strong> ${plan.price}
+              </p>
+              <p>
+                <strong>Duration:</strong> {plan.duration}
+              </p>
+            </div>
+
+            {/* Bottom Row: Actions */}
+            <div className="flex justify-end pt-3 mt-2 border-t border-gray-200">
+              <div className="relative inline-block text-left">
+                <button
+                  onClick={() => setOpenMenu(openMenu === index ? null : index)}
+                  className="p-2 rounded-full hover:bg-gray-200"
+                >
+                  <MoreVertical className="h-5 w-5 text-gray-500" />
+                </button>
+                {openMenu === index && (
+                  <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white border border-gray-200 z-10">
+                    <div className="py-1">
+                      <button className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <Image
+                          src="/assets/editblack.svg"
+                          alt="Edit"
+                          width={16}
+                          height={16}
+                        />{" "}
+                        Edit
+                      </button>
+                      <button className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-red-50">
+                        <Image
+                          src="/assets/delete.svg"
+                          alt="Delete"
+                          width={16}
+                          height={16}
+                        />{" "}
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

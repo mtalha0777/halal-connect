@@ -96,7 +96,7 @@ const Settings = () => {
 
                 <button
                   className="w-full flex items-center justify-start gap-2 px-4 py-2 text-sm bg-transparent hover:bg-gray-100 text-[#000000] rounded"
-                  onClick={() => router.push("/Login/login")}
+                  onClick={() => router.push("/login")}
                 >
                   <Image
                     src="/assets/logout.svg"

@@ -1,3 +1,4 @@
+"use client"; 
 import React, { useEffect, useState } from "react";
 const backgrounds = [
 "/assets/a1.webp",

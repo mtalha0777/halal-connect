@@ -18,7 +18,6 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' };
 }
 
-
 export default function FeatureSubscriptionDetailsPage({ user }) {
   return <FeatureSubscriptionClient user={user} />;
 }

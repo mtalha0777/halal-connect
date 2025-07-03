@@ -6,7 +6,6 @@ import SubscribeCard from "../../components/subscribe/SubscribeCard";
 import Overview from "../../components/overview/OverView";
 import SubscriptionPlans from "../../components/subscribe/SubscriptionPlans";
 import FeatureSubscriptionPlans from "../../components/subscribe/FeatureSubscriptionPlans";
-
 import SubscriptionUserList from "../../components/subscribe/SubscriptionUserList";
 import { featureSubscriptionUsers } from "@/lib/subscription-data";
 
@@ -42,7 +41,7 @@ export default function SubscribeAndPaymentPage() {
       />
       <main
         className={`flex-1 bg-white pt-20 transition-all duration-300 ${
-          isDesktop ? "md:ml-[260px]" : ""
+          isDesktop && isMobileSidebarOpen ? "md:ml-[260px]" : ""
         }`}
       >
         {/* Topbar remains fixed and handles its own layout */}
@@ -75,12 +74,9 @@ export default function SubscribeAndPaymentPage() {
             <div className="mb-6">
               <FeatureSubscriptionPlans />
             </div>
-            {/* <div>
-              <SubscriptionUserList />
-            </div> */}
             <div>
-  <SubscriptionUserList users={featureSubscriptionUsers} />
-</div>
+              <SubscriptionUserList users={featureSubscriptionUsers} />
+            </div>
           </section>
         </div>
       </main>

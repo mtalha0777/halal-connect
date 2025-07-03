@@ -24,6 +24,7 @@ const Dashboard = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar
@@ -31,9 +32,10 @@ const Dashboard = () => {
         toggleMobileSidebar={toggleMobileSidebar}
         isDesktop={isDesktop}
       />
+
       <main
-        className={`flex-1 bg-white p-6 transition-all duration-300 ${
-          isMobileSidebarOpen ? "md:ml-[260px]" : "md:ml-0"
+        className={`flex-1 bg-white p-6 pt-23 transition-all duration-300 ${
+          isDesktop && isMobileSidebarOpen ? "md:ml-[260px]" : ""
         }`}
       >
         <Topbar
@@ -43,9 +45,9 @@ const Dashboard = () => {
         />
 
         {/* Page Title */}
-        <section className="pt-20">
+        <section>
           {" "}
-          <h1 className="text-xl font-bold text-black mb-6">Dashboard</h1>
+          <h1 className="text-xl font-bold text-black mb-3">Dashboard</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {(() => {
               const cards = [
@@ -86,7 +88,6 @@ const Dashboard = () => {
                   cloud: "/assets/cloud4.svg",
                 },
               ];
-
               const cloudColor = [
                 "#BFFFFB52", // Total User
                 "#FFDACD52", // New User
@@ -173,7 +174,6 @@ const Dashboard = () => {
               ));
             })()}
           </div>
-          {/* Charts & Table Section - responsive vertical stacking */}
           <div className="flex flex-col gap-6 w-full min-w-0">
             <Chart />
             <AllUsers />

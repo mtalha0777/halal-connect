@@ -6,7 +6,9 @@ import SubscribeCard from "../../components/subscribe/SubscribeCard";
 import Overview from "../../components/overview/OverView";
 import SubscriptionPlans from "../../components/subscribe/SubscriptionPlans";
 import FeatureSubscriptionPlans from "../../components/subscribe/FeatureSubscriptionPlans";
+
 import SubscriptionUserList from "../../components/subscribe/SubscriptionUserList";
+import { featureSubscriptionUsers } from "@/lib/subscription-data";
 
 export default function SubscribeAndPaymentPage() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -73,9 +75,12 @@ export default function SubscribeAndPaymentPage() {
             <div className="mb-6">
               <FeatureSubscriptionPlans />
             </div>
-            <div>
+            {/* <div>
               <SubscriptionUserList />
-            </div>
+            </div> */}
+            <div>
+  <SubscriptionUserList users={featureSubscriptionUsers} />
+</div>
           </section>
         </div>
       </main>

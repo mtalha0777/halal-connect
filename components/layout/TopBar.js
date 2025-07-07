@@ -2,24 +2,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NotificationPopup from "../modals/NotificationPopup";
-
-const Topbar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
+import { useSidebar } from "@/app/context/SidebarContext";
+const Topbar = () => {
   const router = useRouter();
+  const { isSidebarOpen, toggleSidebar, isDesktop } = useSidebar();
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const performSearch = () => {
     const term = searchTerm.toLowerCase();
@@ -32,17 +23,20 @@ const Topbar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
   };
 
   const handleSearch = (e) => e.key === "Enter" && performSearch();
-
   return (
-    <header className="fixed top-0 left-0 md:left-[260px] right-0 z-40 bg-white shadow-sm">
+    <header
+      className={`fixed top-0 right-0 z-40 bg-white shadow-sm transition-all duration-300 ${
+        isDesktop && isSidebarOpen ? "left-0 md:left-[260px]" : "left-0"
+      }`}
+    >
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 py-4 gap-4">
-        {isMobile && (
+        {!isDesktop && (
           <button
-            onClick={toggleMobileSidebar}
+            onClick={toggleSidebar}
             className="p-2 text-gray-600 rounded-md focus:outline-none"
             aria-label="Toggle sidebar"
           >
-            {isMobileSidebarOpen ? (
+            {isSidebarOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"

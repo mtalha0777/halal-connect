@@ -1,6 +1,6 @@
 import { allusersvalue } from "@/lib/data";
 import ViewDetailsClient from "./ViewDetailsClient";
-
+import AdminLayout from "@/components/layout/AdminLayout";
 export async function getStaticProps({ params }) {
   const { id } = params;
   const matchedUser = allusersvalue.find((u) => String(u.id) === id);
@@ -28,3 +28,12 @@ export async function getStaticPaths() {
 export default function ViewDetailsPage({ user }) {
   return <ViewDetailsClient user={user} />;
 }
+
+
+ViewDetailsPage.getLayout = function getLayout(page) {
+  return (
+    <AdminLayout>
+      {page}
+    </AdminLayout>
+  );
+};

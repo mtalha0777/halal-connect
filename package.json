@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
     "chart.js": "^4.5.0",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "formidable": "^3.5.4",
     "lucide-react": "^0.514.0",
     "next": "15.3.3",
     "react": "^19.0.0",

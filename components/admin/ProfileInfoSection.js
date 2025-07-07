@@ -3,7 +3,7 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
       {/* Title with Icon */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {icon && (
             <Image
@@ -25,7 +25,7 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
         </button>
       </div>
 
-      {/* Info Grid */}
+      <hr className="w-full border-t border-gray-300 my-4" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-4">
         {data.map((item, index) => (
           <div
@@ -38,7 +38,7 @@ const ProfileInfoSection = ({ title, data, onEdit, icon }) => {
                 title === "Location" ? "break-words whitespace-normal" : ""
               }`}
             >
-              {item.value}
+              {item.value || "N/A"}
             </p>
           </div>
         ))}

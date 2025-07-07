@@ -1,4 +1,6 @@
 import "../styles/globals.css";
+
+import { UserProvider } from "./context/UserContext";
 export const metadata = {
   title: "Halal Connect - Admin",
   description: "Admin Panel for Halal Connect",
@@ -7,9 +9,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        {children}
-      </body>
+      <UserProvider>
+        <body>
+          {children} 
+        </body>
+      </UserProvider>
     </html>
   );
 }

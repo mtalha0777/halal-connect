@@ -2,9 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
+import { useUser } from "@/app/context/UserContext";
+import { useSidebar } from "@/app/context/SidebarContext";
+const Sidebar = () => {
   const pathname = usePathname();
+  const { user } = useUser();
+  const { isSidebarOpen, toggleSidebar, isDesktop } = useSidebar();
 
   const menuItems = [
     {
@@ -41,25 +44,20 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
 
   return (
     <>
-      {!isDesktop && isMobileSidebarOpen && (
+      {!isDesktop && isSidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/40 md:hidden"
-          onClick={toggleMobileSidebar}
+          onClick={toggleSidebar}
         />
       )}
-
       <aside
-        className={`bg-[#1D225F] text-white flex flex-col justify-between z-50
-    fixed w-[260px] h-screen pt-6 pr-3 pb-4 pl-3
-    transition-transform duration-300 ease-in-out
-    ${
-      isDesktop
-        ? "translate-x-0"
-        : isMobileSidebarOpen
-        ? "translate-x-0"
-        : "-translate-x-full"
-    }
-  `}
+        className={`bg-[#1D225F] text-white flex flex-col justify-between z-50 fixed w-[260px] h-screen pt-6 pr-3 pb-4 pl-3 transition-transform duration-300 ease-in-out ${
+          isDesktop
+            ? "translate-x-0"
+            : isSidebarOpen
+            ? "translate-x-0"
+            : "-translate-x-full"
+        }`}
       >
         {/* Logo Section */}
         <div>
@@ -83,14 +81,22 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
                     pathname.startsWith("/management/userDetails")
                   : item.label === "Subscription & Payments"
                   ? pathname.startsWith("/admin/subscribe-and-payment") ||
-                    pathname.startsWith("/subscription/Details")
+                    pathname.startsWith("/subscription/details")
                   : item.label === "System Notification"
                   ? pathname.startsWith("/admin/system-notification") ||
                     pathname.startsWith("/notification/create")
                   : pathname === item.path;
 
               return (
-                <Link href={item.path} key={i}>
+                <Link
+                  href={item.path}
+                  key={i}
+                  onClick={() => {
+                    if (!isDesktop) {
+                      toggleSidebar();
+                    }
+                  }}
+                >
                   <div className="flex justify-start">
                     <div
                       className={`flex items-center justify-between px-3 py-2 rounded-[12px] w-[236px] h-[44px] transition-all
@@ -131,19 +137,18 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
           </nav>
         </div>
 
-        {/* Profile Bottom */}
         <Link href="/admin/settings">
           <div className="flex items-center gap-2 mt-10 p-2 rounded-lg cursor-pointer hover:bg-white/10 transition">
             <Image
-              src="/assets/profile.png"
+              src={user.profilePicture}
               alt="Profile"
-              width={40}
-              height={40}
-              className="rounded-full"
+              width={28}
+              height={28}
+              className="rounded-full object-cover"
             />
             <div className="flex-1">
-              <p className="text-sm">Liam James</p>
-              <p className="text-xs text-gray-300">liam@gmail.com</p>
+              <p className="text-sm">{user.name}</p>
+              <p className="text-xs text-gray-300">{user.email}</p>
             </div>
             <Image
               src="/assets/brightarrow.svg"

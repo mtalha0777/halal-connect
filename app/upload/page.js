@@ -1,78 +1,104 @@
-// // File: app/upload/page.js
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import AdminLayout from "@/components/layout/AdminLayout";
+import { useUser } from "../context/UserContext";
+export default function UploadPage() {
+  const { setUser } = useUser();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
 
-// import UploadForm from "@/components/UploadForm"; // Apne component ka sahi path dein
+  const handleUpload = async () => {
+    if (!selectedFile) return setError("Please select a file first.");
+    setUploading(true);
+    setError("");
 
-// export default function UploadPage() {
-//   return (
-//     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-100">
-//       <div className="bg-white p-8 rounded-lg shadow-md">
-//         <UploadForm />
-//       </div>
-//     </main>
-//   );
-// }
+    const formData = new FormData();
+    formData.append("file", selectedFile);
 
-// --- STEP 3.2: REPLACE THE OLD UPLOAD MODAL WITH THIS NEW ONE ---
-{showUploadModal && (
-  <div className="fixed inset-0 z-50 bg-[#00000099] flex items-center justify-center p-4">
-    <div className="w-full max-w-[660px] bg-white rounded-[12px] p-6 md:p-[32px] flex flex-col gap-6">
-      <h2 className="text-xl font-bold text-[#000]">Profile Picture</h2>
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      if (data.success) {
+        setUser((prevUser) => ({ ...prevUser, profilePicture: data.location }));
+        alert("Profile picture updated successfully!");
+        setSelectedFile(null);
+      } else {
+        setError(`Upload failed: ${data.error}`);
+      }
+    } catch (err) {
+      setError(`An error occurred: ${err.message}`);
+    } finally {
+      setUploading(false);
+    }
+  };
 
-      {/* Upload Area with Input */}
-      <div className="w-full h-auto border border-[#00000066] rounded-[8px] flex flex-col items-center justify-center p-4">
-        <input
-          type="file"
-          accept="image/*" // Sirf images allow karein
-          onChange={(e) => {
-            setSelectedFile(e.target.files[0]);
-            setError(""); // Purana error clear karein
-          }}
-          className="block w-full text-sm text-slate-500
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-full file:border-0
-            file:text-sm file:font-semibold
-            file:bg-violet-50 file:text-violet-700
-            hover:file:bg-violet-100"
-        />
+  return (
+    <section>
+      <div className="w-full max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-sm border border-gray-200">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          Upload a New Profile Picture
+        </h2>
+
+        {/* Upload Area with Input */}
+        <div className="w-full h-auto border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center p-6 text-center">
+          <p className="text-gray-500 mb-4">Select a file from your computer</p>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              setSelectedFile(e.target.files[0]);
+              setError("");
+            }}
+            className="block w-full max-w-xs text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-violet-50 file:text-violet-700
+                    hover:file:bg-violet-100 cursor-pointer"
+          />
+        </div>
+
         {/* Show a preview of the selected image */}
         {selectedFile && (
-          <div className="mt-4">
-            <p className="text-sm text-gray-600 mb-2">Preview:</p>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600 mb-2">Image Preview:</p>
             <Image
               src={URL.createObjectURL(selectedFile)}
               alt="Preview"
-              width={100}
-              height={100}
-              className="rounded-full object-cover"
+              width={120}
+              height={120}
+              className="rounded-full object-cover inline-block border-2 border-purple-200 p-1"
             />
           </div>
         )}
-      </div>
 
-      {/* Show error or uploading message */}
-      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-      {uploading && <p className="text-blue-500 text-sm text-center">Uploading, please wait...</p>}
+        {/* Show error or uploading message */}
+        <div className="h-6 mt-4 text-center">
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {uploading && (
+            <p className="text-blue-500 text-sm">Uploading, please wait...</p>
+          )}
+        </div>
 
-      {/* Buttons */}
-      <div className="flex flex-col md:flex-row justify-between w-full gap-3">
-        <button
-          onClick={() => {
-            setShowUploadModal(false);
-            setSelectedFile(null); // Modal band hone par file clear karein
-            setError("");
-          }}
-          className="w-full md:w-[288px] h-[48px] rounded-[8px] bg-gray-200 text-[#5D5FEF] hover:bg-gray-300 transition"
-        >
-          Close
-        </button>
-        <button
-          onClick={handleUpload} // Yahan hum naya function call karenge
-          disabled={!selectedFile || uploading}
-          className="w-full md:w-[288px] h-[48px] rounded-[8px] bg-[#5D5FEF] text-white hover:bg-[#4b4df0] transition disabled:bg-gray-400"
-        >
-          {uploading ? "Saving..." : "Save Changes"}
-        </button>
+        {/* Upload Button */}
+        <div className="flex justify-end w-full mt-6">
+          <button
+            onClick={handleUpload}
+            disabled={!selectedFile || uploading}
+            className="w-full md:w-auto px-8 py-3 rounded-lg bg-[#5D5FEF] text-white font-semibold hover:bg-[#4b4df0] transition disabled:bg-gray-400"
+          >
+            {uploading ? "Uploading..." : "Upload Picture"}
+          </button>
+        </div>
       </div>
-    </div>
-  </div>
-)}
+    </section>
+  );
+}
+UploadPage.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

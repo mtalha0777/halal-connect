@@ -5,6 +5,8 @@ import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import ProfileInfoSection from "../../components/admin/ProfileInfoSection";
 import Image from "next/image";
+import { signOut } from "firebase/auth";
+import { auth } from "@/src/firebase";
 const Settings = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -13,9 +15,19 @@ const Settings = () => {
     []
   );
   const router = useRouter();
-
   const [activeModal, setActiveModal] = useState(null);
   const [showUploadModal, setShowUploadModal] = useState(false);
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth); 
+            console.log("User logged out successfully");
+            router.push('/login'); 
+        } catch (error) {
+            console.error("Logout Error:", error);
+            alert("Failed to log out. Please try again.");
+        }
+    };
 
   const [admin, setAdmin] = useState({
     name: "Liam James",
@@ -96,7 +108,7 @@ const Settings = () => {
 
                 <button
                   className="w-full flex items-center justify-start gap-2 px-4 py-2 text-sm bg-transparent hover:bg-gray-100 text-[#000000] rounded"
-                  onClick={() => router.push("/login")}
+                  onClick={handleLogout} 
                 >
                   <Image
                     src="/assets/logout.svg"

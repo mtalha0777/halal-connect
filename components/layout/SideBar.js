@@ -2,10 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useAuth } from "@/src/AuthSessionProvider"; 
 const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
   const pathname = usePathname();
-
+const { user, loading } = useAuth();
   const menuItems = [
     {
       label: "Dashboard",
@@ -142,8 +142,16 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
               className="rounded-full"
             />
             <div className="flex-1">
-              <p className="text-sm">Liam James</p>
-              <p className="text-xs text-gray-300">liam@gmail.com</p>
+              {loading ? (
+                <p className="text-sm text-gray-300">Loading...</p>
+              ) : user ? (
+                <>
+                  <p className="text-sm font-medium">{user.name || user.username || 'Admin'}</p>
+                  <p className="text-xs text-gray-400">{user.email || ''}</p>
+                </>
+              ) : (
+                <p className="text-sm">Not logged in</p>
+              )}
             </div>
             <Image
               src="/assets/brightarrow.svg"

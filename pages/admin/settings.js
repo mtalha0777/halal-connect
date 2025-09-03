@@ -5,67 +5,88 @@ import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import ProfileInfoSection from "../../components/admin/ProfileInfoSection";
 import Image from "next/image";
-import { signOut } from "firebase/auth";
-import { auth } from "@/src/firebase";
+import { signOut } from '@aws-amplify/auth';
+import { useAuth } from "@/src/AuthSessionProvider";
+
 const Settings = () => {
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const toggleMobileSidebar = useCallback(
-    () => setIsMobileSidebarOpen((prev) => !prev),
-    []
-  );
   const router = useRouter();
-  const [activeModal, setActiveModal] = useState(null);
-  const [showUploadModal, setShowUploadModal] = useState(false);
-
-    const handleLogout = async () => {
-        try {
-            await signOut(auth); 
-            console.log("User logged out successfully");
-            router.push('/login'); 
-        } catch (error) {
-            console.error("Logout Error:", error);
-            alert("Failed to log out. Please try again.");
-        }
-    };
-
+  const { user, signOut } = useAuth();
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null); 
+  const [showUploadModal, setShowUploadModal] = useState(false); 
+  const [isDesktop, setIsDesktop] = useState(false); 
   const [admin, setAdmin] = useState({
-    name: "Liam James",
-    email: "liam123@gmail.com",
-    age: "63 year",
-    dob: "01-10-2000",
-    gender: "Male",
-    phone: "+92 3045683047",
-    address: "1600 Amphitheatre Parkway, Mountain View, CA 94043, U",
-    language: "English",
+    name: "", 
+    email: "", 
+    age: "", 
+    dob: "", 
+    gender: "", 
+    phone: "", 
+    address: "", 
+    language: "",
   });
 
-  const handleSave = (section, updatedFields) => {
-    setAdmin({ ...admin, ...updatedFields });
-    setActiveModal(null);
-  };
   useEffect(() => {
-    const handleResize = () => {
-      const desktop = window.innerWidth >= 768;
-      setIsDesktop(desktop);
-      setIsMobileSidebarOpen(desktop); // auto‑open on desktop
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
+
+
+  useEffect(() => {
+    if (user) {
+      setAdmin(prevAdmin => ({
+        ...prevAdmin,
+        name: user.name || user.given_name || user.username || '',
+        email: user.email || '',
+        phone: user.phone_number || '',
+      }));
+    }
+  }, [user]);
+
+
+  useEffect(() => {
+    const checkScreenSize = () => setIsDesktop(window.innerWidth >= 768);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
+  const toggleMobileSidebar = useCallback(() => {
+    setIsMobileSidebarOpen(prev => !prev);
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push('/login');
+  };
+
+  const handleSave = (section, updatedFields) => {
+    setAdmin(prevAdmin => ({ ...prevAdmin, ...updatedFields }));
+    setActiveModal(null);
+  };
+
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center items-center min-h-screen">
+  //       Loading user data...
+  //     </div>
+  //   );
+  // }
+  if (!user) {
+    return null;
+  }
+
   return (
-    //   <Sidebar />
     <div className="flex min-h-screen font-sans bg-[#f8f8f8]">
       <Sidebar
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebar={toggleMobileSidebar}
         isDesktop={isDesktop}
       />
-      {/* <Topbar /> */}
+      
       <main
-        className={`flex-1 flex flex-col p-6 pt-24 md:ml-[260px]  ${
+        className={`flex-1 flex flex-col p-6 pt-24 md:ml-[260px] ${
           isDesktop && isMobileSidebarOpen ? "ml-[260px]" : ""
         }`}
       >
@@ -91,10 +112,8 @@ const Settings = () => {
               </h2>
               <p className="text-sm text-gray-500">Admin</p>
               <div className="mt-2 w-full space-y-3">
-                {/* Divider Line */}
                 <hr className="w-full border-t border-gray-300" />
 
-                {/* Password Setting Button */}
                 <button className="w-full flex items-center justify-start gap-2 px-4 py-2 text-sm bg-transparent hover:bg-gray-100 text-[#000000] rounded">
                   <Image
                     src="/assets/password.svg"
@@ -192,14 +211,13 @@ const Settings = () => {
           </div>
         </div>
       </main>
+
       {/* Upload Modal */}
       {showUploadModal && (
         <div className="fixed inset-0 z-50 bg-[#00000099] flex items-center justify-center p-4">
-          {/* Main Container - Responsive */}
           <div className="w-full max-w-[660px] h-auto max-h-[90vh] bg-white rounded-[12px] p-6 md:p-[32px] flex flex-col gap-6 md:gap-[40px] overflow-y-auto">
             <h2 className="text-xl font-bold text-[#000]">Profile Picture</h2>
 
-            {/* Upload Area - Responsive */}
             <div className="w-full h-[120px] md:h-[151px] border border-[#00000066] rounded-[8px] flex flex-col items-center justify-center p-4">
               <Image
                 src="/assets/upload.svg"
@@ -211,7 +229,6 @@ const Settings = () => {
               <p className="mt-2 text-sm text-gray-600">Upload Profile Pic</p>
             </div>
 
-            {/* Buttons - Responsive */}
             <div className="flex flex-col md:flex-row justify-between w-full gap-3">
               <button
                 onClick={() => setShowUploadModal(false)}
@@ -239,7 +256,6 @@ const Settings = () => {
             </h2>
 
             <div className="flex flex-col gap-4 md:gap-6">
-              {/* Row 1: Name + Age - Stack on mobile */}
               <div className="flex flex-col md:flex-row gap-4 md:gap-4">
                 <div className="w-full md:w-1/2 flex flex-col gap-1">
                   <label className="text-sm text-gray-600">Name</label>
@@ -254,7 +270,6 @@ const Settings = () => {
                   />
                 </div>
 
-                {/* Age */}
                 <div className="w-full md:w-1/2 flex flex-col gap-1">
                   <label className="text-sm text-gray-600">Age</label>
                   <input
@@ -268,7 +283,7 @@ const Settings = () => {
                   />
                 </div>
               </div>
-              {/* Row 2: Gender + DOB */}
+              
               <div className="flex flex-col md:flex-row gap-4 md:gap-4">
                 <div className="w-full md:w-1/2 flex flex-col gap-1">
                   <label className="text-sm text-gray-600">Gender</label>
@@ -298,7 +313,6 @@ const Settings = () => {
               </div>
             </div>
 
-            {/* Action Buttons - Stack on mobile */}
             <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-0 pt-2">
               <button
                 onClick={() => setActiveModal(null)}
@@ -324,7 +338,7 @@ const Settings = () => {
         </div>
       )}
 
-      {/* Contact Modal - Responsive */}
+      {/* Contact Modal */}
       {activeModal === "contact" && (
         <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-[660px] bg-white rounded-xl md:rounded-[12px] p-6 md:p-[32px] flex flex-col gap-6 md:gap-[40px] relative max-h-[90vh] overflow-y-auto">
@@ -382,7 +396,8 @@ const Settings = () => {
           </div>
         </div>
       )}
-      {/* Location Modal - Responsive */}
+
+      {/* Location Modal */}
       {activeModal === "location" && (
         <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-[660px] bg-white rounded-xl md:rounded-[12px] p-6 md:p-8 flex flex-col gap-6 md:gap-[40px] relative max-h-[90vh] overflow-y-auto">
@@ -431,7 +446,8 @@ const Settings = () => {
           </div>
         </div>
       )}
-      {/* Language Modal - Responsive */}
+
+      {/* Language Modal */}
       {activeModal === "language" && (
         <div className="fixed inset-0 bg-[#00000099] z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-[660px] bg-white rounded-xl md:rounded-[12px] p-6 md:p-[32px] flex flex-col gap-6 md:gap-[40px] relative max-h-[90vh] overflow-y-auto">

@@ -2,15 +2,19 @@
 import React, { useState } from "react"; 
 import Image from "next/image";
 import Link from "next/link";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "@/src/firebase";
+import { useRouter } from "next/navigation";
+// Naya aur Sahi Import
+import { resetPassword } from '@aws-amplify/auth';
 
 export default function ForgotPassword() {
+    // Is page par sirf 'email' ki state chahiye
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState(''); 
     const [error, setError] = useState(''); 
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
+    // Is function ka naam handlePasswordReset hi theek hai
     const handlePasswordReset = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -18,9 +22,10 @@ export default function ForgotPassword() {
         setError('');
 
         try {
-            await sendPasswordResetEmail(auth, email);
-            setMessage("Password reset link has been sent to your email. Please check your inbox (and spam folder).");
-
+            // Sahi function 'resetPassword' ko call karein
+            await resetPassword({ username: email });
+            // Code bhejne ke baad, user ko 'resetpassword' page par email ke saath bhej dein
+            router.push(`/resetpassword?email=${email}`);
         } catch (err) {
             console.error("Password Reset Error:", err);
             setError("Failed to send reset email. Please check if the email address is correct.");
@@ -48,7 +53,8 @@ export default function ForgotPassword() {
             <p className="text-center text-sm text-gray-600 mb-6">
               Enter your email, and we’ll send you a link to reset your password.
             </p>
-
+            
+            {/* Is form ka onSubmit 'handlePasswordReset' ko call karega */}
             <form onSubmit={handlePasswordReset} className="space-y-5">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -65,6 +71,7 @@ export default function ForgotPassword() {
                 {message && <p className="text-green-600 text-sm text-center">{message}</p>}
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
+                {/* Is button ka kaam code bhejna hai */}
                 <button
                     type="submit"
                     className="w-full bg-[#5D5FEF] hover:brightness-110 text-white font-medium py-2.5 rounded-md transition shadow-md !mt-6"

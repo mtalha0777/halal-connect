@@ -1,17 +1,19 @@
-import { AuthProvider } from "./(auth)/context/AuthContext";
 import "../styles/globals.css";
+import { AuthSessionProvider } from "@/src/AuthSessionProvider";
+import ConfigureAmplifyClientSide from "@/src/app/ConfigureAmplify";
 export const metadata = {
-  title: "Halal Connect - Admin",
-  description: "Admin Panel for Halal Connect",
+  title: 'Halal Connect Web',
+  description: 'Admin Dashboard',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-         <AuthProvider>
-        {children}
-        </AuthProvider>
+        <ConfigureAmplifyClientSide />
+        <AuthSessionProvider>
+          {children}
+        </AuthSessionProvider>
       </body>
     </html>
   );

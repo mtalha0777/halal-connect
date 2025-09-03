@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
 import { useState, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "../../components/layout/SideBar";
 import Topbar from "../../components/layout/TopBar";
 import Chart from "../../components/charts/Chart";
 import AllUsers from "../users/AllUsers";
+import { useAuth } from "@/src/AuthSessionProvider";
 
 const Dashboard = () => {
+  const router = useRouter();
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const { user, loading } = useAuth();
+
   const toggleMobileSidebar = useCallback(() => {
     setIsMobileSidebarOpen((prev) => !prev);
   }, []);
@@ -24,7 +29,6 @@ const Dashboard = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   return (
     <div className="flex min-h-screen font-sans">
       <Sidebar
@@ -183,4 +187,5 @@ const Dashboard = () => {
     </div>
   );
 };
+
 export default Dashboard;

@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import NotificationPopup from "../modals/NotificationPopup";
-
+import { useAuth } from "@/src/AuthSessionProvider";
 const Topbar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
+  const { signOut } = useAuth();
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -32,7 +32,36 @@ const Topbar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
   };
 
   const handleSearch = (e) => e.key === "Enter" && performSearch();
+const handleLogout = async () => {
+  try {
+    // Clear all storage
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Clear all cookies
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+    
+    // Service worker cache clear (if applicable)
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) caches.delete(name);
+      });
+    }
 
+    // Perform Amplify sign out
+    await signOut();
+    
+    // Force redirect to login page with cache-busting
+    window.location.href = '/login?t=' + new Date().getTime();
+  } catch (error) {
+    console.error("Logout failed:", error);
+    window.location.href = '/login?t=' + new Date().getTime();
+  }
+};
   return (
     <header className="fixed top-0 left-0 md:left-[260px] right-0 z-40 bg-white shadow-sm">
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 py-4 gap-4">
@@ -180,6 +209,15 @@ const Topbar = ({ isMobileSidebarOpen, toggleMobileSidebar }) => {
               className="cursor-pointer"
             />
           </Link>
+            <button onClick={handleLogout} title="Logout" className="p-1">
+            <Image
+              src="/assets/logout.svg"
+              alt="Logout"
+              width={28}
+              height={28}
+              className="cursor-pointer brightness-0"
+            />
+          </button>
         </div>
       </div>
     </header>

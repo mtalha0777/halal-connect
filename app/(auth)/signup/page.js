@@ -3,39 +3,75 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { auth } from "@/src/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { signUp } from '@aws-amplify/auth';
 
 export default function Signup() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // Password strength ke liye nayi state
+    const [passwordStrength, setPasswordStrength] = useState({ level: "", color: "" });
     const [error, setError] = useState(""); 
     const [loading, setLoading] = useState(false); 
     const router = useRouter();
 
+    // NAYA FUNCTION: Password ki strength check karne ke liye
+    const checkPasswordStrength = (pass) => {
+        let score = 0;
+        if (pass.length > 8) score++;
+        if (pass.match(/[a-z]/)) score++;
+        if (pass.match(/[A-Z]/)) score++;
+        if (pass.match(/[0-9]/)) score++;
+        if (pass.match(/[^A-Za-z0-9]/)) score++;
+
+        if (score < 3) {
+            setPasswordStrength({ level: "Weak", color: "text-red-500" });
+        } else if (score < 5) {
+            setPasswordStrength({ level: "Good", color: "text-orange-500" });
+        } else {
+            setPasswordStrength({ level: "Strong", color: "text-green-500" });
+        }
+    };
+
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+        if (newPassword) {
+            checkPasswordStrength(newPassword);
+        } else {
+            setPasswordStrength({ level: "", color: "" });
+        }
+    };
+
     const handleSignup = async (e) => {
-        e.preventDefault(); // Page ko reload hone se rokein
-        setLoading(true); // Loading shuru
-        setError(""); // Purane error saaf karein
+        e.preventDefault();
+        setLoading(true);
+        setError("");
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-
-            await updateProfile(user, {
-                displayName: username,
+            // SAHI CODE: 'password' property ko yahan add kiya gaya hai
+            const { userId } = await signUp({
+                username: username,
+                password: password, 
+                options: {
+                    userAttributes: {
+                        email: email,
+                        name: username,
+                    },
+                }
             });
-
-            console.log("User signed up successfully:", user);
-            alert("Account created successfully! Please login.");
-            router.push('/login');
-
+            console.log("Sign up successful:", userId);
+            router.push(`/otpverification?username=${username}`);
         } catch (err) {
             console.error("Signup Error:", err);
-            setError(err.message); 
+            // NAYA FEATURE: Email mojood hone ka error check karein
+             if (err.name === 'UsernameExistsException' || err.name === 'AliasExistsException')  {
+                setError("An account with this username or email already exists. Please login or use a different one.");
+            } else {
+                setError(err.message);
+            }
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 
@@ -83,27 +119,29 @@ export default function Signup() {
                     />
                 </div>
 
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+   <div className="mb-4">
+                    <div className="flex justify-between items-center mb-1">
+                        <label className="block text-sm font-medium text-gray-700">Password</label>
+                        {/* NAYA UI ELEMENT: Password strength dikhane ke liye */}
+                        {passwordStrength.level && (
+                            <span className={`text-xs font-bold ${passwordStrength.color}`}>
+                                {passwordStrength.level}
+                            </span>
+                        )}
+                    </div>
                     <input
                         type="password"
                         placeholder="Enter password"
-                        className="w-full px-4 py-2 rounded-md border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#5D5FEF] placeholder:text-gray-400"
-                 
+                        className="w-full px-4 py-2 rounded-md border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#5D5FEF]"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange} // onChange handler update kiya
                         required
                     />
                 </div>
                 
-            
-                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                {error && <p className="text-red-500 text-sm text-center my-2">{error}</p>}
 
-                <button
-                    type="submit"
-                    className="w-full bg-[#5D5FEF] hover:brightness-110 text-white font-medium py-2.5 rounded-md transition shadow-md mt-6"
-                    disabled={loading} 
-                >
+                <button type="submit" className="w-full bg-[#5D5FEF] hover:brightness-110 text-white font-medium py-2.5 rounded-md transition shadow-md mt-6" disabled={loading}>
                     {loading ? "Creating Account..." : "Sign Up"}
                 </button>
             </form>
@@ -112,17 +150,6 @@ export default function Signup() {
                 <div className="flex-grow border-t border-gray-300"></div>
                 <span className="flex-shrink mx-4 text-sm text-gray-600">Or continue with</span>
                 <div className="flex-grow border-t border-gray-300"></div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-             
-                <a href="#" className="flex items-center justify-center w-full sm:w-1/2 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50 transition">
-                    <Image src="/assets/google-logo.svg" alt="Google" width={20} height={20} className="mr-2"/>
-                    <span className="text-sm font-medium">Google</span>
-                </a>
-                <a href="#" className="flex items-center justify-center w-full sm:w-1/2 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50 transition">
-                    <Image src="/assets/fb-logo.svg" alt="Facebook" width={20} height={20} className="mr-2"/>
-                    <span className="text-sm font-medium">Facebook</span>
-                </a>
             </div>
             <p className="text-center text-sm mt-6 text-gray-600">
                 Already have an account?{" "}

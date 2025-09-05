@@ -2,9 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useAuth } from "@/app/(auth)/context/AuthContext";
 const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
   const pathname = usePathname();
+  const { user } = useAuth();
 
   const menuItems = [
     {
@@ -35,7 +36,7 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
     {
       label: "System Notification",
       icon: "/assets/systemnotification.svg",
-      path: "/admin/system-notification",
+      path: "/admin/system-notifications",
     },
   ];
 
@@ -135,15 +136,15 @@ const Sidebar = ({ isMobileSidebarOpen, toggleMobileSidebar, isDesktop }) => {
         <Link href="/admin/settings">
           <div className="flex items-center gap-2 mt-10 p-2 rounded-lg cursor-pointer hover:bg-white/10 transition">
             <Image
-              src="/assets/profile.png"
+              src="/assets/default-profile.png"
               alt="Profile"
               width={40}
               height={40}
               className="rounded-full"
             />
             <div className="flex-1">
-              <p className="text-sm">Liam James</p>
-              <p className="text-xs text-gray-300">liam@gmail.com</p>
+              <p className="text-sm font-medium">{user?.displayName || 'User'}</p>
+              <p className="text-xs text-gray-300">{user?.email}</p>
             </div>
             <Image
               src="/assets/brightarrow.svg"

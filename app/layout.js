@@ -1,5 +1,6 @@
 import { AuthProvider } from "./(auth)/context/AuthContext";
 import "../styles/globals.css";
+import { Toaster } from "react-hot-toast";
 export const metadata = {
   title: "Halal Connect - Admin",
   description: "Admin Panel for Halal Connect",
@@ -7,10 +8,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+  <html lang="en">
       <body>
-         <AuthProvider>
-        {children}
+        <AuthProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+          {children}
         </AuthProvider>
       </body>
     </html>
